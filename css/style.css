@@ -1,0 +1,20 @@
+/* 全域設定：選取所有標籤 (*) */
+* {
+    /* 讓 padding 和 border 包含在寬度內，排版更容易計算 */
+    box-sizing: border-box;
+    /* 移除瀏覽器預設的邊距 */
+    margin: 0;
+    padding: 0;
+}
+
+/* 設定 body (整個網頁) 的基礎樣式 */
+body {
+    /* 設定字型，優先使用微軟正黑體 */
+    font-family: 'Microsoft JhengHei', sans-serif;
+    /* 設定行高，讓閱讀更舒適 */
+    line-height: 1.6;
+    /* 背景顏色：極淺的灰色 */
+    background-color: #f4f4f4;
+    /* 文字顏色：深灰色 */
+    color: #333;
+}
