@@ -17,6 +17,11 @@ body {
     background-color: #f4f4f4;
     /* 文字顏色：深灰色 */
     color: #333;
+
+    /* 讓 Footer 永遠置底的 Flex 設定 */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* ====================
@@ -31,6 +36,19 @@ body {
     /* 上下邊距 0，左右自動 (即置中) */
     padding: 0 20px;
     /* 左右留一點縫隙，避免貼邊 */
+}
+
+.section-padding {
+    padding: 60px 0;
+    /* 每個區塊上下留白 */
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+    /*極簡風格通常字重較輕*/
+    letter-spacing: 2px;
 }
 
 /* ====================
@@ -99,57 +117,147 @@ header ul li a:hover {
 }
 
 /* ====================
-   英雄區塊 (Hero Section)
+   作品集區塊 (Works Section)
    ==================== */
-.hero {
-    height: 400px;
-    /* 設定高度 */
-    background: #fff;
-    /* 白色背景 */
+.work-grid {
+    display: grid;
+    /* 設定網格：自動填滿，每欄最小 300px，最大 1fr (平均分配) */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    /* 網格之間的間距 */
+}
+
+/* 作品項目容器 */
+.work-item {
+    display: block;
+    overflow: hidden;
+    /* 讓圖片放大時不要超出範圍 */
+    text-decoration: none;
+}
+
+/* 作品圖片 */
+.work-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    /*設定動畫過渡效果*/
+}
+
+/* 滑鼠移過去的效果：微放大且稍微變淡 */
+.work-item:hover img {
+    transform: scale(1.05);
+    opacity: 0.8;
+}
+
+/* ====================
+   關於我區塊 (About Section)
+   ==================== */
+.about-content {
     display: flex;
-    /* 再次使用 Flexbox */
-    flex-direction: column;
-    /* 內容改為垂直排列 (上到下) */
-    justify-content: center;
+    align-items: center;
     /* 垂直置中 */
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.about-text {
+    flex: 1;
+    /* 佔用剩餘空間 */
+}
+
+.about-image {
+    flex: 0 0 300px;
+    /* 固定寬度 300px */
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 5px;
+    /* 可選：一點點圓角 */
+}
+
+/* 手機版 RWD：變成垂直排列 */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column-reverse;
+        /* 文字在下，圖片在上 */
+        text-align: center;
+    }
+}
+
+/* ====================
+   聯絡我區塊 (Contact Section)
+   ==================== */
+.contact-content {
     text-align: center;
-    /* 文字水平置中 */
-    border-bottom: 2px solid #ddd;
-    /* 底部加條線裝飾 */
+    /* 內容置中 */
+    padding: 100px 0;
+    /* 增加一點留白，讓它看起來很顯眼 */
 }
 
-.hero h1 {
-    font-size: 3rem;
-    /* 標題字超大 */
-    margin-bottom: 10px;
-    /* 與下方文字的距離 */
+.email-link {
+    font-size: 1.5rem;
+    color: #333;
+    text-decoration: underline;
+    margin-top: 20px;
+    display: inline-block;
 }
 
-.hero p {
-    font-size: 1.2rem;
-    /* 內文稍大 */
-    margin-bottom: 20px;
-    /* 與下方按鈕的距離 */
+.email-link:hover {
+    color: #000;
 }
 
-/* 按鈕樣式 */
+/* ====================
+   作品詳情頁 (Project Detail)
+   ==================== */
+.project-header h1 {
+    font-weight: 400;
+}
+
+/* 按鈕樣式 (back to works) */
 .btn {
     display: inline-block;
-    /* 讓它可以設定 padding */
-    background: #007bff;
-    /* 亮藍色背景 */
+    background: #333;
+    /* 改為深灰色 */
     color: #fff;
-    /* 白色文字 */
-    padding: 10px 20px;
-    /* 內邊距：上下10，左右20 */
-    border-radius: 5px;
-    /* 圓角 */
+    padding: 10px 30px;
+    border-radius: 0;
+    /* 改為直角 */
     text-decoration: none;
-    /* 去除底線 */
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    transition: background 0.3s;
 }
 
-/* 滑鼠移過去按鈕的效果 */
 .btn:hover {
-    background: #0056b3;
-    /* 變深一點的藍色 */
+    background: #000;
+}
+
+/* ====================
+   頁尾 (Footer)
+   ==================== */
+footer {
+    background: #fff;
+    /* 改回白色背景 */
+    color: #888;
+    /* 淺灰色文字 (極簡風) */
+    text-align: center;
+    /* 文字置中 */
+    padding: 40px 0;
+    /* 上下留點空間 */
+    margin-top: auto;
+    /* 確保頁尾在最下方 (配合 body flex) */
+    font-size: 0.8rem;
+}
+
+footer .social-links a {
+    color: #333;
+    /* 深灰色連結 */
+    margin: 0 10px;
+    /* 連結之間的左右距離 */
+    text-decoration: none;
+    /* 去除底線 */
+    text-transform: uppercase;
+    font-weight: bold;
 }

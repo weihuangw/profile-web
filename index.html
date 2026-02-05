@@ -2,63 +2,69 @@
 <html lang="zh-Hant">
 
 <head>
-    <!-- 設定網頁編碼為 UTF-8，避免中文亂碼 -->
     <meta charset="UTF-8">
-
-    <!-- 設定視窗寬度與裝置寬度相同，確保手機版顯示正常 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- 網頁標題，會顯示在瀏覽器分頁上 -->
-    <title>我的個人網站 | Profile Web</title>
-
-    <!-- 引入 CSS 樣式表，負責網頁的外觀設計 -->
+    <title>HUANG WEI</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <!-- [新增] 頁面頂部的導覽列 -->
+    <!-- 導覽列 -->
     <header>
         <div class="container">
-            <!-- 網站 Logo 或名稱 -->
-            <a href="#" class="logo">HUAGN WEI</a>
-
-            <!-- 導覽選單 -->
+            <a href="index.html" class="logo">HUANG WEI</a>
             <nav>
                 <ul>
-                    <!-- li 是清單項目，a 是連結 -->
-                    <li><a href="#home">WORKS</a></li>
-                    <li><a href="#about">ABOUT</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
+                    <li><a href="index.html">WORKS</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- [新增] 首頁英雄區塊 (Hero Section) - 網站的第一印象 -->
-    <section id="home" class="hero">
+    <!-- Works 區塊 - 作品集網格 -->
+    <section id="work" class="section-padding">
         <div class="container">
-            <!-- h1 是最重要的標題 -->
-            <h1>HUANG WEI</h1>
-            <!-- p 是段落文字 -->
-            <p>hello</p>
-
+            <div class="work-grid">
+                <!-- 作品 1 -->
+                <a href="project.html" class="work-item">
+                    <img src="https://placehold.co/600x800/EEE/31343C" alt="Project 1">
+                </a>
+                <!-- 作品 2 -->
+                <a href="project.html" class="work-item">
+                    <img src="https://placehold.co/600x800/EEE/31343C" alt="Project 2">
+                </a>
+                <!-- 作品 3 -->
+                <a href="project.html" class="work-item">
+                    <img src="https://placehold.co/600x800/EEE/31343C" alt="Project 3">
+                </a>
+                <!-- 作品 4 -->
+                <a href="project.html" class="work-item">
+                    <img src="https://placehold.co/600x800/EEE/31343C" alt="Project 4">
+                </a>
+                <!-- 作品 5 -->
+                <a href="project.html" class="work-item">
+                    <img src="https://placehold.co/600x800/EEE/31343C" alt="Project 5">
+                </a>
+                <!-- 作品 6 -->
+                <a href="project.html" class="work-item">
+                    <img src="https://placehold.co/600x800/EEE/31343C" alt="Project 6">
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- [新增] 頁尾區塊 (Footer) - 網站的最底部 -->
+    <!-- 頁尾 -->
     <footer>
         <div class="container">
-            <!-- 版權宣告 (&copy; 是版權符號 © 的代碼) -->
-            <p>&copy; 2026 Wei Huang. All rights reserved.</p>
-            <!-- 簡單的社群連結 -->
+            <p>&copy; 2026 HUANG WEI. All rights reserved.</p>
             <div class="social-links">
+                <a href="#">Instagram</a>
                 <a href="#">Email</a>
             </div>
         </div>
     </footer>
-
-    <!-- 引入 JavaScript 檔案，負責網頁的互動功能 -->
-    <script src="js/script.js"></script>
 </body>
 
 </html>
