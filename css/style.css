@@ -37,12 +37,12 @@ body {
    導覽列 (Header)
    ==================== */
 header {
-    background: #333;
-    /* 深灰色背景 */
-    color: #fff;
-    /* 白色文字 */
-    padding: 1rem 0;
-    /* 上下留白 */
+    background: #fff;
+    /* 改為白色背景 */
+    color: #333;
+    /* 改為深色文字 */
+    padding: 2rem 0;
+    /* 增加上下留白，讓版面更開闊 */
 }
 
 /* 使用 Flexbox 讓 Logo 和選單排在一左一右 */
@@ -56,11 +56,16 @@ header .container {
 
 header .logo {
     font-size: 1.5rem;
-    /* Logo 字體大一點 */
-    color: #fff;
+    /* Logo 字體大小 */
+    color: #000;
+    /* 純黑文字 */
     text-decoration: none;
-    /* 去除連結底線 */
-    font-weight: bold;
+    font-weight: 400;
+    /* 不用太粗，保持優雅 */
+    letter-spacing: 2px;
+    /* 增加字元間距 */
+    text-transform: uppercase;
+    /* 強制大寫 */
 }
 
 header ul {
@@ -71,14 +76,26 @@ header ul {
 }
 
 header ul li {
-    margin-left: 20px;
-    /* 每個選項之間保持距離 */
+    margin-left: 40px;
+    /* 增加選項之間的距離 */
 }
 
 header ul li a {
-    color: #fff;
+    color: #333;
+    /* 深灰色連結 */
     text-decoration: none;
     /* 去除連結底線 */
+    font-size: 0.9rem;
+    /* 字體稍微縮小 */
+    letter-spacing: 1px;
+    /* 增加字元間距 */
+    text-transform: uppercase;
+    /* 強制大寫 */
+}
+
+header ul li a:hover {
+    color: #000;
+    /* 滑鼠移過去變純黑 */
 }
 
 /* ====================
