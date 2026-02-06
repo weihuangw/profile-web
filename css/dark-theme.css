@@ -1,0 +1,110 @@
+/* ====================
+   深色主題 (Dark Theme)
+   在 style.css 之後載入此檔案即可切換為深色模式
+   ==================== */
+
+/* 背景與文字顏色反轉 */
+body {
+    background-color: #1a1a1a;
+    /* 深黑色背景 */
+    color: #e0e0e0;
+    /* 淺灰色文字 */
+}
+
+/* ====================
+   導覽列 (Header)
+   ==================== */
+header {
+    background: #1a1a1a;
+    /* 深黑色背景 */
+    color: #e0e0e0;
+}
+
+header .logo {
+    color: #fff;
+    /* 純白標題 */
+}
+
+header ul li a {
+    color: #ccc;
+    /* 淺灰色連結 */
+}
+
+header ul li a:hover {
+    color: #fff;
+    /* 滑鼠移過變純白 */
+}
+
+/* 漢堡選單線條 (淺色) */
+.bar {
+    background-color: #ccc;
+}
+
+/* ====================
+   作品區塊 (Works)
+   ==================== */
+/* 滑鼠移過效果調整 */
+.work-item:hover img {
+    opacity: 0.7;
+}
+
+/* ====================
+   關於我 (About)
+   ==================== */
+.about-image img {
+    border-radius: 5px;
+}
+
+/* ====================
+   聯絡我 (Contact)
+   ==================== */
+.email-link {
+    color: #ccc;
+}
+
+.email-link:hover {
+    color: #fff;
+}
+
+/* ====================
+   按鈕 (Button)
+   ==================== */
+.btn {
+    background: #e0e0e0;
+    /* 淺灰色按鈕 */
+    color: #1a1a1a;
+    /* 深色文字 */
+}
+
+.btn:hover {
+    background: #fff;
+}
+
+/* ====================
+   頁尾 (Footer)
+   ==================== */
+footer {
+    background: #1a1a1a;
+    color: #666;
+    /* 較暗的灰色 */
+}
+
+footer .social-links a {
+    color: #ccc;
+}
+
+footer .social-links a:hover {
+    color: #fff;
+}
+
+/* ====================
+   手機版選單 (Mobile Menu Overlay)
+   ==================== */
+.nav-links {
+    background-color: rgba(30, 30, 30, 0.98);
+    /* 更深的灰色背景 */
+}
+
+.nav-links li a {
+    color: #e0e0e0;
+}

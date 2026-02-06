@@ -2,19 +2,42 @@
    關於我區塊 (About Section)
    ==================== */
 
-.about-content {
+/* 三張照片的容器 */
+.about-image-gallery {
     display: flex;
-    align-items: center;
-    /* 垂直置中 */
-    justify-content: space-between;
-    gap: 50px;
+    /* 使用 Flexbox 排版 */
+    gap: 5px;
+    /* 照片之間的間距 */
+    width: 90%;
+    /* 充滿整個寬度 */
+    max-width: 900px;
+    /* 限制最大寬度，照片區域更窄 */
+    height: 300px;
+    /* 設定固定高度 */
+    align-items: flex-start;
+    /* 照片垂直置中對齊 */
+    margin: 0 auto;
+    /* 水平置中 */
+}
+
+/* 每張照片的樣式 */
+.about-image-gallery img {
+    height: 100%;
+    /* 所有照片高度相同：填滿容器高度 */
+    width: auto;
+    /* 寬度依原始比例自動調整 */
+    object-fit: contain;
+    /* 完整顯示照片，保持原始比例 */
+    border-radius: 0px;
+    /* 圓角效果 */
 }
 
 .about-text {
-    flex: 1;
-    /* 佔用剩餘空間 */
+    width: 100%;
+    /* 文字區域佔滿寬度 */
 }
 
+/* 保留舊的 .about-image 樣式以防其他地方使用 */
 .about-image {
     flex: 0 0 300px;
     /* 固定寬度 300px */
@@ -23,5 +46,4 @@
 .about-image img {
     width: 100%;
     border-radius: 5px;
-    /* 可選：一點點圓角 */
 }
