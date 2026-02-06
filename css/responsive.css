@@ -70,12 +70,12 @@
     }
 
     .nav-links li {
-        margin: 20px 0;
+        margin: 15px 0;
         /* 增加垂直間距 */
     }
 
     .nav-links li a {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         /* 放大字體 */
         color: #ffffff;
     }

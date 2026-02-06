@@ -60,3 +60,9 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+/* 當漢堡選單打開時，鎖定背景滾動 */
+body.menu-open {
+    overflow: hidden;
+    /* 禁止頁面滾動 */
+}
