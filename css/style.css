@@ -33,11 +33,11 @@ body {
 
 /* 設定容器：讓內容不要太寬，並且自動置中 */
 .container {
-    max-width: 98%;
-    /* 改為 98% 讓畫面看起來更寬、留白更少 */
+    max-width: 85%;
+    /* 改為 % 讓畫面看起來更寬、留白更少 */
     margin: 0 auto;
     /* 上下邊距 0，左右自動 (即置中) */
-    padding: 0 20px;
+    padding: 0 0px;
     /* 左右留一點縫隙，避免貼邊 */
 }
 
@@ -141,10 +141,10 @@ header ul li a:hover {
    ==================== */
 .work-grid {
     display: grid;
-    /* 設定網格：最多 3 欄，但隨著螢幕縮小會自動減少 */
-    /* 使用 minmax(min(100%, 320px), 1fr) 來達到響應式效果 */
+    /* 設定網格：最多 3 欄 */
+    /* 計算方式：容器寬度(85%) / 3 ≈ 28% 為每欄最小寬度，這樣最多只會有 3 欄 */
     /* 當寬度不足時，自動減少欄數 (3→2→1) */
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(max(350px, 30%), 1fr));
     gap: 5px;
     /* 網格之間的間距 */
 }
@@ -355,16 +355,13 @@ footer .social-links a {
     /* 移除 span 的 block 設定，讓它們可以排在同一行 */
     /* header .logo span { display: block; } */
 
-    /* 修正 Work Grid 在極窄螢幕 (如 150px) 破版的問題 */
+    /* 修正 Work Grid */
     .work-grid {
-        /* 原本是 minmax(300px, 1fr)，這會導致寬度 < 300px 時出現水平捲軸且圖片被切 */
-        /* 改為 minmax(100%, 1fr) 讓它在小螢幕自動縮到和容器一樣寬 */
+        /* 強制單欄 */
         grid-template-columns: 1fr;
 
-        /* [新增] 讓圖片左右滿版 */
-        /* 透過負邊距 (Negative Margin) 抵消 Container 的 padding */
-        margin-left: -10px;
-        margin-right: -10px;
+        /* 圖片區域的容器已經沒有 padding，所以不需要負邊距了 */
+
         /* 回復圖片之間的間距 */
         gap: 20px;
     }
@@ -418,10 +415,18 @@ footer .social-links a {
         /* 置中 */
     }
 
-    /* 調整手機版容器的左右邊距，讓視覺上更平衡 */
+    /* 調整手機版容器 */
     .container {
+        max-width: 100%;
+        /* 手機版寬度 100%，達到滿版效果 */
         padding: 0 10px;
-        /* 在極窄螢幕下，稍微縮小邊距可以讓標題和按鈕看起來更「貼邊」且對稱 */
+        /* 標題、頁尾等文字區域保留左右留白 */
+    }
+
+    /* 讓圖片區域突破容器限制，達到左右完全滿版 */
+    #work .container {
+        padding: 0;
+        /* 作品區域移除 padding */
     }
 }
 
