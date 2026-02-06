@@ -7,6 +7,9 @@
     padding: 0;
 }
 
+/* 確保漢堡選單的線條在深色背景下也能清楚顯示 (如果需要調整與背景的反差) */
+/* 這裡維持深灰色，因為 Header 預設是白色 */
+
 /* 設定 body (整個網頁) 的基礎樣式 */
 body {
     /* 設定字型，優先使用微軟正黑體 */
@@ -30,8 +33,8 @@ body {
 
 /* 設定容器：讓內容不要太寬，並且自動置中 */
 .container {
-    max-width: 1100px;
-    /* 最大寬度限制 */
+    max-width: 98%;
+    /* 改為 98% 讓畫面看起來更寬、留白更少 */
     margin: 0 auto;
     /* 上下邊距 0，左右自動 (即置中) */
     padding: 0 20px;
@@ -39,7 +42,7 @@ body {
 }
 
 .section-padding {
-    padding: 60px 0;
+    padding: 20px 0;
     /* 每個區塊上下留白 */
 }
 
@@ -59,7 +62,7 @@ header {
     /* 改為白色背景 */
     color: #333;
     /* 改為深色文字 */
-    padding: 2rem 0;
+    padding: 1rem 0;
     /* 增加上下留白，讓版面更開闊 */
 }
 
@@ -70,20 +73,37 @@ header .container {
     /* 內容分散對齊 (最左與最右) */
     align-items: center;
     /* 垂直方向置中 */
+    gap: 10px;
+    /* 確保兩者之間至少有一些間距，不會黏在一起 */
 }
 
 header .logo {
-    font-size: 1.5rem;
     /* Logo 字體大小 */
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    /* 使用 clamp 讓電腦版字體也能稍微自適應 */
     color: #000;
     /* 純黑文字 */
     text-decoration: none;
     font-weight: 400;
     /* 不用太粗，保持優雅 */
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     /* 增加字元間距 */
     text-transform: uppercase;
     /* 強制大寫 */
+
+    /* [新增] 彈性排版設定 */
+    display: flex;
+    flex-wrap: wrap;
+    /* 關鍵：允許換行 */
+    gap: 8px;
+    /* 單行顯示時，兩個字之間的間距 */
+    line-height: 1.1;
+    /* 雙行顯示時的行距 */
+}
+
+/* 讓每個單字(span)保持完整，不要在字中間換行 */
+header .logo span {
+    display: inline-block;
 }
 
 header ul {
@@ -94,7 +114,7 @@ header ul {
 }
 
 header ul li {
-    margin-left: 40px;
+    margin-left: 20px;
     /* 增加選項之間的距離 */
 }
 
@@ -121,9 +141,11 @@ header ul li a:hover {
    ==================== */
 .work-grid {
     display: grid;
-    /* 設定網格：自動填滿，每欄最小 300px，最大 1fr (平均分配) */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    /* 設定網格：最多 3 欄，但隨著螢幕縮小會自動減少 */
+    /* 使用 minmax(min(100%, 320px), 1fr) 來達到響應式效果 */
+    /* 當寬度不足時，自動減少欄數 (3→2→1) */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    gap: 5px;
     /* 網格之間的間距 */
 }
 
@@ -260,4 +282,151 @@ footer .social-links a {
     /* 去除底線 */
     text-transform: uppercase;
     font-weight: bold;
+}
+
+/* ====================
+   手機版導覽列 (Mobile Navigation)
+   ==================== */
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.bar {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background-color: #333;
+    transition: 0.2s ease-in-out;
+}
+
+/* 當選單打開時 (.active)，將漢堡變形為 X */
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+/* 使用 Flexbox 排版後，透過計算位移量讓線條重疊到中心點 */
+/* 容器高度 20px，三條線各 2px，間距平均分配 */
+/* 第一條線位移到中心，第三條線位移到中心 */
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-4px) rotate(-45deg);
+}
+
+/* 確保打開時線條顏色變為白色 */
+.menu-toggle.active .bar {
+    background-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        /* 改為 Flexbox，讓線條分佈更平均 */
+        flex-direction: column;
+        justify-content: space-between;
+        /* 平均分配空間 */
+        height: 9px;
+        /* 設定固定高度 */
+        width: 24px;
+
+        position: relative;
+        z-index: 1001;
+    }
+
+    /* 確保 Logo 不要太大，隨著螢幕變小自動縮放 */
+    header .logo {
+        /* 移除原本強制 column 的設定，改用全域的 flex-wrap 自動判斷 */
+        /* display: flex; (已在全域設定) */
+        /* flex-direction: column; (移除，才不會強制換行) */
+
+        /* 調整手機版字體大小範圍 */
+        font-size: clamp(1.0rem, 8vw, 1.8rem);
+
+        z-index: 1001;
+    }
+
+    /* 移除 span 的 block 設定，讓它們可以排在同一行 */
+    /* header .logo span { display: block; } */
+
+    /* 修正 Work Grid 在極窄螢幕 (如 150px) 破版的問題 */
+    .work-grid {
+        /* 原本是 minmax(300px, 1fr)，這會導致寬度 < 300px 時出現水平捲軸且圖片被切 */
+        /* 改為 minmax(100%, 1fr) 讓它在小螢幕自動縮到和容器一樣寬 */
+        grid-template-columns: 1fr;
+
+        /* [新增] 讓圖片左右滿版 */
+        /* 透過負邊距 (Negative Margin) 抵消 Container 的 padding */
+        margin-left: -10px;
+        margin-right: -10px;
+        /* 回復圖片之間的間距 */
+        gap: 20px;
+    }
+
+    .nav-links {
+        display: none;
+        /* 手機版預設隱藏 */
+        position: fixed;
+        /* 改為 fixed 固定定位，覆蓋整個視窗 */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        /* 佔滿全螢幕高度 */
+        background-color: rgba(100, 100, 100, 0.98);
+        /* 灰色半透明背景 */
+        flex-direction: column;
+        justify-content: center;
+        /* 垂直置中 */
+        align-items: center;
+        /* 水平置中 */
+        z-index: 1000;
+        /* 確保蓋住其他內容 */
+    }
+
+    .nav-links.active {
+        display: flex;
+        /* 加上 active 類別後顯示 */
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+        /* 增加垂直間距 */
+    }
+
+    .nav-links li a {
+        font-size: 1.5rem;
+        /* 放大字體 */
+        color: #ffffff;
+    }
+
+    /* 修正 About 頁面圖片在小螢幕被切到的問題 */
+    .about-image {
+        flex: auto;
+        /* 取消固定寬度 */
+        width: 100%;
+        /* 讓它隨容器縮放 */
+        max-width: 300px;
+        /* 但不要超過原本設定的大小 */
+        margin: 0 auto;
+        /* 置中 */
+    }
+
+    /* 調整手機版容器的左右邊距，讓視覺上更平衡 */
+    .container {
+        padding: 0 10px;
+        /* 在極窄螢幕下，稍微縮小邊距可以讓標題和按鈕看起來更「貼邊」且對稱 */
+    }
+}
+
+/* 全域圖片自適應修正：確保所有圖片永遠不會超出螢幕寬度 */
+img {
+    max-width: 100%;
+    height: auto;
 }
