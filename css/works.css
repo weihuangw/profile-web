@@ -1,0 +1,36 @@
+/* ====================
+   作品集區塊 (Works Section)
+   ==================== */
+
+.work-grid {
+    display: grid;
+    /* 設定網格：最多 3 欄 */
+    /* 計算方式：容器寬度(90%) / 3 ≈ 30% 為每欄最小寬度，這樣最多只會有 3 欄 */
+    /* 當寬度不足時，自動減少欄數 (3→2→1) */
+    grid-template-columns: repeat(auto-fit, minmax(max(350px, 30%), 1fr));
+    /* 使用 clamp() 讓間距隨螢幕寬度自動調整 */
+    gap: clamp(5px, 0.5vw, 15px);
+}
+
+/* 作品項目容器 */
+.work-item {
+    display: block;
+    overflow: hidden;
+    /* 讓圖片放大時不要超出範圍 */
+    text-decoration: none;
+}
+
+/* 作品圖片 */
+.work-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    /*設定動畫過渡效果*/
+}
+
+/* 滑鼠移過去的效果：微放大且稍微變淡 */
+.work-item:hover img {
+    transform: scale(1.05);
+    opacity: 0.8;
+}

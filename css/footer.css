@@ -1,0 +1,28 @@
+/* ====================
+   頁尾 (Footer)
+   ==================== */
+
+footer {
+    background: #fff;
+    /* 白色背景 */
+    color: #888;
+    /* 淺灰色文字 (極簡風) */
+    text-align: center;
+    /* 文字置中 */
+    padding: 40px 0;
+    /* 上下留點空間 */
+    margin-top: auto;
+    /* 確保頁尾在最下方 (配合 body flex) */
+    font-size: 0.8rem;
+}
+
+footer .social-links a {
+    color: #333;
+    /* 深灰色連結 */
+    margin: 0 10px;
+    /* 連結之間的左右距離 */
+    text-decoration: none;
+    /* 去除底線 */
+    text-transform: uppercase;
+    font-weight: bold;
+}

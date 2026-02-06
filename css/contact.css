@@ -1,0 +1,22 @@
+/* ====================
+   聯絡我區塊 (Contact Section)
+   ==================== */
+
+.contact-content {
+    text-align: center;
+    /* 內容置中 */
+    padding: 100px 0;
+    /* 增加一點留白，讓它看起來很顯眼 */
+}
+
+.email-link {
+    font-size: 1.5rem;
+    color: #333;
+    text-decoration: underline;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.email-link:hover {
+    color: #000;
+}

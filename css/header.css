@@ -1,0 +1,127 @@
+/* ====================
+   導覽列 (Header)
+   ==================== */
+
+header {
+    background: #fff;
+    /* 白色背景 */
+    color: #333;
+    /* 深色文字 */
+    padding: 1rem 0;
+    /* 上下留白 */
+}
+
+/* 使用 Flexbox 讓 Logo 和選單排在一左一右 */
+header .container {
+    display: flex;
+    justify-content: space-between;
+    /* 內容分散對齊 (最左與最右) */
+    align-items: center;
+    /* 垂直方向置中 */
+    gap: 10px;
+    /* 確保兩者之間至少有一些間距，不會黏在一起 */
+}
+
+header .logo {
+    /* Logo 字體大小 */
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    /* 使用 clamp 讓電腦版字體也能稍微自適應 */
+    color: #000;
+    /* 純黑文字 */
+    text-decoration: none;
+    font-weight: 400;
+    /* 不用太粗，保持優雅 */
+    letter-spacing: 1px;
+    /* 增加字元間距 */
+    text-transform: uppercase;
+    /* 強制大寫 */
+
+    /* 彈性排版設定 */
+    display: flex;
+    flex-wrap: wrap;
+    /* 關鍵：允許換行 */
+    gap: 8px;
+    /* 單行顯示時，兩個字之間的間距 */
+    line-height: 1.1;
+    /* 雙行顯示時的行距 */
+}
+
+/* 讓每個單字(span)保持完整，不要在字中間換行 */
+header .logo span {
+    display: inline-block;
+}
+
+header ul {
+    display: flex;
+    /* 讓清單項目變橫排 */
+    list-style: none;
+    /* 去除清單前面的黑點 */
+}
+
+header ul li {
+    margin-left: 20px;
+    /* 增加選項之間的距離 */
+}
+
+header ul li a {
+    color: #333;
+    /* 深灰色連結 */
+    text-decoration: none;
+    /* 去除連結底線 */
+    font-size: 0.9rem;
+    /* 字體稍微縮小 */
+    letter-spacing: 1px;
+    /* 增加字元間距 */
+    text-transform: uppercase;
+    /* 強制大寫 */
+}
+
+header ul li a:hover {
+    color: #000;
+    /* 滑鼠移過去變純黑 */
+}
+
+/* ====================
+   手機版漢堡選單 (Mobile Navigation)
+   ==================== */
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.bar {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background-color: #333;
+    transition: 0.2s ease-in-out;
+}
+
+/* 當選單打開時 (.active)，將漢堡變形為 X */
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+/* 第一條線位移到中心，第三條線位移到中心 */
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-4px) rotate(-45deg);
+}
+
+/* 確保打開時線條顏色變為白色 */
+.menu-toggle.active .bar {
+    background-color: #fff;
+}
+
+/* 當選單打開時，隱藏標題 (Logo) 但保留空間 */
+header.menu-open .logo {
+    visibility: hidden;
+    /* 隱藏但保留佔位，這樣叉叉不會跑位 */
+}

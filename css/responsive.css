@@ -1,0 +1,108 @@
+/* ====================
+   響應式設計 (Responsive / Media Queries)
+   適用於螢幕寬度 768px 以下
+   ==================== */
+
+/* About 區塊手機版 */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column-reverse;
+        /* 文字在下，圖片在上 */
+        text-align: center;
+    }
+}
+
+/* 主要手機版 Media Query */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        /* 改為 Flexbox，讓線條分佈更平均 */
+        flex-direction: column;
+        justify-content: space-between;
+        /* 平均分配空間 */
+        height: 9px;
+        /* 設定固定高度 */
+        width: 24px;
+
+        position: relative;
+        z-index: 1001;
+    }
+
+    /* 確保 Logo 不要太大，隨著螢幕變小自動縮放 */
+    header .logo {
+        /* 調整手機版字體大小範圍 */
+        font-size: clamp(1.0rem, 8vw, 1.8rem);
+        z-index: 1001;
+    }
+
+    /* 修正 Work Grid */
+    .work-grid {
+        /* 強制單欄 */
+        grid-template-columns: 1fr;
+        /* 使用 clamp() 讓間距隨螢幕寬度自動調整 */
+        gap: clamp(3px, 2vw, 15px);
+    }
+
+    .nav-links {
+        display: none;
+        /* 手機版預設隱藏 */
+        position: fixed;
+        /* 改為 fixed 固定定位，覆蓋整個視窗 */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        /* 佔滿全螢幕高度 */
+        background-color: rgba(100, 100, 100, 0.98);
+        /* 灰色半透明背景 */
+        flex-direction: column;
+        justify-content: center;
+        /* 垂直置中 */
+        align-items: center;
+        /* 水平置中 */
+        z-index: 1000;
+        /* 確保蓋住其他內容 */
+    }
+
+    .nav-links.active {
+        display: flex;
+        /* 加上 active 類別後顯示 */
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+        /* 增加垂直間距 */
+    }
+
+    .nav-links li a {
+        font-size: 1.5rem;
+        /* 放大字體 */
+        color: #ffffff;
+    }
+
+    /* 修正 About 頁面圖片在小螢幕被切到的問題 */
+    .about-image {
+        flex: auto;
+        /* 取消固定寬度 */
+        width: 100%;
+        /* 讓它隨容器縮放 */
+        max-width: 300px;
+        /* 但不要超過原本設定的大小 */
+        margin: 0 auto;
+        /* 置中 */
+    }
+
+    /* 調整手機版容器 */
+    .container {
+        max-width: 100%;
+        /* 手機版寬度 100%，達到滿版效果 */
+        padding: 0 10px;
+        /* 標題、頁尾等文字區域保留左右留白 */
+    }
+
+    /* 讓圖片區域突破容器限制，達到左右完全滿版 */
+    #work .container {
+        padding: 0;
+        /* 作品區域移除 padding */
+    }
+}

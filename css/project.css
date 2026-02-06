@@ -1,0 +1,26 @@
+/* ====================
+   作品詳情頁 (Project Detail)
+   ==================== */
+
+.project-header h1 {
+    font-weight: 400;
+}
+
+/* 按鈕樣式 (back to works) */
+.btn {
+    display: inline-block;
+    background: #333;
+    /* 深灰色 */
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 0;
+    /* 直角 */
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #000;
+}

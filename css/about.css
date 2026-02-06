@@ -1,0 +1,27 @@
+/* ====================
+   關於我區塊 (About Section)
+   ==================== */
+
+.about-content {
+    display: flex;
+    align-items: center;
+    /* 垂直置中 */
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.about-text {
+    flex: 1;
+    /* 佔用剩餘空間 */
+}
+
+.about-image {
+    flex: 0 0 300px;
+    /* 固定寬度 300px */
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 5px;
+    /* 可選：一點點圓角 */
+}
