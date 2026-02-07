@@ -54,9 +54,12 @@
         height: 100vh;
         
         /* 佔滿全螢幕高度 */
-        background: linear-gradient(to bottom, rgba(80, 80, 80, 0.98) 80%, transparent);
-        /* 灰色漸層：50% = 灰色延伸到畫面一半才開始變透明 */
-        /* 調整 50% 這個數字：越大灰色越多，越小越快透明 */
+         background: linear-gradient(to bottom, transparent 0%, rgba(150, 150, 150, 0.98) 10%, rgba(150, 150, 150, 0.98) 90%, transparent 100%);
+        /* 漸層規則：4 個數字必須由小到大排列！ */
+        /* 10% = 最上方，從這裡開始由透明漸變成灰色 */
+        /* 30% = 到這裡變成完全灰色（10%→30% 這段是上方淡化區） */
+        /* 70% = 從這裡開始由灰色漸變成透明（30%→70% 這段是中間實色區） */
+        /* 90% = 到這裡完全透明（70%→90% 這段是下方淡化區） */
         flex-direction: column;
         justify-content: center;
         /* 垂直置中 */

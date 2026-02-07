@@ -72,3 +72,9 @@ body.menu-open {
     overflow: hidden;
     /* 禁止頁面滾動 */
 }
+
+/* 當漢堡選單打開時，隱藏頁尾 */
+body.menu-open footer {
+    display: none;
+    /* 選單開啟時 footer 消失，關閉後自動恢復 */
+}
