@@ -7,7 +7,7 @@ header {
     /* 白色背景 */
     color: #333;
     /* 深色文字 */
-    padding: 1rem 0;
+    padding: 2rem 0;
     /* 上下留白 */
 }
 
@@ -24,12 +24,13 @@ header .container {
 
 header .logo {
     /* Logo 字體大小 */
-    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-size: 1.4rem;
+    /* clamp(1.0rem, 8vw, 1.4rem); */
     /* 使用 clamp 讓電腦版字體也能稍微自適應 */
     color: #000;
     /* 純黑文字 */
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 800;
     /* 不用太粗，保持優雅 */
     letter-spacing: 1px;
     /* 增加字元間距 */
@@ -42,7 +43,7 @@ header .logo {
     /* 關鍵：允許換行 */
     gap: 8px;
     /* 單行顯示時，兩個字之間的間距 */
-    line-height: 1.1;
+    line-height: 0.8;
     /* 雙行顯示時的行距 */
 }
 
@@ -59,7 +60,7 @@ header ul {
 }
 
 header ul li {
-    margin-left: 20px;
+    margin-left: 30px;
     /* 增加選項之間的距離 */
 }
 
@@ -68,8 +69,9 @@ header ul li a {
     /* 深灰色連結 */
     text-decoration: none;
     /* 去除連結底線 */
-    font-size: 0.9rem;
-    /* 字體稍微縮小 */
+    font-size: 1.2rem; 
+    /* clamp(1.0rem, 8vw, 1.4rem); */
+    /* 跟 Logo 一樣的響應式字體大小 */
     letter-spacing: 1px;
     /* 增加字元間距 */
     text-transform: uppercase;
