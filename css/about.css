@@ -5,41 +5,44 @@
 /* 三張照片的容器 */
 .about-image-gallery {
     display: flex;
-    /* 使用 Flexbox 排版 */
+    /* 使用 Flexbox 排版：三張照片橫向排列 */
     gap: 5px;
     /* 照片之間的間距 */
-    width: 90%;
-    /* 充滿整個寬度 */
-    max-width: 900px;
-    /* 限制最大寬度，照片區域更窄 */
-    height: 300px;
-    /* 設定固定高度 */
-    align-items: flex-start;
+    justify-content: flex-start;
+    /* 照片群組在容器內水平置中 */
+    align-items: center;
     /* 照片垂直置中對齊 */
+    width: 90%;
+    /* 佔父層 90% 寬度 */
+    max-width: 900px;
+    /* 限制最大寬度，避免在超大螢幕上太寬 */
     margin: 0 auto;
-    /* 水平置中 */
+    /* 容器本身水平置中 */
+    /* 重點：不設固定 height，讓高度由圖片自動決定 */
 }
 
 /* 每張照片的樣式 */
 .about-image-gallery img {
-    height: 100%;
-    /* 所有照片高度相同：填滿容器高度 */
+    height: min(300px, 30vw);
+    /* 響應式高度：大螢幕最高 300px，小螢幕按螢幕寬度 28% 等比縮小 */
+    /* min() 會自動選較小的值，所以螢幕越小、照片越小 */
     width: auto;
-    /* 寬度依原始比例自動調整 */
+    /* 寬度依照每張照片的原始比例自動計算 */
     object-fit: contain;
-    /* 完整顯示照片，保持原始比例 */
+    /* 完整顯示照片，不裁切，保持原始比例 */
     border-radius: 0px;
-    /* 圓角效果 */
+    /* 直角邊框 */
 }
 
 .about-text {
-    width: 100%;
+    width: 90%;
     /* 文字區域佔滿寬度 */
+    max-width: 900px;
 }
 
 /* 保留舊的 .about-image 樣式以防其他地方使用 */
 .about-image {
-    flex: 0 0 300px;
+    flex: 0 0 auto;
     /* 固定寬度 300px */
 }
 
