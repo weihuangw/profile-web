@@ -54,8 +54,9 @@
         height: 100vh;
         
         /* 佔滿全螢幕高度 */
-        background-color: rgba(100, 100, 100, 0.98);
-        /* 灰色半透明背景 */
+        background: linear-gradient(to bottom, rgba(80, 80, 80, 0.98) 80%, transparent);
+        /* 灰色漸層：50% = 灰色延伸到畫面一半才開始變透明 */
+        /* 調整 50% 這個數字：越大灰色越多，越小越快透明 */
         flex-direction: column;
         justify-content: center;
         /* 垂直置中 */
@@ -76,7 +77,7 @@
     }
 
     .nav-links li a {
-        font-size: 1.2rem;
+        font-size: 1rem;
         /* 放大字體 */
         color: #ffffff;
         
@@ -93,9 +94,7 @@
         margin: 0 auto;
         /* 置中 */
     }
-    .about-image{
-        font-size: 0.8rem;
-    }
+    
 
     /* 調整手機版容器 */
     .container {

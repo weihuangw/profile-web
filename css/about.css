@@ -24,7 +24,7 @@
     height: min(800px, 30vw);
     /* 響應式高度：大螢幕最高 300px，小螢幕按螢幕寬度 28% 等比縮小 */
     /* min() 會自動選較小的值，所以螢幕越小、照片越小 */
-    width: contain;
+    width: auto;
     /* 寬度依照每張照片的原始比例自動計算 */
     object-fit: contain;
     /* 完整顯示照片，不裁切，保持原始比例 */
@@ -33,7 +33,7 @@
 }
 
 .about-text {
-    font-size: 1rem;
+    font-size: 0.9rem;
     max-width: 1920px;
    
 }

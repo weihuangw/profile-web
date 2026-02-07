@@ -7,8 +7,6 @@ footer {
     /* 白色背景 */
     color: #888;
     /* 淺灰色文字 (極簡風) */
-    text-align: center;
-    /* 文字置中 */
     padding: 40px 0;
     /* 上下留點空間 */
     margin-top: auto;
@@ -16,11 +14,28 @@ footer {
     font-size: 0.8rem;
 }
 
+/* 讓 copyright 和 social-links 排成一橫列 */
+footer .container {
+    display: flex;
+    /* 橫向排列 */
+    align-items: center;
+    /* 垂直置中對齊 */
+    gap: 30px;
+    /* copyright 和 social-links 之間的間距 */
+    /* ↑ 調整這個數字控制兩者的距離 */
+}
+
+/* social-links 裡面的連結也用 flex 橫排 */
+footer .social-links {
+    display: flex;
+    gap: 20px;
+    /* 每個連結之間的間距 */
+    /* ↑ 調整這個數字控制 Instagram 和 Email 的距離 */
+}
+
 footer .social-links a {
     color: #333;
     /* 深灰色連結 */
-    margin: 0 10px;
-    /* 連結之間的左右距離 */
     text-decoration: none;
     /* 去除底線 */
     text-transform: uppercase;
