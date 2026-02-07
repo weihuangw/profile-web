@@ -52,6 +52,7 @@
         left: 0;
         width: 100%;
         height: 100vh;
+        
         /* 佔滿全螢幕高度 */
         background-color: rgba(100, 100, 100, 0.98);
         /* 灰色半透明背景 */
@@ -78,6 +79,7 @@
         font-size: 1.2rem;
         /* 放大字體 */
         color: #ffffff;
+        
     }
 
     /* 修正 About 頁面圖片在小螢幕被切到的問題 */

@@ -24,7 +24,7 @@ header .container {
 
 header .logo {
     /* Logo 字體大小 */
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     /* clamp(1.0rem, 8vw, 1.4rem); */
     /* 使用 clamp 讓電腦版字體也能稍微自適應 */
     color: #000;

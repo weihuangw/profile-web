@@ -13,7 +13,7 @@
 
 /* 設定 body (整個網頁) 的基礎樣式 */
 body {
-    /* 設定字型，優先使用微軟正黑體 */
+    /* 設定字型：優先使用 Google Sans，中文用微軟正黑體，最後用系統預設 */
     font-family: 'Microsoft JhengHei', sans-serif;
     /* 設定行高，讓閱讀更舒適 */
     line-height: 1.6;

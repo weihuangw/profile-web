@@ -3,6 +3,9 @@
    匯入所有模組化的 CSS 檔案
    ==================== */
 
+/* 載入 Google Sans 字體（字重 400、500、700、800） */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700;800&display=swap');
+
 @import url('base.css');
 /* 全域設定、Reset、共用類別 */
 @import url('header.css');

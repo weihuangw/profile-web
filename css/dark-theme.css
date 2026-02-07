@@ -99,12 +99,16 @@ footer .social-links a:hover {
 
 /* ====================
    手機版選單 (Mobile Menu Overlay)
+   只在手機版（768px 以下）才套用背景色，避免電腦版出現方塊
    ==================== */
-.nav-links {
-    background-color: rgba(30, 30, 30, 0.98);
-    /* 更深的灰色背景 */
-}
+@media (max-width: 768px) {
+    .nav-links {
+        background-color: rgba(30, 30, 30, 0.98);
+        /* 深色主題的全螢幕選單背景 */
+    }
 
-.nav-links li a {
-    color: #e0e0e0;
+    .nav-links li a {
+        color: #e0e0e0;
+        /* 淺灰色文字 */
+    }
 }

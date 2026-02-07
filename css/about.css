@@ -12,8 +12,6 @@
     /* 照片群組在容器內水平置中 */
     align-items: stretch;
     /* 照片垂直置中對齊 */
-    width: 100%;
-    /* 佔父層 % 寬度 */
     max-width: 1920px;
     /* 限制最大寬度，避免在超大螢幕上太寬 */
    
@@ -36,8 +34,6 @@
 
 .about-text {
     font-size: 1rem;
-    width: 100%;
-    /* 文字區域佔滿寬度 */
     max-width: 1920px;
    
 }
@@ -45,7 +41,7 @@
 /* 保留舊的 .about-image 樣式以防其他地方使用 */
 .about-image {
     flex: 0 0 auto;
-    /* 固定寬度 300px */
+   
 }
 
 .about-image img {
