@@ -89,32 +89,53 @@ header ul li a:hover {
 
 .menu-toggle {
     display: none;
+    /* 電腦版隱藏，手機版才會顯示 */
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
+    position: relative;
+    /* 讓裡面的 .bar 可以用 absolute 定位 */
+    transition: transform 0.3s ease-in-out;
+    /* 整個按鈕旋轉的過渡動畫 */
 }
 
 .bar {
     display: block;
-    width: 24px;
+    position: absolute;
+    /* 絕對定位，讓兩條線可以疊在一起 */
+    width: 20px;
     height: 1px;
     background-color: #333;
-    transition: 0.2s ease-in-out;
+    top: 50%;
+    /* 移到容器垂直中線 */
+    left: 50%;
+    /* 移到容器水平中線 */
+    transform: translate(-50%, -50%);
+    /* 往回推自身寬高的一半，讓線條的「中心點」對齊容器的「正中央」 */
+    transition: background-color 0.3s ease-in-out;
+    /* 顏色變化的過渡動畫 */
 }
 
-/* 當選單打開時 (.active)，將漢堡變形為 X */
-.menu-toggle.active .bar:nth-child(2) {
-    opacity: 0;
+/* 第一條線：水平（十字的「橫」） */
+.bar:nth-child(1) {
+    /* 已經由上面的 transform: translate(-50%, -50%) 置中，不需要額外設定 */
 }
 
-/* 第一條線位移到中心，第三條線位移到中心 */
-.menu-toggle.active .bar:nth-child(1) {
-    transform: translateY(4px) rotate(45deg);
+/* 第二條線：垂直（十字的「直」） */
+.bar:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(90deg);
+    /* 先置中，再旋轉 90° 變成直線 */
 }
 
-.menu-toggle.active .bar:nth-child(3) {
-    transform: translateY(-4px) rotate(-45deg);
+/* 第三條線：隱藏（十字只需要兩條線） */
+.bar:nth-child(3) {
+    display: none;
+}
+
+/* 當選單打開時：整個按鈕旋轉 45° → 十字「+」變叉叉「×」 */
+.menu-toggle.active {
+    transform: rotate(135deg);
 }
 
 /* 確保打開時線條顏色變為白色 */

@@ -15,15 +15,12 @@
 /* 主要手機版 Media Query */
 @media (max-width: 768px) {
     .menu-toggle {
-        display: flex;
-        /* 改為 Flexbox，讓線條分佈更平均 */
-        flex-direction: column;
-        justify-content: space-between;
-        /* 平均分配空間 */
-        height: 9px;
-        /* 設定固定高度 */
+        display: block;
+        /* 手機版顯示按鈕 */
         width: 24px;
-
+        /* 按鈕寬度 */
+        height: 24px;
+        /* 正方形，讓十字看起來比例正確 */
         position: relative;
         z-index: 1001;
     }

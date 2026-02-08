@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const header = document.querySelector('header'); // 取得 header 元素
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('active'); // 讓按鈕也切換 active 狀態，以便做變形動畫
+            menuToggle.classList.toggle('active'); // 讓按鈕也切換 active 狀態，以便做旋轉動畫
             header.classList.toggle('menu-open'); // 讓 header 知道選單已打開
-            document.body.classList.toggle('menu-open'); // 新增：鎖定背景滾動
+            document.body.classList.toggle('menu-open'); // 鎖定背景滾動
         });
     }
 });
