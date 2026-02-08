@@ -67,6 +67,65 @@ img {
     height: auto;
 }
 
+/* ====================
+   主題切換按鈕 (Theme Toggle)
+   ==================== */
+
+/* 電腦版：固定在右下角的小圓圈 */
+.theme-toggle {
+    position: fixed;
+    bottom: 44px;
+    /* 對齊 footer 文字的垂直中心（footer padding 40px + 文字半高） */
+    right: 5%;
+    /* 對齊 .container 的右邊界（container 寬度 90%，左右各留 5%） */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    /* 50% = 變成圓形 */
+    border: 1px solid #333;
+    /* 淺色主題：深色邊框 */
+    background: transparent;
+    /* 透明背景（只有邊框的空心圓） */
+    cursor: pointer;
+    padding: 0;
+    z-index: 999;
+    transition: border-color 1.0s ease-in-out;
+    /* 切換主題時邊框顏色平滑過渡 */
+}
+
+/* 深色主題：邊框改為淺色 */
+body.dark-theme .theme-toggle {
+    border-color: #ccc;
+}
+
+/* 手機版：隱藏右下角的按鈕（改在選單裡顯示） */
+@media (max-width: 768px) {
+    body > .theme-toggle {
+        display: none;
+    }
+}
+
+/* 手機版選單裡的切換按鈕容器 */
+.theme-toggle-mobile {
+    display: none;
+    /* 電腦版隱藏 */
+}
+
+@media (max-width: 768px) {
+    .theme-toggle-mobile {
+        display: flex;
+        justify-content: center;
+        /* 圓圈在選單中置中 */
+        margin-top: 20px;
+    }
+
+    .theme-toggle-mobile .theme-toggle {
+        position: static;
+        /* 取消 fixed 定位，讓圓圈留在選單裡面 */
+        display: block;
+    }
+}
+
 /* 當漢堡選單打開時，鎖定背景滾動 */
 body.menu-open {
     overflow: hidden;

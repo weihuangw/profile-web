@@ -1,10 +1,10 @@
 /* ====================
    深色主題 (Dark Theme)
-   在 style.css 之後載入此檔案即可切換為深色模式
+   所有樣式只在 body 有 .dark-theme 類別時才會套用
    ==================== */
 
 /* 背景與文字顏色反轉 */
-body {
+body.dark-theme {
     background-color: #000000;
     /* 深黑色背景 */
     color: #e0e0e0;
@@ -14,100 +14,98 @@ body {
 /* ====================
    導覽列 (Header)
    ==================== */
-header {
+body.dark-theme header {
     background: #000000;
     /* 深黑色背景 */
     color: #e0e0e0;
 }
 
-header .logo {
+body.dark-theme header .logo {
     color: #fff;
     /* 純白標題 */
 }
 
-header ul li a {
+body.dark-theme header ul li a {
     color: #ccc;
     /* 淺灰色連結 */
 }
 
-header ul li a:hover {
+body.dark-theme header ul li a:hover {
     color: #fff;
     /* 滑鼠移過變純白 */
 }
 
 /* 漢堡選單線條 (淺色) */
-.bar {
+body.dark-theme .bar {
     background-color: #ccc;
 }
 
 /* ====================
    作品區塊 (Works)
    ==================== */
-/* 滑鼠移過效果調整 */
-.work-item:hover img {
+body.dark-theme .work-item:hover img {
     opacity: 0.7;
 }
 
 /* ====================
    關於我 (About)
    ==================== */
-.about-image img {
+body.dark-theme .about-image img {
     border-radius: 5px;
 }
 
 /* ====================
    聯絡我 (Contact)
    ==================== */
-.email-link {
+body.dark-theme .email-link {
     color: #ccc;
 }
 
-.email-link:hover {
+body.dark-theme .email-link:hover {
     color: #fff;
 }
 
 /* ====================
    按鈕 (Button)
    ==================== */
-.btn {
+body.dark-theme .btn {
     background: #e0e0e0;
     /* 淺灰色按鈕 */
     color: #1a1a1a;
     /* 深色文字 */
 }
 
-.btn:hover {
+body.dark-theme .btn:hover {
     background: #fff;
 }
 
 /* ====================
    頁尾 (Footer)
    ==================== */
-footer {
+body.dark-theme footer {
     background: #000000;
     color: #666;
     /* 較暗的灰色 */
 }
 
-footer .social-links a {
+body.dark-theme footer .social-links a {
     color: #ccc;
 }
 
-footer .social-links a:hover {
+body.dark-theme footer .social-links a:hover {
     color: #fff;
 }
 
 /* ====================
    手機版選單 (Mobile Menu Overlay)
-   只在手機版（768px 以下）才套用背景色，避免電腦版出現方塊
    ==================== */
 @media (max-width: 768px) {
-    .nav-links {
-         background: linear-gradient(to bottom, #000000 0%, rgba(30, 30, 30, 0.98) 10%, rgba(30, 30, 30, 0.98) 90%, #000000 100%);
-        /* 深色主題漸層：上下漸層到黑色，10% 和 90% 可調整漸層位置 */
+    body.dark-theme .nav-links {
+        background: linear-gradient(to bottom, #000000 0%, rgba(30, 30, 30, 0.98) 10%, rgba(30, 30, 30, 0.98) 90%, #000000 100%);
+        /* 深色主題漸層 */
     }
 
-    .nav-links li a {
+    body.dark-theme .nav-links li a {
         color: #e0e0e0;
         /* 淺灰色文字 */
     }
