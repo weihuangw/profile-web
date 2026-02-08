@@ -69,23 +69,25 @@ header ul {
     /* 去除清單前面的黑點 */
 }
 
-/* WORKS 放在第 4 格 ← 改這個數字就能移動（範圍 1~11） */
+/* WORKS 放在第 5 格 ← 改這個數字就能移動（範圍 1~11） */
 header ul li:nth-child(1) {
     grid-column: 5;
     text-align: left;
-    /* 文字在格子內置中 */
+    /* 文字靠格子左邊 */
 }
 
-/* ABOUT 放在第 7 格 ← 改這個數字就能移動（範圍 1~11） */
+/* ABOUT 放在第 8 格 ← 改這個數字就能移動（範圍 1~11） */
 header ul li:nth-child(2) {
     grid-column: 8;
     text-align: left;
+    /* 文字靠格子左邊 */
 }
 
-/* CONTACT 放在第 10 格 ← 改這個數字就能移動（範圍 1~11） */
+/* CONTACT 放在第 11 格 ← 改這個數字就能移動（範圍 1~11） */
 header ul li:nth-child(3) {
     grid-column: 11;
     text-align: left;
+    /* 文字靠格子左邊 */
 }
 
 header ul li {
@@ -145,10 +147,7 @@ header ul li a:hover {
     /* 顏色變化的過渡動畫 */
 }
 
-/* 第一條線：水平（十字的「橫」） */
-.bar:nth-child(1) {
-    /* 已經由上面的 transform: translate(-50%, -50%) 置中，不需要額外設定 */
-}
+/* 第一條線：水平（十字的「橫」），已由 .bar 的 transform 置中，不需要額外設定 */
 
 /* 第二條線：垂直（十字的「直」） */
 .bar:nth-child(2) {
