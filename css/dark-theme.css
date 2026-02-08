@@ -103,8 +103,8 @@ footer .social-links a:hover {
    ==================== */
 @media (max-width: 768px) {
     .nav-links {
-         background: linear-gradient(to bottom, transparent 0%, rgba(30, 30, 30, 0.98) 10%, rgba(30, 30, 30, 0.98) 90%, transparent 100%);
-        /* 深色主題漸層：20% 和 80% 可調整上下淡化位置 */
+         background: linear-gradient(to bottom, #000000 0%, rgba(30, 30, 30, 0.98) 10%, rgba(30, 30, 30, 0.98) 90%, #000000 100%);
+        /* 深色主題漸層：上下漸層到黑色，10% 和 90% 可調整漸層位置 */
     }
 
     .nav-links li a {
