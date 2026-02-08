@@ -56,7 +56,7 @@
         height: 100vh;
         
         /* 佔滿全螢幕高度 */
-         background: linear-gradient(to bottom, #000000 0%, rgba(150, 150, 150, 0.98) 10%, rgba(150, 150, 150, 0.98) 90%, #000000 100%);
+         background: linear-gradient(to bottom, rgba(60, 60, 60, 0.95) 0%, rgba(120, 120, 120, 0.98) 10%, rgba(120, 120, 120, 0.98) 90%, rgba(60, 60, 60, 0.95) 100%);
         /* 漸層規則：4 個數字必須由小到大排列！ */
         /* 0% = 最頂端，黑色 */
         /* 10% = 從黑色漸變成灰色（0%→10% 這段是上方漸層區） */
@@ -140,5 +140,53 @@
     .about-image-gallery {
         gap: 2px;
         /* 手機版照片間距縮小一點 */
+    }
+
+    /* Contact 頁面：手機版垂直置中 + 縮小字體 */
+    .contact-content {
+        text-align: center;
+        /* 水平置中 */
+        display: flex;
+        flex-direction: column;
+        /* 內容垂直排列 */
+        justify-content: center;
+        /* 垂直方向置中 */
+        align-items: center;
+        /* 水平方向置中 */
+        min-height: 70vh;
+        /* 最小高度佔螢幕 70%（扣掉 header 和 footer 的空間） */
+        padding: 0;
+        /* 移除電腦版的大量 padding，改由 flexbox 處理置中 */
+    }
+
+    .contact-content h3 {
+        font-size: 0.8rem;
+        /* 手機版標題字體大小 */
+    }
+
+    .contact-content p,
+    .contact-content .email-link {
+        font-size: 0.8rem;
+        /* 手機版內文和 email 字體大小 */
+    }
+
+    /* Footer：手機版調整 */
+    footer {
+        padding: 20px 0;
+        /* 縮小上下留白 */
+        font-size: 0.7rem;
+        /* 手機版字體縮小 */
+    }
+
+    footer .container {
+        flex-direction: column;
+        /* 手機版改為上下排列（電腦版是左右排列） */
+        gap: 10px;
+        /* 縮小間距 */
+    }
+
+    footer .social-links {
+        gap: 15px;
+        /* 縮小連結之間的間距 */
     }
 }

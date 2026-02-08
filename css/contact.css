@@ -5,12 +5,13 @@
 .contact-content {
     text-align: center;
     /* 內容置中 */
-    padding: 100px 0;
+    padding: 300px 0;
     /* 增加一點留白，讓它看起來很顯眼 */
 }
 
 .email-link {
-    font-size: 1.5rem;
+    font-size: 1rem;
+    /* 跟內文一樣大小 */
     color: #333;
     text-decoration: underline;
     margin-top: 20px;
