@@ -2,49 +2,85 @@
    關於我區塊 (About Section)
    ==================== */
 
-/* 三張照片的容器 */
+/* ====== Grid 頁面佈局 ====== */
+/* 把 about 頁面的容器設成 Grid，分成 2/3 + 1/3 兩欄 */
+.about-section .container {
+    display: grid;
+    /* 啟用 Grid 排版（像 Excel 表格一樣，把空間切成格子） */
+    grid-template-columns: 2fr 1fr;
+    /* 分成兩欄：左邊佔 2 份，右邊佔 1 份（2:1 = 左邊 2/3，右邊 1/3） */
+    /* fr = fraction（份），瀏覽器會自動把可用空間按比例分配 */
+}
+
+/* .about-text 和 .about-image-gallery 是容器裡唯一的子元素 */
+/* Grid 會自動把它們放進第一個格子（左邊 2/3），右邊 1/3 自然留白 */
+
+/* ====== 文字區域 ====== */
+.about-text {
+    font-size: 1rem;
+}
+
+/* ====== 照片區域 ====== */
+/* 照片容器：用 Flexbox 讓多張照片橫向排列 */
+/* Grid 負責「頁面大區塊佈局」，Flexbox 負責「照片之間的排列」 */
 .about-image-gallery {
     display: flex;
-    /* 使用 Flexbox 排版：三張照片橫向排列 */
-    gap:clamp(0.5px, 0.5vw, 5px);
+    /* 照片之間用 Flexbox 橫向排列 */
+    gap: clamp(0.5px, 0.5vw, 5px);
     /* 照片之間的間距 */
-    justify-content: flex-start;
-    /* 照片群組在容器內水平置中 */
     align-items: stretch;
-    /* 照片垂直置中對齊 */
-    max-width: 1920px;
-    /* 限制最大寬度，避免在超大螢幕上太寬 */
-   
-    /* 容器本身水平置中 */
-    /* 重點：不設固定 height，讓高度由圖片自動決定 */
+    /* 讓所有照片拉到同樣高度，視覺上更整齊 */
 }
 
 /* 每張照片的樣式 */
 .about-image-gallery img {
-    height: min(800px, 30vw);
-    /* 響應式高度：大螢幕最高 300px，小螢幕按螢幕寬度 28% 等比縮小 */
-    /* min() 會自動選較小的值，所以螢幕越小、照片越小 */
-    width: auto;
-    /* 寬度依照每張照片的原始比例自動計算 */
-    object-fit: contain;
-    /* 完整顯示照片，不裁切，保持原始比例 */
+    height: auto;
+    /* 高度由寬度自動算出，保持原始比例 */
+    width: 100%;
+    /* 寬度填滿 flex 分配到的空間 */
+    min-width: 0;
+    /* 允許縮小到比原始尺寸更小 */
+    object-fit: cover;
+    /* 填滿空間，多餘的部分裁切（確保沒有空白） */
     border-radius: 0px;
     /* 直角邊框 */
 }
 
-.about-text {
-    font-size: 0.9rem;
-    max-width: 1920px;
-   
+/* 根據每張照片的寬高比來分配寬度 */
+/* flex 值 = 照片的寬÷高，越寬的照片拿到越多空間 */
+.about-image-gallery img:nth-child(1) {
+    flex: 1.5;
+    /* 第一張：橫式 3:2，比較寬 */
+}
+
+.about-image-gallery img:nth-child(2) {
+    flex: 0.75;
+    /* 第二張：直式 3:4，比較窄 */
+}
+
+/* ====== 經歷區域 ====== */
+.about-credits h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    /* 標題稍微粗一點，跟內文區分 */
+
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+    /* 標題和內文之間的間距 */
+}
+
+.about-credits p {
+    font-size: 1rem;
+    line-height: 1.8;
+    /* 行高寬鬆一點，方便閱讀 */
 }
 
 /* 保留舊的 .about-image 樣式以防其他地方使用 */
 .about-image {
     flex: 0 0 auto;
-   
 }
 
 .about-image img {
     width: 100%;
-    border-radius: 5px;
+    border-radius: 0px;
 }

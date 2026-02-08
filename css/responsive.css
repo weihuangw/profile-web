@@ -14,6 +14,11 @@
 
 /* 主要手機版 Media Query */
 @media (max-width: 768px) {
+    /* 手機版：nav 不要伸展，讓漢堡按鈕留在右邊 */
+    header nav {
+        flex: none;
+    }
+
     .menu-toggle {
         display: block;
         /* 手機版顯示按鈕 */
@@ -89,7 +94,7 @@
         /* 取消固定寬度 */
         width: 100%;
         /* 讓它隨容器縮放 */
-        max-width: 300px;
+        max-width: 1024px;
         /* 但不要超過原本設定的大小 */
         margin: 0 auto;
         /* 置中 */
@@ -110,41 +115,30 @@
         /* 作品區域移除 padding */
     }
 
-    /* About 頁面照片：手機版滿版 */
+    /* About 頁面：手機版 Grid 改成單欄（佔滿整個寬度） */
+    .about-section .container {
+        grid-template-columns: 1fr;
+        /* 覆蓋電腦版的 2fr 1fr，手機版只有一欄 = 滿版 */
+    }
+
+    /* About 頁面：手機版字體大小 ← 改這裡的數字就能調整 */
+    .about-text {
+        font-size: 0.9rem;
+        /* 個人介紹的內文字體大小 */
+    }
+
+    .about-credits h3 {
+        font-size: 0.9rem;
+        /* 經歷標題（Residencies 等）字體大小 */
+    }
+
+    .about-credits p {
+        font-size: 0.8rem;
+        /* 經歷內文字體大小 */
+    }
+
     .about-image-gallery {
-        width: calc(100% + 40px);
-        /* 寬度 = 容器寬度 + 左右各 20px padding，等於螢幕全寬 */
-        margin-left: -20px;
-        /* 往左推 20px，抵銷容器的左 padding */
-        margin-right: -20px;
-        /* 往右推 20px，抵銷容器的右 padding */
         gap: 2px;
         /* 手機版照片間距縮小一點 */
-    }
-
-    .about-image-gallery img {
-        height: auto;
-        /* 覆蓋電腦版的固定高度，改為由寬度自動算出 */
-        width: 100%;
-        /* 填滿 flex 分配到的空間 */
-        min-width: 0;
-        /* 允許縮小到比原始尺寸更小 */
-    }
-
-    /* 根據每張照片的寬高比來分配寬度 */
-    /* flex 值 = 照片的寬÷高，越寬的照片拿到越多空間 */
-    .about-image-gallery img:nth-child(1) {
-        flex: 0.75;
-        /* 第一張：直式 3:4，比較窄 */
-    }
-
-    .about-image-gallery img:nth-child(2) {
-        flex: 1.5;
-        /* 第二張：橫式 3:2，比較寬 */
-    }
-
-    .about-image-gallery img:nth-child(3) {
-        flex: 0.75;
-        /* 第三張：直式 3:4，比較窄 */
     }
 }
