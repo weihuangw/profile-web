@@ -101,7 +101,7 @@ img {
     height: 12px;
     border-radius: 50%;
     /* 50% = 變成圓形 */
-    border: 0.1rem solid #ccc;
+    border: 1.5px solid #ccc;
     /* 深色主題：淺色邊框 */
     background: transparent;
     /* 透明背景（只有邊框的空心圓） */
