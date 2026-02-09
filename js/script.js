@@ -22,14 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================
     // 深色/淺色主題切換功能
     // ========================
-
-    // 讀取使用者上次儲存的主題偏好
-    // localStorage = 瀏覽器的「小型記事本」，關掉網頁也不會消失
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        // 如果使用者上次選擇了淺色主題，就移除 HTML 預設的 dark-theme
-        document.body.classList.remove('dark-theme');
-    }
+    // 注意：主題的「初始載入」已由每個 HTML 頁面裡的內嵌 <script> 處理
+    // 這裡只負責「按鈕點擊時的切換」功能
 
     // 切換主題的函式
     function toggleTheme() {

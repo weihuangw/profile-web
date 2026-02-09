@@ -32,6 +32,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+
+    /* 主題切換時，背景色和文字色平滑過渡（0.4 秒） */
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* ====================
@@ -124,6 +127,12 @@ body.dark-theme .theme-toggle {
         /* 取消 fixed 定位，讓圓圈留在選單裡面 */
         display: block;
     }
+}
+
+/* 頁面載入時暫時停用所有過渡動畫，避免切換頁面時出現主題閃爍 */
+body.no-transition,
+body.no-transition * {
+    transition: none !important;
 }
 
 /* 當漢堡選單打開時，鎖定背景滾動 */

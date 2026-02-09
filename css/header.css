@@ -9,6 +9,8 @@ header {
     /* 深色文字 */
     padding: 2rem 0;
     /* 上下留白 */
+    /* 主題切換時，背景和文字平滑過渡 */
+    transition: background 0.5s ease, color 0.5s ease;
 }
 
 /* 使用 Flexbox 讓 Logo 和選單排在一左一右 */
@@ -34,7 +36,8 @@ header .logo {
     /* 增加字元間距 */
     text-transform: uppercase;
     /* 強制大寫 */
-    
+    /* 主題切換時，Logo 顏色平滑過渡 */
+    transition: color 0.5s ease;
 
     /* 彈性排版設定 */
     display: flex;
@@ -99,13 +102,15 @@ header ul li a {
     /* 深灰色連結 */
     text-decoration: none;
     /* 去除連結底線 */
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
     /* clamp(1.0rem, 8vw, 1.4rem); */
     /* 跟 Logo 一樣的響應式字體大小 */
     letter-spacing: 1px;
     /* 增加字元間距 */
     text-transform: uppercase;
     /* 強制大寫 */
+    /* 主題切換時，連結顏色平滑過渡 */
+    transition: color 0.5s ease;
 }
 
 header ul li a:hover {
