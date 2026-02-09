@@ -54,8 +54,11 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        
-        /* 佔滿全螢幕高度 */
+        /* 舊版瀏覽器的備用值 */
+        height: 100dvh;
+        /* dvh = Dynamic Viewport Height（動態視窗高度） */
+        /* 會自動扣掉 iPhone Safari 底部工具列的高度，確保選單完全覆蓋可見區域 */
+        /* 如果瀏覽器不認識 dvh，就會用上面的 100vh 當備用 */
          background-color: rgba(90, 90, 90, 0.98);
         /* 選單底色（用 background-color 才能做過渡動畫，漸層做不到） */
         background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.3) 100%);
