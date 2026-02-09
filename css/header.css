@@ -72,21 +72,21 @@ header ul {
 /* WORKS 放在第 5 格 ← 改這個數字就能移動（範圍 1~11） */
 header ul li:nth-child(1) {
     grid-column: 5;
-    text-align: left;
+    text-align: right;
     /* 文字靠格子左邊 */
 }
 
 /* ABOUT 放在第 8 格 ← 改這個數字就能移動（範圍 1~11） */
 header ul li:nth-child(2) {
     grid-column: 8;
-    text-align: left;
+    text-align: right;
     /* 文字靠格子左邊 */
 }
 
 /* CONTACT 放在第 11 格 ← 改這個數字就能移動（範圍 1~11） */
 header ul li:nth-child(3) {
     grid-column: 11;
-    text-align: left;
+    text-align: right;
     /* 文字靠格子左邊 */
 }
 

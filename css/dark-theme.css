@@ -101,7 +101,7 @@ body.dark-theme footer .social-links a:hover {
    ==================== */
 @media (max-width: 768px) {
     body.dark-theme .nav-links {
-        background: linear-gradient(to bottom, #000000 0%, rgba(30, 30, 30, 0.98) 10%, rgba(30, 30, 30, 0.98) 90%, #000000 100%);
+        background: linear-gradient(to bottom, #000000 0%, rgba(30, 30, 30, 0.98) 30%, rgba(30, 30, 30, 0.98) 70%, #000000 100%);
         /* 深色主題漸層 */
     }
 
