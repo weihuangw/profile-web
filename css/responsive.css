@@ -132,7 +132,8 @@
     }
 
     .about-credits h3 {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+        font-weight: 200;
         /* 經歷標題（Residencies 等）字體大小 */
     }
 
@@ -153,8 +154,9 @@
 
     /* Project 作品詳情頁：手機版字體大小（跟 About 頁面一樣） */
     .project-info h3 {
-        font-size: 0.9rem;
-        /* 作品資訊標題，跟 about-credits h3 手機版一樣 */
+        font-size: 0.8rem;
+        font-weight: 200;
+        /* Project H3 手機版粗細：200（跟 about-credits h3 同步） */
     }
 
     .project-info p {
@@ -186,13 +188,15 @@
 
     .contact-content h3 {
         font-size: 0.8rem;
-        /* 手機版標題字體大小 */
+        font-weight: 200;
+        /* Contact H3 手機版：0.8rem / 200（跟 About H3 同步） */
     }
 
     .contact-content p,
     .contact-content .email-link {
         font-size: 0.8rem;
-        /* 手機版內文和 email 字體大小 */
+        font-weight: 400;
+        /* Contact 內文 & 連結手機版：0.8rem / 400 */
     }
 
     /* Footer：手機版調整 */

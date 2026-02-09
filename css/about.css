@@ -18,6 +18,8 @@
 /* ====== 文字區域 ====== */
 .about-text {
     font-size: 1rem;
+    font-weight: 400;
+    /* About 內文粗細：400 */
 }
 
 /* ====== 照片區域 ====== */
@@ -61,9 +63,8 @@
 /* ====== 經歷區域 ====== */
 .about-credits h3 {
     font-size: 1rem;
-    font-weight: 600;
-    /* 標題稍微粗一點，跟內文區分 */
-
+    font-weight: 200;
+    /* About H3 粗細：200 */
     letter-spacing: 1px;
     margin-bottom: 0px;
     /* 標題和內文之間的間距 */
@@ -71,6 +72,8 @@
 
 .about-credits p {
     font-size: 1rem;
+    font-weight: 400;
+    /* About 經歷內文粗細：400 */
     line-height: 1.8;
     /* 行高寬鬆一點，方便閱讀 */
 }

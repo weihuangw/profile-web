@@ -11,6 +11,11 @@
             document.documentElement.style.backgroundColor = '#fff';
         }
     </script>
+    <!-- 提前跟 Google 字體伺服器握手，加速字體下載 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 載入 Google Sans + Inter 字體（用 link 並行載入，比 @import 快） -->
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=optional" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -29,7 +34,7 @@
     <!-- 導覽列 -->
     <header>
         <div class="container">
-            <a href="works.html" class="logo"><span>HUANG</span><span>WEI</span></a>
+            <a href="#" class="logo"><span>HUANG</span><span>WEI</span></a>
             <nav>
                 <button class="menu-toggle" aria-label="切換導覽列">
                     <span class="bar"></span>

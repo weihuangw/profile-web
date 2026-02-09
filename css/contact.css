@@ -9,9 +9,25 @@
     /* 增加一點留白，讓它看起來很顯眼 */
 }
 
+.contact-content h3 {
+    font-size: 1rem;
+    /* Contact H3 電腦版大小：1rem */
+    font-weight: 200;
+    /* Contact H3 電腦版粗細：200（跟 About H3 一致） */
+}
+
+.contact-content p {
+    font-size: 1rem;
+    /* Contact 內文電腦版大小：1rem */
+    font-weight: 400;
+    /* Contact 內文電腦版粗細：400 */
+}
+
 .email-link {
     font-size: 1rem;
-    /* 跟內文一樣大小 */
+    /* Contact 連結電腦版大小：1rem */
+    font-weight: 400;
+    /* Contact 連結電腦版粗細：400 */
     color: #ccc;
     text-decoration: underline;
     margin-top: 20px;

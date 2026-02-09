@@ -3,14 +3,18 @@
    ==================== */
 
 .project-header h1 {
+    font-size: 2.5rem;
     font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
 }
 
 /* ====== 作品資訊文字區域（跟 About 頁面的經歷區塊一樣大小） ====== */
 .project-info h3 {
     font-size: 1rem;
     /* 標題字體大小，跟 about-credits h3 一樣 */
-    font-weight: 600;
+    font-weight: 200;
+    /* Project H3 粗細：200（跟 About H3 一致） */
     /* 標題稍微粗一點，跟內文區分 */
     letter-spacing: 1px;
     margin-bottom: 0px;

@@ -19,8 +19,10 @@ html {
 
 /* 設定 body (整個網頁) 的基礎樣式 */
 body {
-    /* 設定字型：優先使用 Google Sans，中文用微軟正黑體，最後用系統預設 */
-    font-family: 'Microsoft JhengHei', sans-serif;
+    /* 設定字型：英文用 Inter，中文用微軟正黑體，最後用系統預設 */
+    font-family: 'Inter', 'Microsoft JhengHei', sans-serif;
+    /* 啟用 Inter 的光學尺寸自動調整（小字和大字會自動微調筆畫粗細） */
+    font-optical-sizing: auto;
     /* 設定行高，讓閱讀更舒適 */
     line-height: 1.6;
     /* 背景顏色：深黑色（深色主題為預設） */
@@ -85,20 +87,20 @@ img {
     height: 12px;
     border-radius: 50%;
     /* 50% = 變成圓形 */
-    border: 1px solid #ccc;
+    border: 0.1rem solid #ccc;
     /* 深色主題：淺色邊框 */
     background: transparent;
     /* 透明背景（只有邊框的空心圓） */
     cursor: pointer;
     padding: 0;
     z-index: 999;
-    transition: border-color 1.0s ease-in-out;
+    transition: border-color 0.8s ease-in-out;
     /* 切換主題時邊框顏色平滑過渡 */
 }
 
 /* 淺色主題：邊框改為深色 */
 body.light-theme .theme-toggle {
-    border-color: #333;
+    border-color: #000000;
 }
 
 /* 手機版：隱藏右下角的按鈕（改在選單裡顯示） */
