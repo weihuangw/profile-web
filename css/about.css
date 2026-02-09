@@ -84,3 +84,13 @@
     width: 100%;
     border-radius: 0px;
 }
+
+.link {
+    font-size: 1rem;
+    /* 跟內文一樣大小 */
+    color: #333;
+    text-decoration: underline;
+    display: inline-block;
+    /* 主題切換時，連結顏色平滑過渡 */
+    transition: color 0.5s ease;
+}

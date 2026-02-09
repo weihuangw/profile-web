@@ -53,6 +53,10 @@ body.dark-theme .work-item:hover img {
 body.dark-theme .about-image img {
     border-radius: 5px;
 }
+body.dark-theme .link {
+    color: #ccc;
+}
+
 
 /* ====================
    聯絡我 (Contact)

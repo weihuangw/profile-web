@@ -5,99 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HUANG WEI</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- 目前首頁尚無內容，自動導向到作品頁 -->
+    <!-- 之後有首頁內容時，移除這行 meta 並加入首頁的 HTML -->
+    <meta http-equiv="refresh" content="0; url=works.html">
 </head>
 
-<body class="no-transition">
-    <!-- 在頁面渲染前立即套用正確主題，避免切換頁面時閃爍 -->
-    <script>
-        if (localStorage.getItem('theme') !== 'light') {
-            document.body.classList.add('dark-theme');
-        }
-        window.addEventListener('load', function () {
-            requestAnimationFrame(function () {
-                document.body.classList.remove('no-transition');
-            });
-        });
-    </script>
-    <!-- 導覽列 -->
-    <header>
-        <div class="container">
-            <a href="index.html" class="logo"><span>HUANG</span><span>WEI</span></a>
-            <nav>
-                <button class="menu-toggle" aria-label="切換導覽列">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-                <ul class="nav-links">
-                    <li><a href="index.html">WORKS</a></li>
-                    <li><a href="about.html">ABOUT</a></li>
-                    <li><a href="contact.html">CONTACT</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Works 區塊 - 作品集網格 -->
-    <section id="work" class="section-padding">
-        <div class="container">
-            <div class="work-grid">
-                <!-- 作品 1 -->
-                <a href="projects/project-1.html" class="work-item">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Project 1">
-                </a>
-                <!-- 作品 2 -->
-                <a href="projects/project-2.html" class="work-item">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Project 2">
-                </a>
-                <!-- 作品 3 -->
-                <a href="projects/project-3.html" class="work-item">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Project 3">
-                </a>
-                <!-- 作品 4 -->
-                <a href="projects/project-4.html" class="work-item">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Project 4">
-                </a>
-                <!-- 作品 5 -->
-                <a href="projects/project-5.html" class="work-item">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Project 5">
-                </a>
-                <!-- 作品 6 -->
-                <a href="projects/project-6.html" class="work-item">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Project 6">
-                </a>
-                <!-- 作品 7 -->
-                <a href="projects/project-7.html" class="work-item">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Project 7">
-                </a>
-                <!-- 作品 8 -->
-                <a href="projects/project-8.html" class="work-item">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Project 8">
-                </a>
-                <!-- 作品 9 -->
-                <a href="projects/project-9.html" class="work-item">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Project 9">
-                </a>
-                <!-- 作品 10 -->
-                <a href="projects/project-10.html" class="work-item">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Project 10">
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 頁尾 -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 HUANG WEI </p>
-            <div class="social-links">
-                <a href="https://www.instagram.com/weihuang_" target="_blank">Instagram</a>
-                <a href="https://www.youtube.com/@w.weihuang.h" target="_blank">YouTube</a>
-            </div>
-        </div>
-    </footer>
-    <script src="js/script.js"></script>
+<body>
 </body>
 
 </html>
