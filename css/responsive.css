@@ -61,7 +61,7 @@
         /* 如果瀏覽器不認識 dvh，就會用上面的 100vh 當備用 */
          background-color: rgba(90, 90, 90, 0.98);
         /* 選單底色（用 background-color 才能做過渡動畫，漸層做不到） */
-        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.3) 100%);
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.9) 100%);
         /* 上下邊緣加一層半透明黑色漸層，營造陰影效果 */
         /* 主題切換時，底色平滑過渡 */
         transition: background-color 0.5s ease;
