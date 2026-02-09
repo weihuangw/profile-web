@@ -12,7 +12,7 @@
 .email-link {
     font-size: 1rem;
     /* 跟內文一樣大小 */
-    color: #333;
+    color: #ccc;
     text-decoration: underline;
     margin-top: 20px;
     display: inline-block;
@@ -21,5 +21,5 @@
 }
 
 .email-link:hover {
-    color: #000;
+    color: #fff;
 }

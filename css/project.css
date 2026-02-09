@@ -27,7 +27,7 @@
 .project-info .link {
     font-size: 1rem;
     /* 連結文字大小，跟 about 頁面的 .link 一樣 */
-    color: #333;
+    color: #ccc;
     text-decoration: underline;
     display: inline-block;
     transition: color 0.5s ease;
@@ -63,9 +63,9 @@
 /* 按鈕樣式 (back to works) */
 .btn {
     display: inline-block;
-    background: #333;
-    /* 深灰色 */
-    color: #fff;
+    background: #e0e0e0;
+    /* 淺灰色按鈕（深色主題為預設） */
+    color: #1a1a1a;
     padding: 10px 30px;
     border-radius: 0;
     /* 直角 */
@@ -77,5 +77,5 @@
 }
 
 .btn:hover {
-    background: #000;
+    background: #fff;
 }

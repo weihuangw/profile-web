@@ -25,12 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 注意：主題的「初始載入」已由每個 HTML 頁面裡的內嵌 <script> 處理
     // 這裡只負責「按鈕點擊時的切換」功能
 
-    // 切換主題的函式
+    // 切換主題的函式（預設深色，點擊切換為淺色）
     function toggleTheme() {
-        document.body.classList.toggle('dark-theme');
+        document.body.classList.toggle('light-theme');
         // 儲存目前的選擇，下次開網頁時會記住
-        const isDark = document.body.classList.contains('dark-theme');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        const isLight = document.body.classList.contains('light-theme');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
     }
 
     // --- 建立電腦版按鈕（固定在右下角） ---

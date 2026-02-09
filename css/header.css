@@ -3,10 +3,10 @@
    ==================== */
 
 header {
-    background: #fff;
-    /* 白色背景 */
-    color: #333;
-    /* 深色文字 */
+    background: #000;
+    /* 深黑色背景（深色主題為預設） */
+    color: #e0e0e0;
+    /* 淺灰色文字 */
     padding: 2rem 0;
     /* 上下留白 */
     /* 主題切換時，背景和文字平滑過渡 */
@@ -27,8 +27,8 @@ header .logo {
     font-size: 1.8rem;
     /* clamp(1.0rem, 8vw, 1.4rem); */
     /* 使用 clamp 讓電腦版字體也能稍微自適應 */
-    color: #000;
-    /* 純黑文字 */
+    color: #fff;
+    /* 純白文字（深色主題為預設） */
     text-decoration: none;
     font-weight: 400;
     /* 不用太粗，保持優雅 */
@@ -98,8 +98,8 @@ header ul li {
 }
 
 header ul li a {
-    color: #333;
-    /* 深灰色連結 */
+    color: #ccc;
+    /* 淺灰色連結（深色主題為預設） */
     text-decoration: none;
     /* 去除連結底線 */
     font-size: 1.2rem;
@@ -114,8 +114,8 @@ header ul li a {
 }
 
 header ul li a:hover {
-    color: #000;
-    /* 滑鼠移過去變純黑 */
+    color: #fff;
+    /* 滑鼠移過去變純白 */
 }
 
 /* ====================
@@ -141,7 +141,7 @@ header ul li a:hover {
     /* 絕對定位，讓兩條線可以疊在一起 */
     width: 20px;
     height: 1px;
-    background-color: #333;
+    background-color: #ccc;
     top: 50%;
     /* 移到容器垂直中線 */
     left: 50%;

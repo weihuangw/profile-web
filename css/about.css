@@ -88,7 +88,7 @@
 .link {
     font-size: 1rem;
     /* 跟內文一樣大小 */
-    color: #333;
+    color: #ccc;
     text-decoration: underline;
     display: inline-block;
     /* 主題切換時，連結顏色平滑過渡 */

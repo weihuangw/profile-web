@@ -23,10 +23,10 @@ body {
     font-family: 'Microsoft JhengHei', sans-serif;
     /* 設定行高，讓閱讀更舒適 */
     line-height: 1.6;
-    /* 背景顏色：白色 */
-    background-color: #fff;
-    /* 文字顏色：深灰色 */
-    color: #333;
+    /* 背景顏色：深黑色（深色主題為預設） */
+    background-color: #000;
+    /* 文字顏色：淺灰色 */
+    color: #e0e0e0;
 
     /* 讓 Footer 永遠置底的 Flex 設定 */
     display: flex;
@@ -85,8 +85,8 @@ img {
     height: 12px;
     border-radius: 50%;
     /* 50% = 變成圓形 */
-    border: 1px solid #333;
-    /* 淺色主題：深色邊框 */
+    border: 1px solid #ccc;
+    /* 深色主題：淺色邊框 */
     background: transparent;
     /* 透明背景（只有邊框的空心圓） */
     cursor: pointer;
@@ -96,9 +96,9 @@ img {
     /* 切換主題時邊框顏色平滑過渡 */
 }
 
-/* 深色主題：邊框改為淺色 */
-body.dark-theme .theme-toggle {
-    border-color: #ccc;
+/* 淺色主題：邊框改為深色 */
+body.light-theme .theme-toggle {
+    border-color: #333;
 }
 
 /* 手機版：隱藏右下角的按鈕（改在選單裡顯示） */

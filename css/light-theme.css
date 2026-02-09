@@ -1,0 +1,117 @@
+/* ====================
+   淺色主題 (Light Theme)
+   所有樣式只在 body 有 .light-theme 類別時才會套用
+   預設為深色主題，這裡是淺色的覆蓋樣式
+   ==================== */
+
+/* 背景與文字顏色反轉為淺色 */
+body.light-theme {
+    background-color: #fff;
+    /* 白色背景 */
+    color: #333;
+    /* 深灰色文字 */
+}
+
+/* ====================
+   導覽列 (Header)
+   ==================== */
+body.light-theme header {
+    background: #fff;
+    /* 白色背景 */
+    color: #333;
+}
+
+body.light-theme header .logo {
+    color: #000;
+    /* 純黑標題 */
+}
+
+body.light-theme header ul li a {
+    color: #333;
+    /* 深灰色連結 */
+}
+
+body.light-theme header ul li a:hover {
+    color: #000;
+    /* 滑鼠移過變純黑 */
+}
+
+/* 漢堡選單線條 (深色) */
+body.light-theme .bar {
+    background-color: #333;
+}
+
+/* ====================
+   作品區塊 (Works)
+   ==================== */
+body.light-theme .work-item:hover img {
+    opacity: 0.8;
+}
+
+/* ====================
+   關於我 (About)
+   ==================== */
+body.light-theme .about-image img {
+    border-radius: 0px;
+}
+
+body.light-theme .link {
+    color: #333;
+}
+
+/* ====================
+   聯絡我 (Contact)
+   ==================== */
+body.light-theme .email-link {
+    color: #333;
+}
+
+body.light-theme .email-link:hover {
+    color: #000;
+}
+
+/* ====================
+   按鈕 (Button)
+   ==================== */
+body.light-theme .btn {
+    background: #333;
+    /* 深灰色按鈕 */
+    color: #fff;
+    /* 白色文字 */
+}
+
+body.light-theme .btn:hover {
+    background: #000;
+}
+
+/* ====================
+   頁尾 (Footer)
+   ==================== */
+body.light-theme footer {
+    background: #fff;
+    color: #888;
+    /* 淺灰色文字 */
+}
+
+body.light-theme footer .social-links a {
+    color: #333;
+}
+
+body.light-theme footer .social-links a:hover {
+    color: #000;
+}
+
+/* ====================
+   手機版選單 (Mobile Menu Overlay)
+   ==================== */
+@media (max-width: 768px) {
+    body.light-theme .nav-links {
+        background-color: rgba(90, 90, 90, 0.98);
+        /* 淺色主題底色（只改底色，漸層遮罩不變，這樣就能平滑過渡） */
+    }
+
+    body.light-theme .nav-links li a {
+        color: #ffffff;
+        /* 純白文字 */
+    }
+}

@@ -23,5 +23,5 @@
 /* 頁尾 */
 @import url('responsive.css');
 /* 響應式設計 (Media Queries) */
-@import url('dark-theme.css');
-/* 深色主題 (Dark Theme) */
+@import url('light-theme.css');
+/* 淺色主題 (Light Theme) */

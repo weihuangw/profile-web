@@ -3,10 +3,10 @@
    ==================== */
 
 footer {
-    background: #fff;
-    /* 白色背景 */
-    color: #888;
-    /* 淺灰色文字 (極簡風) */
+    background: #000;
+    /* 深黑色背景（深色主題為預設） */
+    color: #666;
+    /* 較暗灰色文字 */
     padding: 40px 0;
     /* 上下留點空間 */
     margin-top: auto;
@@ -36,8 +36,8 @@ footer .social-links {
 }
 
 footer .social-links a {
-    color: #333;
-    /* 深灰色連結 */
+    color: #ccc;
+    /* 淺灰色連結（深色主題為預設） */
     text-decoration: none;
     /* 去除底線 */
     text-transform: uppercase;

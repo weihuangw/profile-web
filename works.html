@@ -5,14 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WORKS | HUANG WEI</title>
+    <!-- 在 CSS 載入前就設定背景色，避免重新整理時閃爍 -->
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.style.backgroundColor = '#fff';
+        }
+    </script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="no-transition">
-    <!-- 在頁面渲染前立即套用正確主題，避免切換頁面時閃爍 -->
+    <!-- 頁面渲染後立即套用淺色主題的 class（如果使用者之前選了淺色） -->
     <script>
-        if (localStorage.getItem('theme') !== 'light') {
-            document.body.classList.add('dark-theme');
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
         }
         window.addEventListener('load', function () {
             requestAnimationFrame(function () {
