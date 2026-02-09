@@ -138,9 +138,30 @@
         /* 經歷內文字體大小 */
     }
 
+    .about-credits .link {
+        font-size: 0.8rem;
+        /* 經歷區塊中的連結文字，手機版要跟內文一樣大小 */
+    }
+
     .about-image-gallery {
         gap: 2px;
         /* 手機版照片間距縮小一點 */
+    }
+
+    /* Project 作品詳情頁：手機版字體大小（跟 About 頁面一樣） */
+    .project-info h3 {
+        font-size: 0.9rem;
+        /* 作品資訊標題，跟 about-credits h3 手機版一樣 */
+    }
+
+    .project-info p {
+        font-size: 0.8rem;
+        /* 作品資訊內文，跟 about-credits p 手機版一樣 */
+    }
+
+    .project-info .link {
+        font-size: 0.8rem;
+        /* 作品資訊連結，跟 about-credits .link 手機版一樣 */
     }
 
     /* Contact 頁面：手機版垂直置中 + 縮小字體 */
