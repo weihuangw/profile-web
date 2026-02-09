@@ -64,22 +64,23 @@
     /* 高度填滿 */
 }
 
-/* 按鈕樣式 (back to works) */
-.btn {
-    display: inline-block;
-    background: #e0e0e0;
-    /* 淺灰色按鈕（深色主題為預設） */
-    color: #1a1a1a;
-    padding: 10px 30px;
-    border-radius: 0;
-    /* 直角 */
-    text-decoration: none;
-    letter-spacing: 1px;
-    font-size: 1rem;
-    transition: background 0.5s ease, color 0.5s ease;
-    /* 主題切換時，按鈕背景和文字顏色平滑過渡 */
+/* ====== 回到頂部箭頭 ====== */
+.scroll-top-wrapper {
+    text-align: center;
+    margin-top: 60px;
 }
 
-.btn:hover {
-    background: #fff;
+.scroll-top {
+    display: inline-block;
+    font-size: 1.2rem;
+    /* 箭頭大小 */
+    color: #666;
+    /* 箭頭顏色：低調灰色 */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.scroll-top:hover {
+    color: #fff;
+    /* 滑鼠移過去變亮 */
 }

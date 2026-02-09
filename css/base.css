@@ -1,4 +1,18 @@
 /* ====================
+   自託管字體 (Self-hosted Font)
+   字體檔案放在 fonts/ 資料夾，不用等 Google 伺服器，載入更快、不會跳動
+   ==================== */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    /* 可變字體：一個檔案涵蓋所有字重 100~900 */
+    font-display: block;
+    /* block = 短暫隱藏文字，等字體載入後才顯示（因為是本地檔案所以幾乎瞬間） */
+    src: url('../fonts/inter-latin.woff2') format('woff2');
+}
+
+/* ====================
    全域設定 (Base/Reset)
    ==================== */
 

@@ -71,17 +71,10 @@ body.light-theme .email-link:hover {
 }
 
 /* ====================
-   按鈕 (Button)
+   回到頂部箭頭 (Scroll Top)
    ==================== */
-body.light-theme .btn {
-    background: #333;
-    /* 深灰色按鈕 */
-    color: #fff;
-    /* 白色文字 */
-}
-
-body.light-theme .btn:hover {
-    background: #000;
+body.light-theme .scroll-top:hover {
+    color: #000;
 }
 
 /* ====================
