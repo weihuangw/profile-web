@@ -3,10 +3,10 @@
    ==================== */
 
 .project-header h1 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: 400;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
 }
 
 /* ====== 作品資訊文字區域（跟 About 頁面的經歷區塊一樣大小） ====== */
@@ -24,7 +24,7 @@
 .project-info p {
     font-size: 1rem;
     /* 內文字體大小，跟 about-credits p 一樣 */
-    line-height: 1.8;
+    line-height: 1;
     /* 行高寬鬆一點，方便閱讀 */
 }
 

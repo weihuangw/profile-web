@@ -49,8 +49,8 @@
     <section class="section-padding">
         <div class="container">
             <!-- 作品標題區 -->
-            <div class="project-header" style="text-align: center; margin-bottom: 40px;">
-                <h1>PROJECT TITLE 10</h1>
+            <div class="project-header" style="text-align: center; margin-bottom: 20px;">
+                <h1>PROJECT TITLE 01</h1>
                 <p style="color: #666; max-width: 600px; margin: 0 auto;">
                     test
                 </p>
@@ -59,21 +59,43 @@
             <!-- 作品大圖展示 -->
             <div class="project-images">
                 <img src="https://placehold.co/1200x600/EEE/31343C" alt="Project Main Image"
-                    style="width: 100%; margin-bottom: 20px;">
+                    style="width: 100%; margin-bottom: 0px;">
 
                 <!-- 兩張並排圖 -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 5px;">
                     <img src="https://placehold.co/600x400/EEE/31343C" alt="Detail 1" style="width: 100%;">
                     <img src="https://placehold.co/600x400/EEE/31343C" alt="Detail 2" style="width: 100%;">
                 </div>
 
                 <img src="https://placehold.co/1200x800/EEE/31343C" alt="Project Detail Image"
-                    style="width: 100%; margin-bottom: 20px;">
+                    style="width: 100%; margin-bottom: 5px;">
             </div>
 
-            <!-- 底部導航 -->
-            <div class="project-nav" style="text-align: center; margin-top: 60px;">
-                <a href="../works.html" class="btn">BACK TO WORKS</a>
+            <!-- YouTube 影片嵌入 -->
+            <div class="project-video" style="margin-top:5px;">
+                <iframe
+                    src="https://www.youtube.com/embed/TQ3813Z1QWA?si=i7Jxecwxy0FhcE1q"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- 作品資訊區塊（用 project-info 包起來，字體大小就會跟 About 頁面一致） -->
+            <div class="project-info" style="margin-top: 40px;">
+                <h3>Credits</h3>
+                <p>Visual & Sound: <a href="https://www.instagram.com/weihuang_" class="link">Huang Wei</a></p>
+                <p>Presented at <a href="https://clab.org.tw/en/" class="link">Taiwan Contemporary Culture Lab</a>, Taipei</p>
+                <br>
+                <h3>About</h3>
+                <p>This is a sample description for the project. You can replace this text with real content later.</p>
+            </div>
+
+            <!-- 回到頂部箭頭 -->
+            <div class="scroll-top-wrapper">
+                <a href="#" class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
             </div>
         </div>
     </section>
@@ -85,6 +107,7 @@
             <div class="social-links">
                 <a href="https://www.instagram.com/weihuang_" target="_blank">Instagram</a>
                 <a href="https://www.youtube.com/@w.weihuang.h" target="_blank">YouTube</a>
+                
             </div>
         </div>
     </footer>
