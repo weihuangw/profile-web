@@ -3,10 +3,10 @@
    ==================== */
 
 .project-header h1 {
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-size: 1.2rem;
+    font-weight: 800;
     letter-spacing: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     color:oklch(0.96 0 340);
 }
 
@@ -17,7 +17,7 @@
     font-weight: 200;
     /* Project H3 粗細：200（跟 About H3 一致） */
     /* 標題稍微粗一點，跟內文區分 */
-    letter-spacing: 1px;
+    letter-spacing: 0px;
     margin-bottom: 0px;
     /* 標題和內文之間的間距 */
 }
@@ -26,9 +26,9 @@
 .project-info p {
     font-size: 1rem;
     /* 內文字體大小，跟 about-credits p 一樣 */
-    line-height: 1.8;
+    line-height: 1.5;
     /* 行高寬鬆一點，方便閱讀 */
-    color:oklch(0.76 0 340);
+    color:oklch(0.96 0 340);
 }
 
 .project-info .link {

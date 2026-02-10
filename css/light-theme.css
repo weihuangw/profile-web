@@ -71,6 +71,29 @@ body.light-theme .email-link:hover {
 }
 
 /* ====================
+   作品詳情頁 (Project Detail)
+   ==================== */
+body.light-theme .project-header h1 {
+    color: oklch(0.25 0 340);
+    /* 淺色主題：深色標題 */
+}
+
+body.light-theme .project-info h3 {
+    color: oklch(0.25 0 340);
+    /* 淺色主題：深色小標題 */
+}
+
+body.light-theme .project-info p {
+    color: oklch(0.35 0 340);
+    /* 淺色主題：深灰色內文 */
+}
+
+body.light-theme .project-info .link {
+    color: oklch(0.25 0 340);
+    /* 淺色主題：深色連結 */
+}
+
+/* ====================
    回到頂部箭頭 (Scroll Top)
    ==================== */
 body.light-theme .scroll-top:hover {

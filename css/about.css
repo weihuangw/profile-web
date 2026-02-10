@@ -65,8 +65,8 @@
     font-size: 1rem;
     font-weight: 200;
     /* About H3 粗細：200 */
-    letter-spacing: 1px;
-    margin-bottom: 0px;
+    letter-spacing: 0px;
+    margin-bottom: 5px;
     /* 標題和內文之間的間距 */
 }
 
@@ -91,7 +91,7 @@
 .link {
     font-size: 1rem;
     /* 跟內文一樣大小 */
-    color: #ccc;
+    color: oklch(0.96 0 340);
     text-decoration: underline;
     display: inline-block;
     /* 主題切換時，連結顏色平滑過渡 */
