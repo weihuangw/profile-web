@@ -153,6 +153,12 @@
     }
 
     /* Project 作品詳情頁：手機版字體大小（跟 About 頁面一樣） */
+    .project-header h1 {
+        font-size: 1rem;
+        font-weight: 400;
+        color:oklch(0.76 0 340);
+    }
+    
     .project-info h3 {
         font-size: 0.8rem;
         font-weight: 200;
@@ -161,6 +167,7 @@
 
     .project-info p {
         font-size: 0.8rem;
+        color:oklch(0.96 0 340);
         /* 作品資訊內文，跟 about-credits p 手機版一樣 */
     }
 

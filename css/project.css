@@ -5,8 +5,9 @@
 .project-header h1 {
     font-size: 1.5rem;
     font-weight: 400;
-    letter-spacing: 1px;
+    letter-spacing: 0px;
     margin-bottom: 10px;
+    color:oklch(0.96 0 340);
 }
 
 /* ====== 作品資訊文字區域（跟 About 頁面的經歷區塊一樣大小） ====== */
@@ -21,17 +22,19 @@
     /* 標題和內文之間的間距 */
 }
 
+
 .project-info p {
     font-size: 1rem;
     /* 內文字體大小，跟 about-credits p 一樣 */
-    line-height: 1;
+    line-height: 1.8;
     /* 行高寬鬆一點，方便閱讀 */
+    color:oklch(0.76 0 340);
 }
 
 .project-info .link {
     font-size: 1rem;
     /* 連結文字大小，跟 about 頁面的 .link 一樣 */
-    color: #ccc;
+    color:oklch(0.96 0 340);
     text-decoration: underline;
     display: inline-block;
     transition: color 0.5s ease;
