@@ -127,7 +127,7 @@ body.light-theme footer .social-links a:hover {
     }
 
     body.light-theme .nav-links li a {
-        color: #ffffff;
-        /* 純白文字 */
+        color: oklch(0.25 0 340);
+        /* 淺色主題：深色文字 */
     }
 }
