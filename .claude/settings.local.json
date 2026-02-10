@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(del \"C:\\\\__Antigravity\\\\profile-web\\\\css\\\\dark-theme.css\")"
-    ]
-  }
-}
