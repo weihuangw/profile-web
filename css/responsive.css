@@ -87,7 +87,7 @@
     .nav-links li a {
         font-size: 1rem;
         /* 放大字體 */
-        color: oklch(0.90 0 340);
+        color: oklch(0.96 0 340);
         /* 深色主題：淺色文字；主題切換時，文字顏色平滑過渡 */
         transition: color 0.5s ease;
     }
