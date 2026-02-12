@@ -44,18 +44,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // 手機版作品圖片觸碰效果
     // ========================
     // 手機沒有滑鼠 hover，所以用 JS 偵測觸碰
-    // 第一次點 → 圖片變淡 + 顯示標題（跟電腦版 hover 一樣）
-    // 第二次點 → 進入作品頁面
+    // 第一次「點」 → 顯示遮罩 + 標題（跟電腦版 hover 一樣）
+    // 第二次「點」 → 進入作品頁面
+    // 「滑動」 → 不觸發效果（避免捲動頁面時卡住）
     const workItems = document.querySelectorAll('.work-item'); // 抓到所有作品格子
+    let touchStartX = 0; // 記錄手指按下的 X 位置
+    let touchStartY = 0; // 記錄手指按下的 Y 位置
 
     workItems.forEach(item => {
+        // 手指按下時：記錄起始位置
         item.addEventListener('touchstart', function (e) {
-            // 如果這個格子「還沒被觸碰過」
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        });
+
+        // 手指放開時：判斷是「點」還是「滑」
+        item.addEventListener('touchend', function (e) {
+            const touchEndX = e.changedTouches[0].clientX; // 手指放開的 X 位置
+            const touchEndY = e.changedTouches[0].clientY; // 手指放開的 Y 位置
+            const deltaX = Math.abs(touchEndX - touchStartX); // X 方向移動距離
+            const deltaY = Math.abs(touchEndY - touchStartY); // Y 方向移動距離
+
+            // 如果手指移動超過 10px，代表是「滑動」，不是「點擊」→ 忽略
+            if (deltaX > 10 || deltaY > 10) return;
+
+            // 以下是真正的「點一下」
             if (!this.classList.contains('touched')) {
                 e.preventDefault(); // 阻止第一次點擊直接跳頁
                 // 先把其他格子的 touched 狀態清掉
                 workItems.forEach(other => other.classList.remove('touched'));
-                // 幫這個格子加上 touched（觸發變淡 + 顯示標題）
+                // 幫這個格子加上 touched（觸發遮罩 + 顯示標題）
                 this.classList.add('touched');
             }
             // 如果已經有 touched，就不阻止 → 正常跳轉到作品頁面
@@ -63,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 點擊空白處時，清除所有 touched 狀態
-    document.addEventListener('touchstart', function (e) {
+    document.addEventListener('touchend', function (e) {
         if (!e.target.closest('.work-item')) {
             workItems.forEach(item => item.classList.remove('touched'));
         }
