@@ -40,6 +40,35 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(desktopToggle);
     desktopToggle.addEventListener('click', toggleTheme);
 
+    // ========================
+    // 手機版作品圖片觸碰效果
+    // ========================
+    // 手機沒有滑鼠 hover，所以用 JS 偵測觸碰
+    // 第一次點 → 圖片變淡 + 顯示標題（跟電腦版 hover 一樣）
+    // 第二次點 → 進入作品頁面
+    const workItems = document.querySelectorAll('.work-item'); // 抓到所有作品格子
+
+    workItems.forEach(item => {
+        item.addEventListener('touchstart', function (e) {
+            // 如果這個格子「還沒被觸碰過」
+            if (!this.classList.contains('touched')) {
+                e.preventDefault(); // 阻止第一次點擊直接跳頁
+                // 先把其他格子的 touched 狀態清掉
+                workItems.forEach(other => other.classList.remove('touched'));
+                // 幫這個格子加上 touched（觸發變淡 + 顯示標題）
+                this.classList.add('touched');
+            }
+            // 如果已經有 touched，就不阻止 → 正常跳轉到作品頁面
+        });
+    });
+
+    // 點擊空白處時，清除所有 touched 狀態
+    document.addEventListener('touchstart', function (e) {
+        if (!e.target.closest('.work-item')) {
+            workItems.forEach(item => item.classList.remove('touched'));
+        }
+    });
+
     // --- 建立手機版按鈕（放在選單最後面） ---
     if (navLinks) {
         const mobileLi = document.createElement('li');

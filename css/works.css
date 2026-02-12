@@ -16,8 +16,8 @@
 .work-item {
     display: block;
     overflow: hidden;
-    /* 讓圖片放大時不要超出範圍 */
     text-decoration: none;
+    position: relative; /* 讓遮罩和標題可以定位在圖片上方 */
 }
 
 /* 作品圖片 */
@@ -25,12 +25,55 @@
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    /*設定動畫過渡效果*/
 }
 
-/* 滑鼠移過去的效果：微放大且稍微變淡 */
-.work-item:hover img {
-    transform: scale(1.0);
-    opacity: 0.3;
+/* 深色遮罩（用 ::after 偽元素蓋在圖片上面） */
+.work-item::after {
+    content: '';                  /* 必須有 content 偽元素才會顯示 */
+    position: absolute;          /* 疊在圖片上方 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* 半透明黑色遮罩，0.7 = 70% 不透明 */
+    opacity: 0;                  /* 預設隱藏 */
+    transition: opacity 0.3s ease; /* 平滑淡入 */
+    z-index: 1;                  /* 在圖片上方，但在標題下方 */
+    pointer-events: none;        /* 不擋住滑鼠點擊 */
+}
+
+/* 滑鼠移過去時：顯示深色遮罩 */
+.work-item:hover::after {
+    opacity: 1;
+}
+
+/* 作品標題（覆蓋在圖片中央） */
+.work-title {
+    position: absolute;          /* 脫離正常排版，疊在圖片上 */
+    top: 50%;                    /* 垂直置中 */
+    left: 50%;                   /* 水平置中 */
+    transform: translate(-50%, -50%);
+    color: white;                /* 文字顏色：白色（深色遮罩上一定看得清楚） */
+    font-size: clamp(18px, 1vw, 18px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-align: center;
+    opacity: 0;                  /* 預設隱藏 */
+    transition: opacity 0.3s ease;
+    z-index: 2;                  /* 確保標題在遮罩上方 */
+    pointer-events: none;        /* 不擋住滑鼠點擊 */
+}
+
+/* 滑鼠移過去時：標題淡入 */
+.work-item:hover .work-title {
+    opacity: 1;
+}
+
+/* 手機觸碰後加上 .touched class，效果跟電腦版 hover 一樣 */
+.work-item.touched::after {
+    opacity: 1;
+}
+
+.work-item.touched .work-title {
+    opacity: 1;
 }

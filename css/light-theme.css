@@ -44,10 +44,6 @@ body.light-theme .bar {
 /* ====================
    作品區塊 (Works)
    ==================== */
-body.light-theme .work-item:hover img {
-    opacity: 0.8;
-}
-
 /* ====================
    關於我 (About)
    ==================== */
