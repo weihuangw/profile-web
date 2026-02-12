@@ -31,6 +31,6 @@
 
 /* 滑鼠移過去的效果：微放大且稍微變淡 */
 .work-item:hover img {
-    transform: scale(1.05);
-    opacity: 0.8;
+    transform: scale(1.0);
+    opacity: 0.3;
 }
