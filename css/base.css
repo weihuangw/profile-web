@@ -158,13 +158,21 @@ body {
 /* 當 JS 判斷「頁面準備好了」，就加上這個 class 來淡入顯示 */
 body.page-ready {
     opacity: 1;  /* 完全顯示 */
-    transition: opacity 0.4s ease-in;  /* 0.4 秒淡入 */
+    /* 同時處理兩件事：
+       1. opacity 0.4s → 頁面淡入效果
+       2. background-color + color 0.5s → 主題切換的平滑過渡
+       必須全部寫在同一行，否則後面會覆蓋前面！ */
+    transition: opacity 0.25s ease-in,
+                background-color 0.5s ease,
+                color 0.5s ease;
 }
 
 /* 當 body 加上 page-leaving 這個 class 時，畫面會淡出 */
 body.page-leaving {
     opacity: 0 !important;  /* 變成透明 */
-    transition: opacity 0.3s ease-out !important;  /* 0.3 秒淡出 */
+    transition: opacity 0.2s ease-out !important,
+                background-color 0.5s ease !important,
+                color 0.5s ease !important;
 }
 
 /* 頁面載入時暫時停用所有過渡動畫，避免切換頁面時出現主題閃爍 */

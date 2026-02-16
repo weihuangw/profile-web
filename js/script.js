@@ -191,14 +191,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;  // 直接結束，不做轉場
             }
 
+            // 6. 如果連結目標就是「目前這個頁面」→ 不重新載入，也不做轉場
+            // 例如：你已經在 works.html，又點了 WORKS 連結，畫面不該閃一下
+            // this.href 是瀏覽器自動補全的完整網址（例如 http://...../works.html）
+            // window.location.href 是目前頁面的完整網址
+            // 兩者一樣 = 點的就是當前頁面
+            if (this.href === window.location.href) {
+                e.preventDefault();  // 阻止重新載入
+                return;  // 什麼都不做
+            }
+
             e.preventDefault();  // 阻止瀏覽器立刻跳頁
 
             document.body.classList.add('page-leaving');  // 加上淡出效果的 class
 
-            // 等淡出動畫結束後（300 毫秒 = 0.3 秒），才真正跳到新頁面
+            // 等淡出動畫結束後（200 毫秒 = 0.2 秒），才真正跳到新頁面
             setTimeout(() => {
                 window.location.href = href;  // 跳轉到目標頁面
-            }, 300);
+            }, 200);
         });
     });
 

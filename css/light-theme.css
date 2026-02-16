@@ -16,7 +16,7 @@ body.light-theme {
    導覽列 (Header)
    ==================== */
 body.light-theme header {
-    background: #fff;
+    background-color: #fff;
     /* 白色背景 */
     color: #333;
 }
@@ -100,7 +100,7 @@ body.light-theme .scroll-top:hover {
    頁尾 (Footer)
    ==================== */
 body.light-theme footer {
-    background: #fff;
+    background-color: #fff;
     color: #888;
     /* 淺灰色文字 */
 }
