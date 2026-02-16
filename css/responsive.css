@@ -46,8 +46,15 @@
     }
 
     .nav-links {
-        display: none;
-        /* 手機版預設隱藏 */
+        /* 手機版預設隱藏（用 opacity + visibility，而不是 display: none）*/
+        /* 為什麼不用 display: none？因為 display 無法做過渡動畫，只能瞬間開關 */
+        /* opacity + visibility 就像調光器，可以慢慢亮起來 */
+        display: flex;
+        /* 改為永遠是 flex（排版用），靠 opacity 和 visibility 控制顯示 */
+        opacity: 0;
+        /* 完全透明 = 看不到 */
+        visibility: hidden;
+        /* 隱藏 = 不能點擊（opacity: 0 只是看不見，還是能點到） */
         position: fixed;
         /* 改為 fixed 固定定位，覆蓋整個視窗 */
         top: 0;
@@ -59,12 +66,12 @@
         /* dvh = Dynamic Viewport Height（動態視窗高度） */
         /* 會自動扣掉 iPhone Safari 底部工具列的高度，確保選單完全覆蓋可見區域 */
         /* 如果瀏覽器不認識 dvh，就會用上面的 100vh 當備用 */
-         background-color: rgba(20, 20, 20, 0.98);
+        background-color: rgba(20, 20, 20, 0.98);
         /* 選單底色：深色（深色主題為預設） */
         background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.4) 100%);
         /* 上下邊緣加一層半透明黑色漸層，營造陰影效果 */
-        /* 主題切換時，底色平滑過渡 */
-        transition: background-color 0.5s ease;
+        /* 過渡動畫：opacity 控制淡入淡出，background-color 控制主題切換 */
+        transition: opacity 0.2s ease, visibility 0.2s ease, background-color 0.5s ease;
         flex-direction: column;
         justify-content: center;
         /* 垂直置中 */
@@ -75,8 +82,10 @@
     }
 
     .nav-links.active {
-        display: flex;
-        /* 加上 active 類別後顯示 */
+        opacity: 1;
+        /* 完全顯示 */
+        visibility: visible;
+        /* 可以點擊 */
     }
 
     .nav-links li {
