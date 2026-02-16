@@ -87,6 +87,121 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ========================
+    // 頁面轉場動畫（淡出 → 等圖片載入 → 淡入）
+    // ========================
+    // 像餐廳上菜：不是做好一道端一道，而是整桌菜都準備好了才掀開蓋子
+    //
+    // 完整流程：
+    // 1. 點擊連結 → 舊頁面淡出（0.3 秒）
+    // 2. 跳到新頁面 → 新頁面先隱藏（opacity: 0）
+    // 3. 等待畫面上「看得到的圖片」都載入完成
+    // 4. 全部準備好 → 新頁面淡入顯示（0.4 秒）
+
+    // ---------- 淡入部分：等可見圖片載入完成才顯示頁面 ----------
+
+    /**
+     * 判斷一張圖片是否在「目前螢幕看得到的範圍」內
+     * getBoundingClientRect() 會回傳圖片的位置資訊
+     * 如果圖片的頂部 < 螢幕高度，代表至少有一部分是看得到的
+     */
+    function isInViewport(img) {
+        const rect = img.getBoundingClientRect();  // 取得圖片在螢幕上的位置
+        return rect.top < window.innerHeight;      // 圖片頂部是否在螢幕可見範圍內
+    }
+
+    /**
+     * 顯示頁面的函式：移除 no-transition，加上 page-ready 來觸發淡入
+     */
+    function showPage() {
+        document.body.classList.remove('no-transition');  // 允許動畫效果
+        // requestAnimationFrame = 等瀏覽器準備好下一幀畫面時再執行
+        // 這樣 transition 才能正確觸發（瀏覽器需要「看到」opacity:0 的狀態，才能動畫到 opacity:1）
+        requestAnimationFrame(() => {
+            document.body.classList.add('page-ready');  // 觸發淡入！頁面慢慢顯示出來
+        });
+    }
+
+    // --- 收集螢幕上「看得到的圖片」 ---
+    const allImages = document.querySelectorAll('img');  // 抓到頁面上所有 <img>
+    const visibleImages = [];  // 存放「目前看得到」的圖片
+
+    allImages.forEach(img => {
+        if (isInViewport(img) && !img.complete) {
+            // 圖片在螢幕範圍內，而且還沒載入完成 → 需要等它
+            // img.complete = true 代表圖片已經在快取中，不用等
+            visibleImages.push(img);
+        }
+    });
+
+    if (visibleImages.length === 0) {
+        // 沒有需要等待的圖片（可能是沒圖片的頁面，或圖片都已經在快取中）
+        // → 直接顯示頁面
+        showPage();
+    } else {
+        // 有圖片需要等待 → 每張圖片載入完成時檢查是否「全部」都好了
+        let loadedCount = 0;  // 已載入完成的圖片數量
+
+        visibleImages.forEach(img => {
+            // 圖片載入成功時
+            img.addEventListener('load', () => {
+                loadedCount++;  // 完成數量 +1
+                if (loadedCount >= visibleImages.length) {
+                    showPage();  // 全部載入完成 → 顯示頁面！
+                }
+            });
+
+            // 圖片載入失敗時（例如網址錯誤）→ 也算「完成」，不要讓頁面永遠卡住
+            img.addEventListener('error', () => {
+                loadedCount++;
+                if (loadedCount >= visibleImages.length) {
+                    showPage();
+                }
+            });
+        });
+
+        // 安全機制：最多等 3 秒，即使圖片還沒載入完也強制顯示頁面
+        // 避免網路太慢時，使用者看到一片空白太久
+        setTimeout(() => {
+            if (!document.body.classList.contains('page-ready')) {
+                showPage();  // 超時了，強制顯示！
+            }
+        }, 3000);
+    }
+
+    // ---------- 淡出部分：點連結時先淡出再跳頁 ----------
+
+    // 找到頁面上所有的 <a> 連結
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');  // 取得連結的目標網址
+
+            // 以下情況「不需要」轉場效果，直接正常跳轉：
+            // 1. 沒有 href 的連結
+            // 2. # 開頭的錨點連結（同頁面內跳轉）
+            // 3. target="_blank" 開新分頁的連結
+            // 4. mailto: 或 tel: 等特殊連結
+            // 5. javascript: 開頭的連結
+            if (!href ||
+                href.startsWith('#') ||
+                this.target === '_blank' ||
+                href.startsWith('mailto:') ||
+                href.startsWith('tel:') ||
+                href.startsWith('javascript:')) {
+                return;  // 直接結束，不做轉場
+            }
+
+            e.preventDefault();  // 阻止瀏覽器立刻跳頁
+
+            document.body.classList.add('page-leaving');  // 加上淡出效果的 class
+
+            // 等淡出動畫結束後（300 毫秒 = 0.3 秒），才真正跳到新頁面
+            setTimeout(() => {
+                window.location.href = href;  // 跳轉到目標頁面
+            }, 300);
+        });
+    });
+
     // --- 建立手機版按鈕（放在選單最後面） ---
     if (navLinks) {
         const mobileLi = document.createElement('li');

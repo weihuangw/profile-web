@@ -145,7 +145,30 @@ body.light-theme .theme-toggle {
     }
 }
 
+/* ====================
+   頁面轉場動畫 (Page Transition)
+   流程：淡出舊頁面 → 跳到新頁面 → 等圖片載入 → 淡入新頁面
+   ==================== */
+
+/* 頁面一開始是隱藏的（透明），等圖片準備好才顯示 */
+body {
+    opacity: 0;  /* 預設完全透明，像舞台布幕還沒拉開 */
+}
+
+/* 當 JS 判斷「頁面準備好了」，就加上這個 class 來淡入顯示 */
+body.page-ready {
+    opacity: 1;  /* 完全顯示 */
+    transition: opacity 0.4s ease-in;  /* 0.4 秒淡入 */
+}
+
+/* 當 body 加上 page-leaving 這個 class 時，畫面會淡出 */
+body.page-leaving {
+    opacity: 0 !important;  /* 變成透明 */
+    transition: opacity 0.3s ease-out !important;  /* 0.3 秒淡出 */
+}
+
 /* 頁面載入時暫時停用所有過渡動畫，避免切換頁面時出現主題閃爍 */
+/* 但不影響 opacity，因為頁面本身是隱藏的，看不到閃爍 */
 body.no-transition,
 body.no-transition * {
     transition: none !important;
