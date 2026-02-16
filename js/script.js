@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!document.body.classList.contains('page-ready')) {
                 showPage();  // 超時了，強制顯示！
             }
-        }, 3000);
+        },2000);
     }
 
     // ---------- 淡出部分：點連結時先淡出再跳頁 ----------
@@ -205,10 +205,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.body.classList.add('page-leaving');  // 加上淡出效果的 class
 
-            // 等淡出動畫結束後（200 毫秒 = 0.2 秒），才真正跳到新頁面
+            // 等淡出動畫結束後（150 毫秒 = 0.15 秒），才真正跳到新頁面
             setTimeout(() => {
                 window.location.href = href;  // 跳轉到目標頁面
-            }, 200);
+            }, 150);
         });
     });
 

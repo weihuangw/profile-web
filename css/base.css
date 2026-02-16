@@ -159,10 +159,10 @@ body {
 body.page-ready {
     opacity: 1;  /* 完全顯示 */
     /* 同時處理兩件事：
-       1. opacity 0.25s → 頁面淡入效果
+       1. opacity 0.18s → 頁面淡入效果
        2. background-color + color 0.5s → 主題切換的平滑過渡
        必須全部寫在同一行，否則後面會覆蓋前面！ */
-    transition: opacity 0.25s ease-in,
+    transition: opacity 0.18s ease-in,
                 background-color 0.5s ease,
                 color 0.5s ease;
 }
@@ -171,7 +171,7 @@ body.page-ready {
 body.page-leaving {
     opacity: 0 !important;  /* 變成透明 */
     /* !important 只能寫在整個 transition 的最尾端，不能每個項目都加 */
-    transition: opacity 0.2s ease-out,
+    transition: opacity 0.15s ease-out,
                 background-color 0.5s ease,
                 color 0.5s ease !important;
 }
