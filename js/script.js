@@ -1,6 +1,22 @@
 
 console.log("網站腳本已成功載入！");
 
+// ========================
+// 修正「上一頁」黑畫面問題
+// ========================
+// 瀏覽器按「上一頁」時，會從快取（bfcache）還原頁面
+// 但還原的頁面可能還帶著 page-leaving（opacity: 0）→ 卡在黑畫面
+// pageshow 事件 = 每次頁面「顯示」時都會觸發（包括從快取還原）
+// event.persisted = true 代表「這是從快取還原的」，不是重新載入
+window.addEventListener('pageshow', function (event) {
+    if (event.persisted) {
+        // 從快取還原 → 移除淡出狀態，重新顯示頁面
+        document.body.classList.remove('page-leaving');  // 移除「正在離開」的狀態
+        document.body.classList.remove('no-transition'); // 允許動畫
+        document.body.classList.add('page-ready');       // 觸發淡入顯示
+    }
+});
+
 // 等待 DOM 載入完成
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.querySelector('.menu-toggle');
