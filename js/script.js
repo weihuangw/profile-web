@@ -66,23 +66,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const workItems = document.querySelectorAll('.work-item'); // 抓到所有作品格子
     let hasMoved = false; // 記錄手指是否有移動過（有移動 = 滑動，不是點擊）
 
+    // ⚠️ 關鍵：在 document 層級監聽，而不是在格子上
+    // 原因：iOS/手機瀏覽器偵測到「這是滑動手勢」時，會攔截元素上的 touchmove
+    // 導致格子的 touchmove 根本沒觸發，hasMoved 永遠是 false，誤判成點擊
+    // 在 document 最上層監聽就能繞過這個問題
+    document.addEventListener('touchstart', function () {
+        hasMoved = false; // 每次手指按下，重設旗標
+    }, { passive: true }); // passive: true = 告訴瀏覽器「我不會阻止滑動」，效能更好
+
+    document.addEventListener('touchmove', function () {
+        hasMoved = true; // 只要有移動，就標記
+    }, { passive: true });
+
     workItems.forEach(item => {
-        // 手指按下時：重設移動標記
-        item.addEventListener('touchstart', function (e) {
-            hasMoved = false; // 每次按下都重設，等待判斷
-        });
-
-        // 手指移動時：標記「有移動過」
-        item.addEventListener('touchmove', function (e) {
-            hasMoved = true; // 只要 touchmove 觸發，就代表是滑動
-        });
-
         // 手指放開時：判斷是「點」還是「滑」
         item.addEventListener('touchend', function (e) {
-            // 如果手指有移動過，代表是「滑動」→ 完全忽略，不觸發任何效果
+            // 如果手指有移動過，代表是「滑動」→ 完全忽略
             if (hasMoved) return;
 
-            // 以下是真正的「點一下」（手指完全沒有移動）
+            // 以下是真正的「點一下」
             if (!this.classList.contains('touched')) {
                 e.preventDefault(); // 阻止第一次點擊直接跳頁
                 // 先把其他格子的 touched 狀態清掉
@@ -94,8 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 點擊空白處時，清除所有 touched 狀態
+    // 點擊空白處時，清除所有 touched 狀態（滑動不清除）
     document.addEventListener('touchend', function (e) {
+        if (hasMoved) return; // 滑動結束時不清除，只有「點」才清除
         if (!e.target.closest('.work-item')) {
             workItems.forEach(item => item.classList.remove('touched'));
         }
