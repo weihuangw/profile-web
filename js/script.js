@@ -214,7 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // 兩者一樣 = 點的就是當前頁面
             if (this.href === window.location.href) {
                 e.preventDefault();  // 阻止重新載入
-                return;  // 什麼都不做
+                // 關閉手機版選單（移除所有 active 狀態）
+                if (navLinks) navLinks.classList.remove('active');
+                if (menuToggle) menuToggle.classList.remove('active');
+                const header = document.querySelector('header');
+                if (header) header.classList.remove('menu-open');
+                document.body.classList.remove('menu-open');
+                return;
             }
 
             e.preventDefault();  // 阻止瀏覽器立刻跳頁
