@@ -64,27 +64,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // 第二次「點」 → 進入作品頁面
     // 「滑動」 → 不觸發效果（避免捲動頁面時卡住）
     const workItems = document.querySelectorAll('.work-item'); // 抓到所有作品格子
-    let touchStartX = 0; // 記錄手指按下的 X 位置
-    let touchStartY = 0; // 記錄手指按下的 Y 位置
+    let hasMoved = false; // 記錄手指是否有移動過（有移動 = 滑動，不是點擊）
 
     workItems.forEach(item => {
-        // 手指按下時：記錄起始位置
+        // 手指按下時：重設移動標記
         item.addEventListener('touchstart', function (e) {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
+            hasMoved = false; // 每次按下都重設，等待判斷
+        });
+
+        // 手指移動時：標記「有移動過」
+        item.addEventListener('touchmove', function (e) {
+            hasMoved = true; // 只要 touchmove 觸發，就代表是滑動
         });
 
         // 手指放開時：判斷是「點」還是「滑」
         item.addEventListener('touchend', function (e) {
-            const touchEndX = e.changedTouches[0].clientX; // 手指放開的 X 位置
-            const touchEndY = e.changedTouches[0].clientY; // 手指放開的 Y 位置
-            const deltaX = Math.abs(touchEndX - touchStartX); // X 方向移動距離
-            const deltaY = Math.abs(touchEndY - touchStartY); // Y 方向移動距離
+            // 如果手指有移動過，代表是「滑動」→ 完全忽略，不觸發任何效果
+            if (hasMoved) return;
 
-            // 如果手指移動超過 10px，代表是「滑動」，不是「點擊」→ 忽略
-            if (deltaX > 10 || deltaY > 10) return;
-
-            // 以下是真正的「點一下」
+            // 以下是真正的「點一下」（手指完全沒有移動）
             if (!this.classList.contains('touched')) {
                 e.preventDefault(); // 阻止第一次點擊直接跳頁
                 // 先把其他格子的 touched 狀態清掉
