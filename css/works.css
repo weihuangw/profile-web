@@ -71,11 +71,3 @@
     opacity: 1;
 }
 
-/* 手機觸碰後加上 .touched class，效果跟電腦版 hover 一樣 */
-.work-item.touched::after {
-    opacity: 1;
-}
-
-.work-item.touched .work-title {
-    opacity: 1;
-}

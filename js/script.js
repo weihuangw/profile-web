@@ -81,27 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
     workItems.forEach(item => {
         // 手指放開時：判斷是「點」還是「滑」
         item.addEventListener('touchend', function (e) {
-            // 如果手指有移動過，代表是「滑動」→ 完全忽略
-            if (hasMoved) return;
-
-            // 以下是真正的「點一下」
-            if (!this.classList.contains('touched')) {
-                e.preventDefault(); // 阻止第一次點擊直接跳頁
-                // 先把其他格子的 touched 狀態清掉
-                workItems.forEach(other => other.classList.remove('touched'));
-                // 幫這個格子加上 touched（觸發遮罩 + 顯示標題）
-                this.classList.add('touched');
+            // 如果手指有移動過，代表是「滑動」→ 阻止跳頁
+            if (hasMoved) {
+                e.preventDefault();
             }
-            // 如果已經有 touched，就不阻止 → 正常跳轉到作品頁面
+            // 沒有移動 → 直接讓瀏覽器跟隨連結（進入作品頁面）
         });
-    });
-
-    // 點擊空白處時，清除所有 touched 狀態（滑動不清除）
-    document.addEventListener('touchend', function (e) {
-        if (hasMoved) return; // 滑動結束時不清除，只有「點」才清除
-        if (!e.target.closest('.work-item')) {
-            workItems.forEach(item => item.classList.remove('touched'));
-        }
     });
 
     // ========================
