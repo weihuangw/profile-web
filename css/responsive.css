@@ -161,13 +161,22 @@
         /* 手機版照片間距縮小一點 */
     }
 
-    /* Project 頁面手機版：圖片和影片突破容器，左右滿版 */
+    /* Project 頁面手機版：圖片和 grid 突破容器，左右滿版 */
     section:has(.project-header) .container > img,
     section:has(.project-header) .container > div:not([class]) {
         margin-left: -20px;
         margin-right: -20px;
         width: calc(100% + 40px) !important;
         max-width: calc(100% + 40px) !important;
+    }
+
+    /* YouTube wrapper 手機版：用 vw 修正 16:9 比例 */
+    section:has(.project-header) .container > .yt-wrapper {
+        margin-left: -20px;
+        margin-right: -20px;
+        width: calc(100% + 40px) !important;
+        max-width: calc(100% + 40px) !important;
+        padding-top: 56.25vw !important;
     }
 
     /* Project 作品詳情頁：手機版文字區塊滿版（覆蓋電腦版的 66.67% 限制） */
