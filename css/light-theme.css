@@ -42,9 +42,6 @@ body.light-theme .bar {
 }
 
 /* ====================
-   作品區塊 (Works)
-   ==================== */
-/* ====================
    關於我 (About)
    ==================== */
 body.light-theme .about-image img {
@@ -70,7 +67,7 @@ body.light-theme .email-link:hover {
    作品詳情頁 (Project Detail)
    ==================== */
 body.light-theme .project-header h1 {
-    color: oklch(0.25 0 340);
+    color: oklch(0.35 0 340);
     /* 淺色主題：深色標題 */
 }
 
