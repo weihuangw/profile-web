@@ -102,6 +102,7 @@ header ul li a {
     /* 淺灰色連結（深色主題為預設） */
     text-decoration: none;
     /* 去除連結底線 */
+    font-weight: 400;
     font-size: 1.2rem;
     /* clamp(1.0rem, 8vw, 1.4rem); */
     /* 跟 Logo 一樣的響應式字體大小 */
