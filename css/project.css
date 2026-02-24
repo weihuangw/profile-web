@@ -2,6 +2,13 @@
    作品詳情頁 (Project Detail)
    ==================== */
 
+/* ====== 大螢幕（> 1280px）：project 頁面縮窄至 80% ====== */
+@media (min-width: 1281px) {
+    section:has(.project-header) .container {
+        max-width: 80%;
+    }
+}
+
 .project-header h1 {
     font-size: 1.2rem;
     font-weight: 800;
