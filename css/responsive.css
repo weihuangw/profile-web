@@ -166,8 +166,8 @@
     section:has(.project-header) .container > div:not([class]) {
         margin-left: -20px;
         margin-right: -20px;
-        width: calc(100% + 40px);
-        max-width: calc(100% + 40px);
+        width: calc(100% + 40px) !important;
+        max-width: calc(100% + 40px) !important;
     }
 
     /* Project 作品詳情頁：手機版文字區塊滿版（覆蓋電腦版的 66.67% 限制） */
