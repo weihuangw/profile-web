@@ -220,24 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ========================
-    // YouTube Facade（點擊縮圖後才載入 iframe）
-    // ========================
-    document.querySelectorAll('.yt-facade').forEach(facade => {
-        facade.addEventListener('click', () => {
-            const videoId = facade.dataset.videoId;
-            const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&iv_load_policy=3&playsinline=1`;
-            iframe.title = facade.querySelector('img')?.alt || 'YouTube video';
-            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-            iframe.allowFullscreen = true;
-            iframe.style.cssText = 'border:0;position:absolute;top:0;left:0;width:100%;height:100%;';
-            facade.innerHTML = '';
-            facade.appendChild(iframe);
-            facade.style.cursor = 'default';
-        });
-    });
-
     // --- 建立手機版按鈕（放在選單最後面） ---
     if (navLinks) {
         const mobileLi = document.createElement('li');
