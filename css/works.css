@@ -37,7 +37,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);  /* 深色底色 */
-    background-image: linear-gradient(to bottom, transparent 0%, rgba(10, 10, 10, 0.75) 45%, rgba(10, 10, 10, 0.75) 55%, transparent 100%); /* 中間深、上下透（反過來） */
+    background-image: linear-gradient(to bottom, transparent 0%, rgba(10, 10, 10, 0.75) 47.5%, rgba(10, 10, 10, 0.75) 52.5%, transparent 100%); /* 中間深、上下透（反過來） */
     opacity: 0;                  /* 預設隱藏 */
     transition: opacity 0.3s ease; /* 平滑淡入 */
     z-index: 1;                  /* 在圖片上方，但在標題下方 */
@@ -76,7 +76,7 @@
 .work-title {
     color: oklch(0.96 0 340);
     font-size: clamp(16px, 1vw, 18px);
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: 1px;
 }
 
@@ -84,7 +84,7 @@
 .work-type {
     color: oklch(0.96 0 340);
     font-size: clamp(12px, 0.75vw, 14px);
-    font-weight: 200;
+    font-weight: 400;
     letter-spacing: 0.5px;
     
 }

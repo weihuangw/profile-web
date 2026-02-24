@@ -161,6 +161,12 @@
         /* 手機版照片間距縮小一點 */
     }
 
+    /* Project 作品詳情頁：手機版文字區塊滿版（覆蓋電腦版的 66.67% 限制） */
+    .project-header,
+    .project-info {
+        max-width: 100% !important;
+    }
+
     /* Project 作品詳情頁：手機版字體大小（跟 About 頁面一樣） */
     .project-header h1 {
         font-size: 1rem;
