@@ -44,6 +44,29 @@
     /* 主題切換時，連結顏色平滑過渡 */
 }
 
+/* ====== YouTube Facade 播放按鈕 ====== */
+.yt-facade {
+    cursor: pointer;
+}
+
+.yt-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-left: 20px solid rgba(255, 255, 255, 0.85);
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    transition: border-left-color 0.2s ease;
+    pointer-events: none;
+}
+
+.yt-facade:hover .yt-play-btn {
+    border-left-color: #fff;
+}
+
 /* ====== YouTube 影片嵌入區域 ====== */
 .project-video {
     position: relative;
