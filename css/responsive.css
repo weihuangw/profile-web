@@ -170,8 +170,10 @@
         max-width: calc(100% + 40px) !important;
     }
 
-    /* YouTube wrapper 手機版：用 vw 修正 16:9 比例 */
+    /* YouTube wrapper 手機版：用 vw 修正 16:9 比例 + 縮小留白 */
     section:has(.project-header) .container > .yt-wrapper {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
         margin-left: -20px;
         margin-right: -20px;
         width: calc(100% + 40px) !important;
