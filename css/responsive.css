@@ -163,6 +163,7 @@
 
     /* Project 頁面手機版：圖片和 grid 突破容器，左右滿版 */
     section:has(.project-header) .container > img,
+    section:has(.project-header) .container > video,
     section:has(.project-header) .container > div:not([class]) {
         margin-left: -20px;
         margin-right: -20px;

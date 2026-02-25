@@ -103,7 +103,7 @@ header ul li a {
     text-decoration: none;
     /* 去除連結底線 */
     font-weight: 400;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     /* clamp(1.0rem, 8vw, 1.4rem); */
     /* 跟 Logo 一樣的響應式字體大小 */
     letter-spacing: 1px;
