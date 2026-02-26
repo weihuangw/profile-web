@@ -68,7 +68,7 @@
         /* 如果瀏覽器不認識 dvh，就會用上面的 100vh 當備用 */
         background-color: oklch(0.12 0 340);
         /* 選單底色：深色（深色主題為預設） */
-        background-image: linear-gradient(to bottom, rgba(120, 120, 120, 0.1) 0%, transparent 30%, transparent 70%, rgba(120, 120, 120, 0.1) 100%);
+        background-image: linear-gradient(to bottom, transparent 0%, rgba(120, 120, 120, 0.1) 30%, rgba(120, 120, 120, 0.1) 70%, transparent 100%);
         /* 上下邊緣加一層半透明黑色漸層，營造陰影效果 */
         /* 過渡動畫：opacity 控制淡入淡出，background-color 控制主題切換 */
         transition: opacity 0.2s ease, visibility 0.2s ease, background-color 0.5s ease;
