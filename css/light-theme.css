@@ -102,9 +102,6 @@ body.light-theme .scroll-top {
     color: oklch(0.55 0 340);
 }
 
-body.light-theme .scroll-top:hover {
-    color: oklch(0.15 0 340);
-}
 
 /* ====================
    頁尾 (Footer)

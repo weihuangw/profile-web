@@ -93,7 +93,7 @@
 
 .scroll-top {
     display: inline-block;
-    font-size: 1.2rem;
+    font-size: 1rem;
     /* 箭頭大小 */
     color: oklch(0.5 0 340);
     /* 箭頭顏色：低調灰色 */
@@ -101,7 +101,3 @@
     transition: color 0.5s ease;
 }
 
-.scroll-top:hover {
-    color: oklch(0.96 0 340);
-    /* 滑鼠移過去變亮 */
-}
