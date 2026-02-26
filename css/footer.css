@@ -5,7 +5,7 @@
 footer {
     background-color: #000;
     /* 深黑色背景（深色主題為預設） */
-    color: #666;
+    color: oklch(0.5 0 340);
     /* 較暗灰色文字 */
     padding: 40px 0;
     /* 上下留點空間 */
@@ -36,7 +36,7 @@ footer .social-links {
 }
 
 footer .social-links a {
-    color: #ccc;
+    color: oklch(0.76 0 340);
     /* 淺灰色連結（深色主題為預設） */
     text-decoration: none;
     /* 去除底線 */

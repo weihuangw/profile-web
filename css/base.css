@@ -29,6 +29,8 @@
 html {
     scrollbar-gutter: stable;
     /* 不管頁面長短，都預留捲軸的空間，切換頁面時選單不會移位 */
+    background-color: #000;
+    /* body opacity:0 時，html 背景透出來——設成跟 body 一樣的深色，避免閃白 */
 }
 
 /* 設定 body (整個網頁) 的基礎樣式 */

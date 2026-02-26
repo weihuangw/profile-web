@@ -6,7 +6,7 @@
 
 /* 背景與文字顏色反轉為淺色 */
 body.light-theme {
-    background-color: #fff;
+    background-color:oklch(0.92 0 340);
     /* 白色背景 */
     color: #333;
     /* 深灰色文字 */
@@ -16,7 +16,7 @@ body.light-theme {
    導覽列 (Header)
    ==================== */
 body.light-theme header {
-    background-color: #fff;
+    background-color:oklch(0.92 0 340);
     /* 白色背景 */
     color: #333;
 }
@@ -39,11 +39,20 @@ body.light-theme header ul li a:hover {
 /* 漢堡選單線條 (深色) */
 body.light-theme .bar {
     background-color: #333;
+    transition: background-color 0.5s ease;
+}
+
+body.light-theme .menu-toggle.active .bar {
+    background-color: #333;
 }
 
 /* ====================
    關於我 (About)
    ==================== */
+body.light-theme .about-credits h3 {
+    color: oklch(0.55 0 340);
+}
+
 body.light-theme .about-image img {
     border-radius: 0px;
 }
@@ -82,32 +91,35 @@ body.light-theme .project-info p {
 }
 
 body.light-theme .project-info .link {
-    color: oklch(0.25 0 340);
+    color: oklch(0.35 0 340);
     /* 淺色主題：深色連結 */
 }
 
 /* ====================
    回到頂部箭頭 (Scroll Top)
    ==================== */
+body.light-theme .scroll-top {
+    color: oklch(0.55 0 340);
+}
+
 body.light-theme .scroll-top:hover {
-    color: #000;
+    color: oklch(0.15 0 340);
 }
 
 /* ====================
    頁尾 (Footer)
    ==================== */
 body.light-theme footer {
-    background-color: #fff;
-    color: #888;
-    /* 淺灰色文字 */
+    background-color: oklch(0.92 0 340);
+    color: oklch(0.55 0 340);
 }
 
 body.light-theme footer .social-links a {
-    color: #333;
+    color: oklch(0.35 0 340);
 }
 
 body.light-theme footer .social-links a:hover {
-    color: #000;
+    color: oklch(0.15 0 340);
 }
 
 /* ====================
@@ -115,7 +127,7 @@ body.light-theme footer .social-links a:hover {
    ==================== */
 @media (max-width: 768px) {
     body.light-theme .nav-links {
-        background-color: rgba(165, 165, 165, 0.98);
+        background-color: oklch(0.92 0 340);
         /* 淺色主題底色（只改底色，漸層遮罩不變，這樣就能平滑過渡） */
     }
 

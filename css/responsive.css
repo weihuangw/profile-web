@@ -66,9 +66,9 @@
         /* dvh = Dynamic Viewport Height（動態視窗高度） */
         /* 會自動扣掉 iPhone Safari 底部工具列的高度，確保選單完全覆蓋可見區域 */
         /* 如果瀏覽器不認識 dvh，就會用上面的 100vh 當備用 */
-        background-color: rgba(20, 20, 20, 0.98);
+        background-color: oklch(0.12 0 340);
         /* 選單底色：深色（深色主題為預設） */
-        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.4) 100%);
+        background-image: linear-gradient(to bottom, rgba(120, 120, 120, 0.1) 0%, transparent 30%, transparent 70%, rgba(120, 120, 120, 0.1) 100%);
         /* 上下邊緣加一層半透明黑色漸層，營造陰影效果 */
         /* 過渡動畫：opacity 控制淡入淡出，background-color 控制主題切換 */
         transition: opacity 0.2s ease, visibility 0.2s ease, background-color 0.5s ease;
@@ -89,7 +89,7 @@
     }
 
     .nav-links li {
-        margin: 15px 0;
+        margin: 20px 0;
         /* 增加垂直間距 */
     }
 
@@ -97,6 +97,7 @@
         font-size: 1rem;
         /* 放大字體 */
         color: oklch(0.96 0 340);
+        font-weight: 400;
         /* 深色主題：淺色文字；主題切換時，文字顏色平滑過渡 */
         transition: color 0.5s ease;
     }
@@ -142,7 +143,6 @@
 
     .about-credits h3 {
         font-size: 0.8rem;
-        font-weight: 200;
         /* 經歷標題（Residencies 等）字體大小 */
     }
 
@@ -197,8 +197,6 @@
     
     .project-info h3 {
         font-size: 0.8rem;
-        font-weight: 200;
-        /* Project H3 手機版粗細：200（跟 about-credits h3 同步） */
     }
 
     .project-info p {

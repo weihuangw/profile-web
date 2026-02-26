@@ -27,7 +27,7 @@ header .logo {
     font-size: 1.8rem;
     /* clamp(1.0rem, 8vw, 1.4rem); */
     /* 使用 clamp 讓電腦版字體也能稍微自適應 */
-    color: #fff;
+    color: oklch(0.96 0 340);
     /* 純白文字（深色主題為預設） */
     text-decoration: none;
     font-weight: 400;
@@ -37,7 +37,7 @@ header .logo {
     text-transform: uppercase;
     /* 強制大寫 */
     /* 主題切換時，Logo 顏色平滑過渡 */
-    transition: color 0.5s ease;
+    transition: color 0.5s ease, opacity 0.2s ease, visibility 0.2s ease;
 
     /* 彈性排版設定 */
     display: flex;
@@ -98,7 +98,7 @@ header ul li {
 }
 
 header ul li a {
-    color: #ccc;
+    color: oklch(0.76 0 340);
     /* 淺灰色連結（深色主題為預設） */
     text-decoration: none;
     /* 去除連結底線 */
@@ -115,7 +115,7 @@ header ul li a {
 }
 
 header ul li a:hover {
-    color: #fff;
+    color: oklch(0.96 0 340);
     /* 滑鼠移過去變純白 */
 }
 
@@ -142,15 +142,15 @@ header ul li a:hover {
     /* 絕對定位，讓兩條線可以疊在一起 */
     width: 20px;
     height: 1px;
-    background-color: #ccc;
+    background-color: oklch(0.76 0 340);
     top: 50%;
     /* 移到容器垂直中線 */
     left: 50%;
     /* 移到容器水平中線 */
     transform: translate(-50%, -50%);
     /* 往回推自身寬高的一半，讓線條的「中心點」對齊容器的「正中央」 */
-    transition: background-color 0.3s ease-in-out;
-    /* 顏色變化的過渡動畫 */
+    transition: background-color 0.5s ease;
+    /* 顏色變化的過渡動畫，與主題切換同步 */
 }
 
 /* 第一條線：水平（十字的「橫」），已由 .bar 的 transform 置中，不需要額外設定 */
@@ -173,11 +173,12 @@ header ul li a:hover {
 
 /* 確保打開時線條顏色變為白色 */
 .menu-toggle.active .bar {
-    background-color: #fff;
+    background-color: oklch(0.96 0 340);
 }
 
 /* 當選單打開時，隱藏標題 (Logo) 但保留空間 */
 header.menu-open .logo {
+    opacity: 0;
     visibility: hidden;
-    /* 隱藏但保留佔位，這樣叉叉不會跑位 */
+    /* opacity 淡出後再切換 visibility，保留佔位讓叉叉不跑位 */
 }
