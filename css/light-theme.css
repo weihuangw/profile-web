@@ -72,8 +72,8 @@ body.light-theme .project-header h1 {
 }
 
 body.light-theme .project-info h3 {
-    color: oklch(0.25 0 340);
-    /* 淺色主題：深色小標題 */
+    color: oklch(0.55 0 340);
+    /* 淺色主題：中灰色小標題，比內文更淡 */
 }
 
 body.light-theme .project-info p {
