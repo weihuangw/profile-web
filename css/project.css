@@ -43,6 +43,12 @@
     transition: color 0.5s ease;
 }
 
+.project-info .caption {
+    font-size: 0.75rem;
+    color: oklch(0.6 0 340);
+    transition: color 0.5s ease;
+}
+
 .project-info .link {
     font-size: 1rem;
     /* 連結文字大小，跟 about 頁面的 .link 一樣 */

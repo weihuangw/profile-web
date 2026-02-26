@@ -142,7 +142,7 @@ header ul li a:hover {
     /* 絕對定位，讓兩條線可以疊在一起 */
     width: 20px;
     height: 1px;
-    background-color: oklch(0.76 0 340);
+    background-color: oklch(0.96 0 340);
     top: 50%;
     /* 移到容器垂直中線 */
     left: 50%;

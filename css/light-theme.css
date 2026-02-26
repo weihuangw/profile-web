@@ -80,6 +80,10 @@ body.light-theme .project-header h1 {
     /* 淺色主題：深色標題 */
 }
 
+body.light-theme .project-info .caption {
+    color: oklch(0.6 0 340);
+}
+
 body.light-theme .project-info h3 {
     color: oklch(0.55 0 340);
     /* 淺色主題：中灰色小標題，比內文更淡 */
