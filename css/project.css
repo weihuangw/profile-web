@@ -12,7 +12,7 @@
 .project-header h1 {
     font-size: 1.2rem;
     font-weight: 600;
-    letter-spacing: 0px;
+    letter-spacing: 1px;
     margin-bottom: 0px;
     color:oklch(0.96 0 340);
     transition: color 0.5s ease;
@@ -43,9 +43,18 @@
     transition: color 0.5s ease;
 }
 
-.project-info .caption {
-    font-size: 0.75rem;
-    color: oklch(0.6 0 340);
+/* 圖片組下方的照片來源說明（Photo credits） */
+p.caption {
+    font-size: 1rem;
+    color: oklch(0.76 0 340);
+    text-align: center;
+    transition: color 0.5s ease;
+}
+
+/* 圖片上方的標籤文字（Image labels，如 "1 / Micro Reaction"） */
+p.img-label {
+    font-size: 1rem;
+    color: oklch(0.76 0 340);
     transition: color 0.5s ease;
 }
 

@@ -191,7 +191,7 @@
     /* Project 作品詳情頁：手機版字體大小（跟 About 頁面一樣） */
     .project-header h1 {
         font-size: 1rem;
-        font-weight: 800;
+        font-weight: 600;
         color:oklch(0.96 0 340);
     }
     
@@ -208,6 +208,28 @@
     .project-info .link {
         font-size: 0.8rem;
         /* 作品資訊連結，跟 about-credits .link 手機版一樣 */
+    }
+
+    p.caption {
+        font-size: 0.8rem;
+        color: oklch(0.76 0 340);
+    }
+
+    p.img-label {
+        font-size: 0.8rem;
+        color: oklch(0.76 0 340);
+    }
+
+    /* MRSP 作品章節：手機版改為單欄，每張圖各佔一行 */
+    .labeled-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 手機版解除強制比例，讓圖片顯示原始尺寸 */
+    .labeled-grid img {
+        aspect-ratio: auto !important;
+        object-fit: contain !important;
     }
 
     /* Contact 頁面：手機版垂直置中 + 縮小字體 */
