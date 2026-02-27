@@ -96,20 +96,28 @@
                 <p>The work depicts the interaction between Earth's magnetic field and solar wind through force lines. These invisible forces affect body rhythms and mix with man-made signals. Visuals follow force strength; sound shifts between silence and noise.</p> -->
             </div>
 
-            <!-- ─── 2 3 張橫向等寬 (16:9)，各有上方標題 ─── -->
+            <!-- ─── 2 3 張橫向等寬 (16:9)，各有上方標題，點擊原位播放 mp4 ─── -->
             <div class="labeled-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; margin-top:5px; margin-bottom:40px;">
                 <div>
                     <p class="img-label" style="margin-bottom:5x;">1 / Micro Reaction</p>
-                    <img src="../images/MRSP/MRSP-2.jpg" alt="" loading="lazy" style="width:100%; aspect-ratio:16/9; object-fit:cover;">
+                    <div class="video-swap" style="position:relative; width:100%; aspect-ratio:133/61;">
+                        <img src="../images/MRSP/MRSP-2.jpg" alt="" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; cursor:pointer;">
+                        <video src="../images/MRSP/MRSP-2.mp4" loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:none; cursor:pointer;"></video>
+                    </div>
                 </div>
                 <div>
                     <p class="img-label" style="margin-bottom:5x;">2 / Sedimentary</p>
-                    <img src="../images/MRSP/MRSP-3.jpg" alt="" loading="lazy" style="width:100%; aspect-ratio:16/9; object-fit:cover;">
+                    <div class="video-swap" style="position:relative; width:100%; aspect-ratio:133/61;">
+                        <img src="../images/MRSP/MRSP-3.jpg" alt="" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; cursor:pointer;">
+                        <video src="../images/MRSP/MRSP-3.mp4" loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:none; cursor:pointer;"></video>
+                    </div>
                 </div>
                 <div>
                     <p class="img-label" style="margin-bottom:5x;">3 / Polarity</p>
-                    <img src="../images/MRSP/MRSP-4.jpg" alt="" loading="lazy" style="width:100%; aspect-ratio:16/9; object-fit:cover;">
-                <br>
+                    <div class="video-swap" style="position:relative; width:100%; aspect-ratio:133/61;">
+                        <img src="../images/MRSP/MRSP-4.jpg" alt="" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; cursor:pointer;">
+                        <video src="../images/MRSP/MRSP-4.mp4" loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:none; cursor:pointer;"></video>
+                    </div>
                 </div>
             </div>
 
@@ -222,6 +230,24 @@
         </div>
     </footer>
     <script src="../js/script.js"></script>
+    <script>
+        document.querySelectorAll('.video-swap').forEach(function (wrap) {
+            const img = wrap.querySelector('img');
+            const video = wrap.querySelector('video');
+
+            img.addEventListener('click', function () {
+                img.style.display = 'none';
+                video.style.display = 'block';
+                video.play();
+            });
+
+            video.addEventListener('click', function () {
+                video.pause();
+                video.style.display = 'none';
+                img.style.display = 'block';
+            });
+        });
+    </script>
 </body>
 
 </html>

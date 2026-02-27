@@ -243,6 +243,16 @@
         object-fit: contain !important;
     }
 
+    /* video-swap 內的 img / video 維持 16:9 cover，不受上方規則影響 */
+    .labeled-grid .video-swap {
+        aspect-ratio: 133/61 !important;
+    }
+    .labeled-grid .video-swap img,
+    .labeled-grid .video-swap video {
+        aspect-ratio: unset !important;
+        object-fit: cover !important;
+    }
+
     /* Contact 頁面：手機版垂直置中 + 縮小字體 */
     .contact-content {
         text-align: center;
