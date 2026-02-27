@@ -171,6 +171,17 @@
         max-width: calc(100% + 40px) !important;
     }
 
+    /* Project 頁面手機版：圖片 grid 間距縮小 */
+    section:has(.project-header) .container > div:not([class]) {
+        gap: 2px !important;
+    }
+
+    /* wrapper 內的巢狀 grid 也套用 2px gap */
+    section:has(.project-header) .container > div:not([class]) > div:not([class]) {
+        gap: 2px !important;
+        margin-top: 2px !important;
+    }
+
     /* YouTube wrapper 手機版：用 vw 修正 16:9 比例 + 縮小留白 */
     section:has(.project-header) .container > .yt-wrapper {
         margin-top: 10px !important;
@@ -223,7 +234,7 @@
     /* MRSP 作品章節：手機版改為單欄，每張圖各佔一行 */
     .labeled-grid {
         grid-template-columns: 1fr !important;
-        gap: 20px !important;
+        gap: 10px !important;
     }
 
     /* 手機版解除強制比例，讓圖片顯示原始尺寸 */
