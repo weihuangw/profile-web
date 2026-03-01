@@ -3,7 +3,7 @@
    ==================== */
 
 header {
-    background-color: #000;
+    background-color: oklch(0.2 0 0);
     /* 深黑色背景（深色主題為預設） */
     color: #e0e0e0;
     /* 淺灰色文字 */

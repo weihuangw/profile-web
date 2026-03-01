@@ -3,7 +3,7 @@
    ==================== */
 
 footer {
-    background-color: #000;
+    background-color: oklch(0.2 0 0);
     /* 深黑色背景（深色主題為預設） */
     color: oklch(0.5 0 340);
     /* 較暗灰色文字 */

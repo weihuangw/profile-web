@@ -29,7 +29,7 @@
 html {
     scrollbar-gutter: stable;
     /* 不管頁面長短，都預留捲軸的空間，切換頁面時選單不會移位 */
-    background-color: #000;
+    background-color: oklch(0.2 0 0);
     /* body opacity:0 時，html 背景透出來——設成跟 body 一樣的深色，避免閃白 */
 }
 
@@ -42,7 +42,7 @@ body {
     /* 設定行高，讓閱讀更舒適 */
     line-height: 1.6;
     /* 背景顏色：深黑色（深色主題為預設） */
-    background-color: #000;
+    background-color: oklch(0.2 0 0);
     /* 文字顏色：淺灰色 */
     color: #e0e0e0;
 
