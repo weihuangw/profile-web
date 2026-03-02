@@ -12,6 +12,13 @@
     }
 }
 
+/* 中間斷點：iPad 橫向 / 小筆電 */
+@media (max-width: 1024px) {
+    .work-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 /* 主要手機版 Media Query */
 @media (max-width: 768px) {
     /* 手機版：nav 不要伸展，讓漢堡按鈕留在右邊 */
