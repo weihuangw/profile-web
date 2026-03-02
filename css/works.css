@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 1px; /* 超細列高，讓 JS 用 row span 撐出各自高度 */
-    gap: clamp(2px, 0.5vw, 4px);
+    gap: clamp(2px, 1vw, 4px);
     max-width: 100%;
     margin: 0 auto;
 }
