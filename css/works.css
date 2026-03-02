@@ -76,7 +76,7 @@
 /* 作品標題 */
 .work-title {
     color: oklch(0.96 0 340);
-    font-size: clamp(16px, 1vw, 18px);
+    font-size: clamp(12px, 1vw, 16px);
     font-weight: 600;
     letter-spacing: 1px;
 }
@@ -84,7 +84,7 @@
 /* 作品類型 */
 .work-type {
     color: oklch(0.76 0 340);
-    font-size: clamp(12px, 0.75vw, 14px);
+    font-size: clamp(10px, 0.75vw, 14px);
     font-weight: 400;
     letter-spacing: 0.5px;
 }
