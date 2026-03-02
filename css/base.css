@@ -196,3 +196,15 @@ body.menu-open footer {
     display: none;
     /* 選單開啟時 footer 消失，關閉後自動恢復 */
 }
+
+/* ====== 捲動淡入動畫 ====== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

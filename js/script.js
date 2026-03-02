@@ -307,4 +307,26 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.appendChild(mobileLi);
         mobileBtn.addEventListener('click', toggleTheme);
     }
+
+    // ========================
+    // 捲動淡入動畫（Project 頁）
+    // ========================
+    if (document.querySelector('.project-header')) {
+        document.querySelectorAll('section img, section video').forEach(el => {
+            el.classList.add('scroll-reveal');
+        });
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+    }
 });
