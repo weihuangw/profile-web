@@ -313,7 +313,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================
     if (document.querySelector('.project-header')) {
         document.querySelectorAll('section img, section video').forEach(el => {
-            el.classList.add('scroll-reveal');
+            if (!el.closest('.video-swap')) {
+                el.classList.add('scroll-reveal');
+            }
         });
 
         const revealObserver = new IntersectionObserver((entries) => {
