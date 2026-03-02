@@ -178,9 +178,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 逐格淡入：每個 work-item 依序用 workReveal 動畫出現
         // 180ms = body 淡入時間，之後 items 才開始逐格出現
-        document.querySelectorAll('.work-item').forEach((item, i) => {
+        const workItems = document.querySelectorAll('.work-item');
+        workItems.forEach((item, i) => {
+            item.style.opacity = '0';
             item.style.animation = `workReveal 0.5s ease ${180 + i * 40}ms both`;
         });
+
+        // 動畫全部播完後清掉 animation style，明確寫死 opacity: 1
+        // 避免 iOS Safari scroll repaint 時閃回 animation 初始幀（opacity: 0）
+        const lastDelay = 180 + (workItems.length - 1) * 40;
+        setTimeout(() => {
+            workItems.forEach(item => {
+                item.style.animation = '';
+                item.style.opacity = '1';
+            });
+        }, lastDelay + 550); // 最後一個 delay + 動畫時長(500ms) + buffer
 
         document.body.classList.remove('no-transition');
         requestAnimationFrame(() => {
