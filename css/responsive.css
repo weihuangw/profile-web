@@ -141,6 +141,14 @@
         /* 覆蓋電腦版的 2fr 1fr，手機版只有一欄 = 滿版 */
     }
 
+    .work-title {
+        font-size: 12px;
+    }
+
+    .work-type {
+        font-size: 10px;
+    }
+
     /* About 頁面：手機版字體大小 ← 改這裡的數字就能調整 */
     .about-text {
         font-size: 0.9rem;
