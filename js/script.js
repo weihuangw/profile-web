@@ -124,6 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const grid = document.querySelector('.work-grid');
         if (!grid) return;
 
+        // 手機版不做 masonry，清掉 JS 設定的樣式讓 CSS 自然排列
+        if (window.innerWidth <= 768) {
+            grid.querySelectorAll('.work-item').forEach(item => {
+                item.style.gridRowEnd = '';
+                const img = item.querySelector('img');
+                if (img) img.style.height = '';
+            });
+            return;
+        }
+
         const gap = parseFloat(getComputedStyle(grid).rowGap) || 0;
 
         grid.querySelectorAll('.work-item').forEach(item => {

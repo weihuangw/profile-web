@@ -40,6 +40,7 @@
     /* 修正 Work Grid */
     .work-grid {
         grid-template-columns: 1fr; /* 手機版單欄 */
+        grid-auto-rows: auto;       /* 覆蓋電腦版的 1px，讓圖片自然高度顯示 */
         max-width: 95%;
     }
 
@@ -64,7 +65,7 @@
         /* dvh = Dynamic Viewport Height（動態視窗高度） */
         /* 會自動扣掉 iPhone Safari 底部工具列的高度，確保選單完全覆蓋可見區域 */
         /* 如果瀏覽器不認識 dvh，就會用上面的 100vh 當備用 */
-        background-color: oklch(0.2 0 0);
+        background-color: oklch(0.22 0 0);
         /* 選單底色：深色（深色主題為預設） */
         background-image: linear-gradient(to bottom, transparent 0%, rgba(120, 120, 120, 0.1) 30%, rgba(120, 120, 120, 0.1) 70%, transparent 100%);
         /* 上下邊緣加一層半透明黑色漸層，營造陰影效果 */
