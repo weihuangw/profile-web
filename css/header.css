@@ -3,7 +3,7 @@
    ==================== */
 
 header {
-    background-color: oklch(0.2 0 0);
+    background-color: oklch(0.22 0 0);
     /* 深黑色背景（深色主題為預設） */
     color: #e0e0e0;
     /* 淺灰色文字 */
@@ -27,7 +27,7 @@ header .logo {
     font-size: 1.8rem;
     /* clamp(1.0rem, 8vw, 1.4rem); */
     /* 使用 clamp 讓電腦版字體也能稍微自適應 */
-    color: oklch(0.96 0 340);
+    color: oklch(0.76 0 340);
     /* 純白文字（深色主題為預設） */
     text-decoration: none;
     font-weight: 400;

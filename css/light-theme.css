@@ -115,7 +115,7 @@ body.light-theme .scroll-top {
    頁尾 (Footer)
    ==================== */
 body.light-theme footer {
-    background-color: oklch(0.92 0 340);
+    background-color: oklch(0.92 0 0);
     color: oklch(0.55 0 340);
 }
 
@@ -132,7 +132,7 @@ body.light-theme footer .social-links a:hover {
    ==================== */
 @media (max-width: 768px) {
     body.light-theme .nav-links {
-        background-color: oklch(0.92 0 340);
+        background-color: oklch(0.92 0 0);
         /* 淺色主題底色（只改底色，漸層遮罩不變，這樣就能平滑過渡） */
     }
 

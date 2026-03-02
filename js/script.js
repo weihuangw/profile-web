@@ -114,15 +114,60 @@ document.addEventListener('DOMContentLoaded', () => {
         return rect.top < window.innerHeight;      // 圖片頂部是否在螢幕可見範圍內
     }
 
+    // ========================
+    // 瀑布流 Masonry 排版
+    // ========================
+    // 原理：grid-auto-rows: 1px 讓每列只有 1px 高
+    // JS 依圖片的真實寬高比算出每個 item 要 span 幾列，撐出正確高度
+    // 這樣 Grid 還是照橫向（左→右）排列，不像 CSS columns 會直向填欄
+    function layoutMasonry() {
+        const grid = document.querySelector('.work-grid');
+        if (!grid) return;
+
+        const gap = parseFloat(getComputedStyle(grid).rowGap) || 0;
+
+        grid.querySelectorAll('.work-item').forEach(item => {
+            const img = item.querySelector('img');
+            if (!img || !img.naturalWidth) return;
+
+            const colWidth = item.getBoundingClientRect().width;
+            const renderedHeight = colWidth * (img.naturalHeight / img.naturalWidth);
+            const span = Math.round((renderedHeight + gap) / (1 + gap));
+            item.style.gridRowEnd = `span ${span}`;
+            // grid area 精確高度 = span 列(各 1px) + (span-1) 個 row-gap
+            // 把圖片設成這個高度，讓 item 完全貼合 grid area，縫隙就只剩純 row-gap
+            const gridAreaHeight = span + (span - 1) * gap;
+            img.style.height = `${gridAreaHeight}px`;
+        });
+    }
+
+    // 視窗縮放時重新計算（先淡出 grid，重算後淡入，遮住位置跳動）
+    let masonryTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(masonryTimer);
+        const grid = document.querySelector('.work-grid');
+        if (grid) grid.style.opacity = '0';
+        masonryTimer = setTimeout(() => {
+            layoutMasonry();
+            if (grid) grid.style.opacity = '';
+        }, 150);
+    });
+
     /**
      * 顯示頁面的函式：移除 no-transition，加上 page-ready 來觸發淡入
      */
     function showPage() {
-        document.body.classList.remove('no-transition');  // 允許動畫效果
-        // requestAnimationFrame = 等瀏覽器準備好下一幀畫面時再執行
-        // 這樣 transition 才能正確觸發（瀏覽器需要「看到」opacity:0 的狀態，才能動畫到 opacity:1）
+        layoutMasonry(); // 圖片載入完成後，計算瀑布流排版
+
+        // 逐格淡入：每個 work-item 依序用 workReveal 動畫出現
+        // 180ms = body 淡入時間，之後 items 才開始逐格出現
+        document.querySelectorAll('.work-item').forEach((item, i) => {
+            item.style.animation = `workReveal 0.5s ease ${180 + i * 40}ms both`;
+        });
+
+        document.body.classList.remove('no-transition');
         requestAnimationFrame(() => {
-            document.body.classList.add('page-ready');  // 觸發淡入！頁面慢慢顯示出來
+            document.body.classList.add('page-ready');
         });
     }
 

@@ -39,10 +39,8 @@
 
     /* 修正 Work Grid */
     .work-grid {
-        /* 強制單欄 */
-        grid-template-columns: 1fr;
-        /* 使用 clamp() 讓間距隨螢幕寬度自動調整 */
-        gap: clamp(3px, 2vw, 15px);
+        grid-template-columns: 1fr; /* 手機版單欄 */
+        max-width: 95%;
     }
 
     .nav-links {
@@ -66,7 +64,7 @@
         /* dvh = Dynamic Viewport Height（動態視窗高度） */
         /* 會自動扣掉 iPhone Safari 底部工具列的高度，確保選單完全覆蓋可見區域 */
         /* 如果瀏覽器不認識 dvh，就會用上面的 100vh 當備用 */
-        background-color: oklch(0.12 0 340);
+        background-color: oklch(0.2 0 0);
         /* 選單底色：深色（深色主題為預設） */
         background-image: linear-gradient(to bottom, transparent 0%, rgba(120, 120, 120, 0.1) 30%, rgba(120, 120, 120, 0.1) 70%, transparent 100%);
         /* 上下邊緣加一層半透明黑色漸層，營造陰影效果 */

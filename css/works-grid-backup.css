@@ -1,14 +1,20 @@
 /* ====================
-   作品集區塊 (Works Section)
+   作品集區塊 (Works Section) — GRID 版本備份
+   原始 Grid 排版，備份於 2026-03-02
+   若要還原：把此檔內容貼回 works.css，
+   並把 responsive.css 內 .work-grid 的手機版改回：
+       grid-template-columns: 1fr;
+       gap: clamp(3px, 2vw, 15px);
    ==================== */
 
 .work-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 1px; /* 超細列高，讓 JS 用 row span 撐出各自高度 */
-    gap: clamp(12px, 2vw, 20px);
-    max-width: 90%;
-    margin: 0 auto;
+    /* 設定網格：最多 3 欄 */
+    /* 計算方式：容器寬度(90%) / 3 ≈ 30% 為每欄最小寬度，這樣最多只會有 3 欄 */
+    /* 當寬度不足時，自動減少欄數 (3→2→1) */
+    grid-template-columns: repeat(auto-fit, minmax(max(350px, 30%), 1fr));
+    /* 使用 clamp() 讓間距隨螢幕寬度自動調整 */
+    gap: clamp(5px, 0.5vw, 15px);
 }
 
 /* 作品項目容器 */
@@ -16,16 +22,14 @@
     display: block;
     overflow: hidden;
     text-decoration: none;
-    position: relative;
-    align-self: start; /* 從格子頂端開始，不拉伸填滿 */
+    position: relative; /* 讓遮罩和標題可以定位在圖片上方 */
 }
 
 /* 作品圖片 */
 .work-item img {
     width: 100%;
-    height: auto; /* JS 會設定精確高度，object-fit 防止變形 */
+    height: auto;
     display: block;
-    object-fit: cover;
 }
 
 
@@ -88,15 +92,3 @@
     font-weight: 400;
     letter-spacing: 0.5px;
 }
-
-/* 瀑布流進場動畫 */
-@keyframes workReveal {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* resize 時用 opacity transition 遮住重算過程 */
-.work-grid {
-    transition: opacity 0.15s ease;
-}
-
