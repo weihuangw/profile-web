@@ -152,8 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 視窗縮放時重新計算（先淡出 grid，重算後淡入，遮住位置跳動）
+    // 只追蹤寬度變化：iOS Safari 滾動時工具列收起會改變高度但不改寬度
+    // 若只有高度變（捲動），直接略過，避免 grid 反覆淡出淡入造成閃爍
     let masonryTimer;
+    let lastWidth = window.innerWidth;
     window.addEventListener('resize', () => {
+        const currentWidth = window.innerWidth;
+        if (currentWidth === lastWidth) return;
+        lastWidth = currentWidth;
+
         clearTimeout(masonryTimer);
         const grid = document.querySelector('.work-grid');
         if (grid) grid.style.opacity = '0';
