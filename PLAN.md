@@ -1,7 +1,7 @@
 # HUANG WEI — 作品集網站開發計畫
 
-> 最後更新：2026-02-15
-> 專案路徑：`c:\__Antigravity\profile-web`
+> 最後更新：2026-03-01
+> 專案路徑：`c:\__Code\profile-web`
 
 ---
 
@@ -25,10 +25,14 @@
 | 頁面 | 檔案 | 狀態 |
 |------|------|------|
 | 首頁 | `index.html` | 空殼，直接跳轉到 works.html |
-| 作品列表 | `works.html` | 已完成，10 格作品（1 個有圖，9 個佔位圖） |
+| 作品列表 | `works.html` | 已完成基礎版（10 格，4 個有圖，6 個佔位圖） |
 | 關於 | `about.html` | 已完成，有簡介、照片、完整經歷列表 |
 | 聯絡 | `contact.html` | 已完成，有 Email 和 Instagram |
-| 作品詳情 | `projects/project-1.html` ~ `project-10.html` | project-10 已完成（∫\<Sense\>*dt），其餘待填內容 |
+| project-10 | `projects/project-10.html` | ✓ ∫\<Sense\>*dt（含 YouTube 嵌入） |
+| project-9 | `projects/project-9.html` | ✓ Sedimentary |
+| project-8 | `projects/project-8.html` | ✓ MRSP（含點擊播放 mp4） |
+| project-7 | `projects/project-7.html` | ✓ INNERSTAR-01 : Reddening |
+| project-1 ~ 6 | `projects/project-1.html` ~ `project-6.html` | 空白模板，待填內容 |
 
 ### 已完成的功能
 
@@ -39,13 +43,22 @@
 | 手機觸碰 hover 效果 | 第一次點顯示標題，第二次點進入作品頁 | `js/script.js` |
 | 回到頂部按鈕 | 作品詳情頁底部的 ↑ 按鈕 | 各 project HTML 內嵌 |
 | HTML 圖片懶載入 | `loading="lazy"` 屬性 | 各 project HTML |
+| 頁面轉場動畫 | 離開淡出、進入淡入，不影響主題切換 | `css/base.css` + `js/script.js` |
 | YouTube 嵌入 | 響應式 iframe 影片嵌入 | `projects/project-10.html` |
+| 點擊播放 mp4 | 作品頁圖片點擊後原位播放 loop 影片 | `projects/project-8.html` |
+
+### 視覺設定
+
+| 項目 | 深色主題 | 淺色主題 |
+|------|---------|---------|
+| 背景色 | `oklch(0.2 0 0)`（深灰） | `oklch(0.92 0 340)`（帶粉淺灰） |
+| 文字色 | `#e0e0e0` | `#333` |
 
 ### CSS 模組化結構
 
 | 檔案 | 負責區域 |
 |------|---------|
-| `css/base.css` | 全站基礎樣式（字體、顏色、reset） |
+| `css/base.css` | 全站基礎樣式（字體、顏色、reset、頁面轉場） |
 | `css/header.css` | 導覽列 + 漢堡選單 |
 | `css/footer.css` | 頁尾 |
 | `css/style.css` | 主樣式（匯入其他 CSS） |
@@ -70,9 +83,6 @@
   - 響應式圖片格子（根據螢幕寬度自動調整）
   - 觸控滑動偵測（手機左右滑換圖）
   - 頁面轉場動畫
-  - Google Analytics 流量追蹤
-  - Cookie 同意橫幅
-  - 防止圖片右鍵下載
   - Debounce 防抖函式（優化捲動效能）
 
 ### 2. main1.js — Mario Carrillo 的 WebGL Shader 背景
@@ -99,7 +109,6 @@
   - 雙音軌 LFO 交叉淡入淡出（聲音呼吸感）
   - 聲音與畫面完全同步（LFO 同時控制音量和亮度）
   - 紅點按鈕切換「藝術模式」和「資訊模式」
-  - 可拖曳的 UI 面板
   - Email 地址混淆防爬蟲
   - 雙緩衝渲染（backbuffer 回饋效果）
 - **已提取的 Shader**：
@@ -107,9 +116,39 @@
 - **已提取的音訊系統**：
   - `404zero_audio_system.md` — 完整聲音處理邏輯文件
 
+### 4. Peeky — 作品集平台照片排版機制
+
+- **來源**：`g:\My Drive\wei-Obsidian\projects\peeky-photo-layout.md`
+- **技術**：Flexbox + JS 動態計算位置
+- **可參考的功能**：
+  - 直向（2:3）佔 1 欄、橫向（3:2）佔 2 欄
+  - padding-bottom 鎖定長寬比
+  - JS 計算同排等高，cover 裁切填滿
+  - 類型碼系統（L / l / P / Y / X / S）決定排列 pattern
+
 ---
 
 ## 功能開發計畫
+
+### 階段 0：Works 頁面排版重構（進行中討論）
+
+#### 0-1. 混合比例排版（Peeky 風格）
+
+- **優先度**：高
+- **狀態**：規劃中，尚未決定各作品方向
+- **說明**：Works 頁面改為 Flexbox，直向作品佔 1 欄（1/3），橫向作品佔 2 欄（2/3），響應式 3→2→1 欄
+- **影響檔案**：`works.html`、`css/works.css`、`js/script.js`
+- **實作要點**：
+  - 每個 `.work-item` 加 `data-type="landscape"` 或 `data-type="portrait"`
+  - JS 讀取視窗寬度決定欄數（>1024px → 3欄，768~1024px → 2欄，<768px → 1欄）
+  - 3欄模式：landscape=66.67%、portrait=33.33%，每排湊滿 100%
+  - 2欄模式：所有作品 50% 等寬
+  - 1欄模式：所有作品 100%
+  - JS 計算同排等高，圖片 object-fit: cover
+  - resize 事件加 debounce 重算
+- **待決定**：10 個作品各自是直向還是橫向（影響排列 pattern）
+
+---
 
 ### 階段 1：基礎體驗升級
 
@@ -132,26 +171,8 @@
 #### 1-2. 頁面轉場動畫
 
 - **優先度**：高
-- **狀態**：未開始
-- **說明**：頁面切換時加上淡入淡出效果，避免硬切
-- **參考**：`main.js` 的 pageTransition 模組
-- **影響檔案**：`js/script.js`、`css/base.css`
-- **實作要點**：
-  - 離開頁面時 → 淡出（opacity 0）
-  - 進入頁面時 → 淡入（opacity 1）
-  - 用 CSS transition + JS 控制
-  - 注意：不要影響到現有的主題切換動畫
-
-#### 1-3. 作品頁 Prev / Next 導航
-
-- **優先度**：中
-- **狀態**：未開始
-- **說明**：作品詳情頁底部加上「← 上一個作品 / 下一個作品 →」按鈕
-- **影響檔案**：各 project HTML、`css/project.css`
-- **實作要點**：
-  - 固定在頁面底部（footer 上方）
-  - 顯示上/下一個作品的名稱
-  - 最後一個作品的 Next → 回到第一個（循環）
+- **狀態**：✓ 已完成
+- **說明**：頁面切換時淡入淡出，不影響主題切換動畫
 
 #### 1-4. 圖片 Lazy Loading 強化
 
@@ -161,10 +182,8 @@
 - **參考**：`main.js` 的 Lazy Load v1.9.7
 - **影響檔案**：`js/script.js`
 - **實作要點**：
-  - Intersection Observer API（現代瀏覽器內建）
-  - 圖片載入前顯示低解析度佔位或 blur 效果
-  - 圖片進入視窗時才開始載入
-  - 載入完成後淡入顯示
+  - Intersection Observer API
+  - 圖片進入視窗時才載入，載入完成後淡入顯示
 
 ---
 
@@ -181,36 +200,20 @@
 - **影響檔案**：`index.html`（重寫）、新增 `js/webgl.js`
 - **實作要點**：
   - 全螢幕 `<canvas>` 背景
-  - GLSL Fragment Shader 動態效果（可用你已有的 Shader 作品）
-  - 上面疊加 HUANG WEI 的名字和簡單導航
-  - 點擊或捲動進入 Works 頁面
-  - 注意效能：手機上可能需要降低解析度或關閉效果
-  - 參考 `main1.js` 的響應式處理（不同螢幕用不同參數）
-
-#### 2-2. 影片封面取代靜態圖片
-
-- **優先度**：中
-- **狀態**：未開始
-- **說明**：Works 頁面的作品格子，hover 時播放短影片預覽
-- **影響檔案**：`works.html`、`css/works.css`、`js/script.js`
-- **實作要點**：
-  - 預設顯示靜態圖片（縮圖）
-  - 滑鼠 hover 時自動播放短影片（3~5 秒循環，靜音）
-  - 手機版維持靜態圖片（節省流量）
-  - 影片格式：MP4（相容性最好）
-  - 需要為每個作品準備一段短預覽影片
+  - GLSL Fragment Shader 動態效果
+  - 上面疊加 HUANG WEI 名字和簡單導航
+  - 手機版降低解析度或關閉效果
 
 #### 2-3. 捲動動畫（Scroll Animation）
 
 - **優先度**：中
 - **狀態**：未開始
-- **說明**：頁面內容在捲動時淡入出現，增加瀏覽節奏感
+- **說明**：頁面內容在捲動時淡入出現
 - **影響檔案**：`js/script.js`、`css/base.css`
 - **實作要點**：
   - Intersection Observer API 偵測元素進入視窗
   - 元素從下方滑入 + 淡入（translateY + opacity）
-  - 只觸發一次（出現過就不再重複動畫）
-  - 適用於：作品格子、About 頁面的各區塊、作品詳情頁的圖片
+  - 只觸發一次
 
 #### 2-4. 作品分類篩選
 
@@ -221,8 +224,25 @@
 - **實作要點**：
   - 標籤類別：Performance / Exhibition / Installation / Media Design / All
   - 每個 `.work-item` 加上 `data-category` 屬性
-  - 點擊標籤 → 隱藏不符合的作品（加上淡出動畫）
-  - 預設顯示 All
+  - 點擊標籤 → 隱藏不符合的作品（淡出動畫）
+
+---
+
+### 階段 4：URL 結構重構
+
+#### 4-1. 去除 URL 中的 .html 副檔名
+
+- **優先度**：低（等內容完成後再處理）
+- **狀態**：未開始
+- **說明**：GitHub Pages 不原生支援無副檔名 URL，需改用資料夾結構
+- **做法**：每個頁面改為 `頁面名稱/index.html`
+  ```
+  works.html               →  works/index.html          →  /works/
+  about.html               →  about/index.html          →  /about/
+  contact.html             →  contact/index.html        →  /contact/
+  projects/project-10.html →  projects/project-10/index.html  →  /projects/project-10/
+  ```
+- **注意**：所有內部連結（href）、CSS / JS / 圖片相對路徑全部要重寫，建議等 project-1~6 內容都填完再一次處理
 
 ---
 
@@ -234,55 +254,38 @@
 
 - **優先度**：低（長期目標）
 - **狀態**：未開始
-- **說明**：在首頁或特定作品頁加入聲音元素，聲音與畫面同步
 - **參考**：`404` 的 Web Audio API + LFO 交叉淡入淡出
-- **詳細文件**：`c:\Users\weihuang\Downloads\404zero_audio_system.md`
-- **實作要點**：
-  - Web Audio API（AudioContext + GainNode）
-  - 需要使用者點擊才能啟動聲音（瀏覽器規定）
-  - LFO 控制音量 + GLSL 亮度同步
-  - 準備環境音或噪聲音軌（mp3 / ogg）
+- **詳細文件**：`g:\My Drive\wei-Obsidian\projects\404zero_audio_system.md`
 
 #### 3-2. 滑鼠互動式視覺
 
 - **優先度**：低（長期目標）
 - **狀態**：未開始
-- **說明**：滑鼠位置影響網頁上的視覺效果
 - **參考**：`404` 的滑鼠控制攝影機 + 地形
-- **實作要點**：
-  - 追蹤滑鼠位置，傳給 GLSL Shader 作為 uniform
-  - 可以影響：背景顏色、粒子方向、形狀變化
-  - 手機版用陀螺儀或觸碰位置取代
 
 #### 3-3. 自訂 404 錯誤頁面
 
 - **優先度**：低
 - **狀態**：未開始
-- **說明**：找不到頁面時顯示一個有趣的藝術頁面
-- **參考**：`404` 的 Ray Marching 效果
 - **影響檔案**：新增 `404.html`
-- **實作要點**：
-  - WebGL 動態背景 + 「Page Not Found」文字
-  - 可以用你的 Shader 作品作為背景
-  - 加上返回首頁的連結
-  - GitHub Pages 需要把檔案命名為 `404.html`
+- **實作要點**：GitHub Pages 需要命名為 `404.html`
 
 ---
 
 ## 目前檔案結構
 
 ```
-c:\__Antigravity\profile-web\
+c:\__Code\profile-web\
 │
-├── index.html              ← 首頁（目前空殼，跳轉到 works）
+├── index.html              ← 首頁（空殼，跳轉到 works）
 ├── works.html              ← 作品列表頁
 ├── about.html              ← 關於頁面
 ├── contact.html            ← 聯絡頁面
-├── README.md
+├── PLAN.md                 ← 本檔案
 │
 ├── css\
 │   ├── style.css           ← 主樣式（匯入其他 CSS）
-│   ├── base.css            ← 全站基礎
+│   ├── base.css            ← 全站基礎（含頁面轉場）
 │   ├── header.css          ← 導覽列
 │   ├── footer.css          ← 頁尾
 │   ├── works.css           ← 作品列表頁
@@ -293,47 +296,51 @@ c:\__Antigravity\profile-web\
 │   └── light-theme.css     ← 淺色主題
 │
 ├── js\
-│   └── script.js           ← 主要 JS（選單、主題、觸碰效果）
+│   └── script.js           ← 主要 JS（選單、主題、觸碰、頁面轉場）
 │
 ├── images\
-│   └── SenseDt\            ← ∫<Sense>*dt 作品圖片
+│   ├── SenseDt\            ← ∫<Sense>*dt
+│   ├── SED_inst\           ← Sedimentary
+│   ├── MRSP\               ← MRSP
+│   └── Innerstar\          ← INNERSTAR-01
 │
 ├── projects\
-│   ├── project-1.html      ← 作品 1（待填內容）
-│   ├── project-2.html      ← 作品 2（待填內容）
-│   ├── ...
-│   └── project-10.html     ← ∫<Sense>*dt（已完成）
+│   ├── project.html        ← 空白模板
+│   ├── project-7.html      ← ✓ INNERSTAR-01
+│   ├── project-8.html      ← ✓ MRSP
+│   ├── project-9.html      ← ✓ Sedimentary
+│   ├── project-10.html     ← ✓ ∫<Sense>*dt
+│   └── project-1 ~ 6.html  ← 空白模板，待填
 │
-└── fonts\                  ← 自訂字體
+└── fonts\                  ← 自訂字體（Inter WOFF2）
 ```
 
 ---
 
 ## 相關資源檔案
 
-從參考網站提取出來的學習資源，存放在 Downloads：
-
 | 檔案 | 說明 | 路徑 |
 |------|------|------|
-| `shaders.md` | 三段 GLSL Shader 原始碼（含中文註解） | `c:\Users\weihuang\Downloads\shaders.md` |
-| `td_wave_shader.glsl` | 波浪條紋 Shader（TouchDesigner 版） | `c:\Users\weihuang\Downloads\td_wave_shader.glsl` |
-| `td_grid_shader.glsl` | 格子方塊 Shader（TouchDesigner 版） | `c:\Users\weihuang\Downloads\td_grid_shader.glsl` |
-| `td_raymarching_404zero.glsl` | Ray Marching 地形 Shader（TouchDesigner 版） | `c:\Users\weihuang\Downloads\td_raymarching_404zero.glsl` |
-| `404zero_audio_system.md` | 404.zero 聲音系統完整解析 | `c:\Users\weihuang\Downloads\404zero_audio_system.md` |
+| `peeky-photo-layout.md` | Peeky 平台照片排版機制分析 | `g:\My Drive\wei-Obsidian\projects\` |
+| `404zero_audio_system.md` | 404.zero 聲音系統完整解析 | `g:\My Drive\wei-Obsidian\projects\` |
+| `shaders.md` | 三段 GLSL Shader 原始碼 | `g:\My Drive\wei-Obsidian\projects\` |
 
 ---
 
 ## 待辦事項清單
 
+### 內容
+- [ ] `project-1` ~ `project-6` 作品內容待填
+- [ ] `works.html` 6 個佔位圖待替換
+
+### 功能
+- [ ] **階段 0-1**：Works 混合比例排版（需先決定各作品方向）
 - [ ] **階段 1-1**：圖片 Lightbox 燈箱
-- [ ] **階段 1-2**：頁面轉場動畫
-- [ ] **階段 1-3**：作品頁 Prev / Next 導航
 - [ ] **階段 1-4**：圖片 Lazy Loading 強化
 - [ ] **階段 2-1**：首頁 WebGL 動態背景
-- [ ] **階段 2-2**：影片封面取代靜態圖片
 - [ ] **階段 2-3**：捲動動畫（Scroll Animation）
 - [ ] **階段 2-4**：作品分類篩選
 - [ ] **階段 3-1**：網頁音訊互動
 - [ ] **階段 3-2**：滑鼠互動式視覺
 - [ ] **階段 3-3**：自訂 404 錯誤頁面
-- [ ] **其他**：補齊 project-1 ~ project-9 的作品內容
+- [ ] **階段 4-1**：URL 結構重構（去除 .html）— 等內容完成後再處理
