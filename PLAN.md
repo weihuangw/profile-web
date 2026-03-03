@@ -1,6 +1,6 @@
 # HUANG WEI — 作品集網站開發計畫
 
-> 最後更新：2026-03-01
+> 最後更新：2026-03-03
 > 專案路徑：`c:\__Code\profile-web`
 
 ---
@@ -32,7 +32,12 @@
 | project-9 | `projects/project-9.html` | ✓ Sedimentary |
 | project-8 | `projects/project-8.html` | ✓ MRSP（含點擊播放 mp4） |
 | project-7 | `projects/project-7.html` | ✓ INNERSTAR-01 : Reddening |
-| project-1 ~ 6 | `projects/project-1.html` ~ `project-6.html` | 空白模板，待填內容 |
+| project-6 | `projects/project-6.html` | 待填（封面圖已存在：Homoform） |
+| project-5 | `projects/project-5.html` | 待填（封面圖已存在：Daniel） |
+| project-4 | `projects/project-4.html` | 待填（封面圖已存在：MT） |
+| project-3 | `projects/project-3.html` | 待填（封面圖已存在：DIS） |
+| project-2 | `projects/project-2.html` | 待填（封面圖已存在：ex） |
+| project-1 | `projects/project-1.html` | 空白模板，works.html 中已註解隱藏 |
 
 ### 已完成的功能
 
@@ -272,6 +277,86 @@
 
 ---
 
+### 階段 5：部署與分析
+
+#### 5-1. 遷移到 Cloudflare Pages + 開啟 Web Analytics
+
+- **優先度**：中（等網站內容完成後執行）
+- **狀態**：未開始
+- **說明**：將網站從 GitHub Pages 遷移到 Cloudflare Pages，免費獲得更快速度與內建訪客分析（無 Cookie、不用改程式碼）
+- **步驟**：
+  1. 在 [cloudflare.com](https://cloudflare.com) 建立免費帳號
+  2. Workers & Pages → Create → Pages → Connect to Git
+  3. 連結 GitHub 帳號，選擇 `profile-web` repo
+  4. Framework preset = `None`，Build command 與 Output directory 留空
+  5. 部署完成後確認網站正常（會有 `profile-web.pages.dev` 網址）
+  6. 左側 Web Analytics → Add a site → 選 Pages 專案 → 開啟分析
+  7. 確認分析資料正常後，可選擇關閉 GitHub Pages
+- **優點**：免費、無 Cookie、全球 CDN 加速、不需修改任何程式碼
+- **影響檔案**：無（純部署操作）
+
+#### 5-2. Git 分支工作流程
+
+- **狀態**：待遷移後採用
+- **策略**：`main` branch 直接對應正式網站，日常開發開 feature branch
+- **流程**：
+  ```
+  開發新功能／修改
+       ↓
+  開一個 feature branch（如 feature/project-6）
+       ↓
+  push 到 GitHub → Cloudflare 自動產生預覽網址
+       ↓
+  確認預覽沒問題
+       ↓
+  merge 到 main → 正式網站自動更新
+  ```
+- **說明**：
+  - `main` → 正式網站（`profile-web.pages.dev`）
+  - 其他任何 branch → Cloudflare 自動產生獨立預覽網址，可實際瀏覽效果
+  - 不需要額外維護 production branch，保持簡單
+
+---
+
+### 階段 6：SEO — Google 搜尋優化
+
+> 目標：讓 Google 能搜尋到網站，提升被找到的機率
+
+#### 6-1. 提交 Google Search Console + 建立 sitemap.xml
+
+- **優先度**：中（遷移 Cloudflare 後執行）
+- **狀態**：未開始
+- **步驟**：
+  1. 前往 [search.google.com/search-console](https://search.google.com/search-console) 新增網站
+  2. 驗證擁有權（Cloudflare DNS 驗證最簡單）
+  3. 在根目錄建立 `sitemap.xml`，列出所有頁面 URL
+  4. 在 Search Console 提交 sitemap
+- **影響檔案**：新增 `sitemap.xml`
+
+#### 6-2. 補齊所有頁面的 meta description 和 og tags
+
+- **優先度**：中
+- **狀態**：未開始
+- **說明**：每個頁面的 `<head>` 加上以下標籤，提升搜尋結果的曝光品質
+- **需加入標籤**：
+  ```html
+  <meta name="description" content="作品描述（150字以內）">
+  <meta property="og:title" content="作品名稱 — HUANG WEI">
+  <meta property="og:description" content="作品描述">
+  <meta property="og:image" content="封面圖完整 URL">
+  <meta property="og:url" content="頁面完整 URL">
+  ```
+- **影響檔案**：`works.html`、`about.html`、`contact.html`、所有 `project-N.html`
+
+#### 6-3. 補全圖片 alt 屬性
+
+- **優先度**：低
+- **狀態**：未開始
+- **說明**：圖片的 `alt` 文字有助於 Google 理解圖片內容，目前部分為空或佔位文字
+- **影響檔案**：各 `project-N.html`
+
+---
+
 ## 目前檔案結構
 
 ```
@@ -344,3 +429,7 @@ c:\__Code\profile-web\
 - [ ] **階段 3-2**：滑鼠互動式視覺
 - [ ] **階段 3-3**：自訂 404 錯誤頁面
 - [ ] **階段 4-1**：URL 結構重構（去除 .html）— 等內容完成後再處理
+- [ ] **階段 5-1**：遷移到 Cloudflare Pages + 開啟 Web Analytics — 等內容完成後再執行
+- [ ] **階段 6-1**：提交 Google Search Console + sitemap.xml
+- [ ] **階段 6-2**：補齊所有頁面 meta description 和 og tags
+- [ ] **階段 6-3**：檢查並補全所有圖片 alt 屬性
