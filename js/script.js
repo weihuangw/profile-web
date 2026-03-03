@@ -329,8 +329,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    revealObserver.unobserve(entry.target);
+                    const el = entry.target;
+                    revealObserver.unobserve(el);
+                    if (el.tagName === 'IMG' && !el.complete) {
+                        const show = () => el.classList.add('visible');
+                        el.addEventListener('load', show, { once: true });
+                        setTimeout(show, 1500);
+                    } else {
+                        el.classList.add('visible');
+                    }
                 }
             });
         }, { threshold: 0.08 });
