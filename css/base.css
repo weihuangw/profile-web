@@ -57,7 +57,7 @@ body {
     min-height: 100vh;
 
     /* 主題切換時，背景色和文字色平滑過渡（0.4 秒） */
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ====================
