@@ -33,6 +33,11 @@ html {
     /* body opacity:0 時，html 背景透出來——設成跟 body 一樣的深色，避免閃白 */
 }
 
+/* 淺色主題時，html 背景同步切換，避免 body 淡入時閃黑 */
+html:has(.light-theme) {
+    background-color: oklch(0.92 0 340);
+}
+
 /* 設定 body (整個網頁) 的基礎樣式 */
 body {
     /* 設定字型：英文用 Inter，中文用微軟正黑體，最後用系統預設 */
