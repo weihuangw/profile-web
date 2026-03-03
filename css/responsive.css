@@ -49,6 +49,7 @@
         grid-template-columns: 1fr; /* 手機版單欄 */
         grid-auto-rows: auto;       /* 覆蓋電腦版的 1px，讓圖片自然高度顯示 */
         max-width: 95%;
+        gap: 2.5vw;
     }
 
     .nav-links {
