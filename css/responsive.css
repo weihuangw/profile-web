@@ -3,6 +3,20 @@
    適用於螢幕寬度 768px 以下
    ==================== */
 
+/* 手機選單開啟時背景模糊 */
+@media (max-width: 768px) {
+    body.menu-open section,
+    body.menu-open footer {
+        filter: blur(3px);
+        transition: filter 0.5s ease;
+    }
+
+    section,
+    footer {
+        transition: filter 0.5s ease;
+    }
+}
+
 /* About 區塊手機版 */
 @media (max-width: 768px) {
     .about-content {
