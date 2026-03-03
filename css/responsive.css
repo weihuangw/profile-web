@@ -176,6 +176,12 @@
         /* 手機版照片間距縮小一點 */
     }
 
+    /* 圖片+文字混排：手機版改為單欄堆疊 */
+    .grid-text-image {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
     /* Project 頁面手機版：圖片和 grid 突破容器，左右滿版 */
     section:has(.project-header) .container > img,
     section:has(.project-header) .container > video,
