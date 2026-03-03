@@ -200,6 +200,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, lastDelay + 550); // 最後一個 delay + 動畫時長(500ms) + buffer
 
+        // 強制瀏覽器先 commit 目前的背景色，防止移除 no-transition 時觸發背景色過渡
+        void document.body.offsetHeight;
         document.body.classList.remove('no-transition');
         requestAnimationFrame(() => {
             document.body.classList.add('page-ready');
