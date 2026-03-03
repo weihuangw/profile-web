@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================
     // 捲動淡入動畫（Project 頁 + About 頁）
     // ========================
-    if (document.querySelector('.project-header') || document.querySelector('.about-section') || document.querySelector('.work-grid')) {
+    if (document.querySelector('.project-header') || document.querySelector('.about-section')) {
         document.querySelectorAll('section img, section video').forEach(el => {
             if (!el.closest('.video-swap')) {
                 el.classList.add('scroll-reveal');
