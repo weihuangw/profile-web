@@ -1,6 +1,11 @@
 
 console.log("網站腳本已成功載入！");
 
+// 頁面載入時，確保 color-scheme 與主題同步（影響瀏覽器頁面切換時的底色）
+if (localStorage.getItem('theme') === 'light') {
+    document.documentElement.style.colorScheme = 'light';
+}
+
 // ========================
 // 修正「上一頁」黑畫面問題
 // ========================
@@ -47,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // 儲存目前的選擇，下次開網頁時會記住
         const isLight = document.body.classList.contains('light-theme');
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        // 同步更新 html 背景色，避免 body opacity:0 時透出錯誤顏色
+        // 同步更新 html 背景色與 color-scheme，避免 body opacity:0 時透出錯誤顏色
         document.documentElement.style.backgroundColor = isLight ? 'oklch(0.92 0 340)' : 'oklch(0.12 0 0)';
+        document.documentElement.style.colorScheme = isLight ? 'light' : 'dark';
     }
 
     // --- 建立電腦版按鈕（固定在右下角） ---
