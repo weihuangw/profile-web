@@ -263,7 +263,7 @@
 
     p.img-label {
         font-size: 0.8rem;
-        color: oklch(0.76 0 340);
+        color: #e0e0e0;
     }
 
     /* MRSP 作品章節：手機版改為單欄，每張圖各佔一行 */

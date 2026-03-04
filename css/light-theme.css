@@ -85,7 +85,7 @@ body.light-theme p.caption {
 }
 
 body.light-theme p.img-label {
-    color: oklch(0.55 0 0);
+    color: #333;
 }
 
 body.light-theme .project-info h3 {

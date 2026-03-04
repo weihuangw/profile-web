@@ -54,7 +54,7 @@ p.caption {
 /* 圖片上方的標籤文字（Image labels，如 "1 / Micro Reaction"） */
 p.img-label {
     font-size: 1rem;
-    color: oklch(0.76 0 340);
+    color: #e0e0e0;
     transition: color 0.5s ease;
 }
 
