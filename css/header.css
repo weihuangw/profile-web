@@ -117,20 +117,25 @@ header ul li a {
     gap: 12px;
 }
 
-/* 小圓點：始終佔位，active 時才顯色 */
+/* 小圓點：始終佔位，hover = 空心，active = 實心 */
 header ul li a::before {
     content: '';
     display: block;
     width: 0.35em;
-    height: 0.35em;
+    aspect-ratio: 1;
     border-radius: 50%;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
+    background-color: transparent;
     flex-shrink: 0;
-    transition: border-color 0.4s ease;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+header ul li a:hover::before {
+    border-color: currentColor;
 }
 
 header ul li a.active::before {
-    border-color: currentColor;
+    background-color: currentColor;
 }
 
 header ul li a:hover {
