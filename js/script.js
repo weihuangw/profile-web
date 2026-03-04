@@ -15,9 +15,7 @@ if (localStorage.getItem('theme') === 'light') {
 // event.persisted = true 代表「這是從快取還原的」，不是重新載入
 window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
-        document.body.classList.remove('no-transition');
-        document.body.style.opacity = '1';
-        document.body.classList.add('page-ready');
+        // 從快取還原 → 確保 main 過場狀態重置
         const main = document.querySelector('main');
         if (main) {
             main.classList.remove('page-leaving');
@@ -28,11 +26,9 @@ window.addEventListener('pageshow', function (event) {
 
 // 等待 DOM 載入完成
 document.addEventListener('DOMContentLoaded', () => {
-    // DOMContentLoaded 一觸發就立即顯示 body（header 馬上出現）
-    // main 保持 opacity: 0，等圖片載入後再由 showPage() 淡入
+    // no-transition 移除後才能啟用主題切換動畫，body.page-ready 標記已就緒
     void document.body.offsetHeight;
     document.body.classList.remove('no-transition');
-    document.body.style.opacity = '1';
     document.body.classList.add('page-ready');
 
     const menuToggle = document.querySelector('.menu-toggle');

@@ -157,14 +157,8 @@ body.light-theme .theme-toggle {
    流程：淡出舊頁面 → 跳到新頁面 → 等圖片載入 → 淡入新頁面
    ==================== */
 
-/* 頁面一開始是隱藏的（透明），防止閃爍 */
-body {
-    opacity: 0;
-}
-
-/* body 變為可見時：opacity 瞬間切換，只保留主題切換的顏色過渡 */
+/* 主題切換的顏色過渡（page-ready 時啟用，no-transition 時被覆蓋） */
 body.page-ready {
-    opacity: 1;
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
