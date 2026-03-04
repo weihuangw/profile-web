@@ -28,6 +28,13 @@ window.addEventListener('pageshow', function (event) {
 
 // 等待 DOM 載入完成
 document.addEventListener('DOMContentLoaded', () => {
+    // DOMContentLoaded 一觸發就立即顯示 body（header 馬上出現）
+    // main 保持 opacity: 0，等圖片載入後再由 showPage() 淡入
+    void document.body.offsetHeight;
+    document.body.classList.remove('no-transition');
+    document.body.style.opacity = '1';
+    document.body.classList.add('page-ready');
+
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 
@@ -204,12 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, lastDelay + 550); // 最後一個 delay + 動畫時長(500ms) + buffer
 
-        // 強制瀏覽器先 commit 目前的背景色，防止移除 no-transition 時觸發背景色過渡
-        void document.body.offsetHeight;
-        document.body.classList.remove('no-transition');
-        // body 瞬間顯示（header 立即出現），main 再淡入（內容漸顯）
-        document.body.style.opacity = '1';
-        document.body.classList.add('page-ready');
+        // main 淡入（body 已在 DOMContentLoaded 時顯示，這裡只處理內容區）
         const main = document.querySelector('main');
         requestAnimationFrame(() => {
             if (main) main.classList.add('page-ready');
