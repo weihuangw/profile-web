@@ -15,10 +15,14 @@ if (localStorage.getItem('theme') === 'light') {
 // event.persisted = true 代表「這是從快取還原的」，不是重新載入
 window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
-        // 從快取還原 → 移除淡出狀態，重新顯示頁面
-        document.body.classList.remove('page-leaving');  // 移除「正在離開」的狀態
-        document.body.classList.remove('no-transition'); // 允許動畫
-        document.body.classList.add('page-ready');       // 觸發淡入顯示
+        document.body.classList.remove('no-transition');
+        document.body.style.opacity = '1';
+        document.body.classList.add('page-ready');
+        const main = document.querySelector('main');
+        if (main) {
+            main.classList.remove('page-leaving');
+            main.classList.add('page-ready');
+        }
     }
 });
 
@@ -203,8 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // 強制瀏覽器先 commit 目前的背景色，防止移除 no-transition 時觸發背景色過渡
         void document.body.offsetHeight;
         document.body.classList.remove('no-transition');
+        // body 瞬間顯示（header 立即出現），main 再淡入（內容漸顯）
+        document.body.style.opacity = '1';
+        document.body.classList.add('page-ready');
+        const main = document.querySelector('main');
         requestAnimationFrame(() => {
-            document.body.classList.add('page-ready');
+            if (main) main.classList.add('page-ready');
         });
     }
 
@@ -295,7 +303,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             e.preventDefault();  // 阻止瀏覽器立刻跳頁
 
-            document.body.classList.add('page-leaving');  // 加上淡出效果的 class
+            // 只讓 main 淡出，header 維持不動
+            const main = document.querySelector('main');
+            if (main) {
+                main.classList.add('page-leaving');
+            }
 
             // 等淡出動畫結束後（150 毫秒 = 0.15 秒），才真正跳到新頁面
             setTimeout(() => {

@@ -157,30 +157,30 @@ body.light-theme .theme-toggle {
    流程：淡出舊頁面 → 跳到新頁面 → 等圖片載入 → 淡入新頁面
    ==================== */
 
-/* 頁面一開始是隱藏的（透明），等圖片準備好才顯示 */
+/* 頁面一開始是隱藏的（透明），防止閃爍 */
 body {
-    opacity: 0;  /* 預設完全透明，像舞台布幕還沒拉開 */
+    opacity: 0;
 }
 
-/* 當 JS 判斷「頁面準備好了」，就加上這個 class 來淡入顯示 */
+/* body 變為可見時：opacity 瞬間切換，只保留主題切換的顏色過渡 */
 body.page-ready {
-    opacity: 1;  /* 完全顯示 */
-    /* 同時處理兩件事：
-       1. opacity 0.18s → 頁面淡入效果
-       2. background-color + color 0.5s → 主題切換的平滑過渡
-       必須全部寫在同一行，否則後面會覆蓋前面！ */
-    transition: opacity 0.18s ease-in,
-                background-color 0.5s ease,
-                color 0.5s ease;
+    opacity: 1;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* 當 body 加上 page-leaving 這個 class 時，畫面會淡出 */
-body.page-leaving {
-    opacity: 0 !important;  /* 變成透明 */
-    /* !important 只能寫在整個 transition 的最尾端，不能每個項目都加 */
-    transition: opacity 0.15s ease-out,
-                background-color 0.5s ease,
-                color 0.5s ease !important;
+/* main 內容區：負責淡入淡出，header 不受影響 */
+main {
+    opacity: 0;
+}
+
+main.page-ready {
+    opacity: 1;
+    transition: opacity 0.18s ease-in;
+}
+
+main.page-leaving {
+    opacity: 0 !important;
+    transition: opacity 0.15s ease-out !important;
 }
 
 /* 頁面載入時暫時停用所有過渡動畫，避免切換頁面時出現主題閃爍 */
@@ -205,8 +205,8 @@ body.menu-open footer {
 /* ====== 捲動淡入動畫 ====== */
 .scroll-reveal {
     opacity: 0;
-    transform: translateY(15px);
-    filter: blur(3px);
+    transform: translateY(0px);
+    filter: blur(4px);
     transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
 }
 
