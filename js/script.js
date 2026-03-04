@@ -138,7 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!grid) return;
 
         // 手機版不做 masonry，清掉 JS 設定的樣式讓 CSS 自然排列
-        if (window.innerWidth <= 768) {
+        // 用 matchMedia 確保與 CSS max-width: 768px 判斷完全一致
+        if (window.matchMedia('(max-width: 768px)').matches) {
             grid.querySelectorAll('.work-item').forEach(item => {
                 item.style.gridRowEnd = '';
                 const img = item.querySelector('img');
