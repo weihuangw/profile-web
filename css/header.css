@@ -112,30 +112,6 @@ header ul li a {
     /* 強制大寫 */
     /* 主題切換時，連結顏色平滑過渡 */
     transition: color 0.5s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-}
-
-/* 小圓點：始終佔位，hover = 空心，active = 實心 */
-header ul li a::before {
-    content: '';
-    display: block;
-    width: 0.35em;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 1px solid transparent;
-    background-color: transparent;
-    flex-shrink: 0;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-header ul li a:hover::before {
-    border-color: currentColor;
-}
-
-header ul li a.active::before {
-    background-color: currentColor;
 }
 
 header ul li a:hover {

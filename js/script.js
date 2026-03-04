@@ -31,18 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('no-transition');
     document.body.classList.add('page-ready');
 
-    // ========================
-    // 目前頁面 active nav 圓點
-    // ========================
-    const currentFile = window.location.pathname.split('/').pop() || 'works.html';
-    const isProjectPage = currentFile.startsWith('project-');
-    document.querySelectorAll('header ul li a').forEach(link => {
-        const linkFile = link.getAttribute('href').split('/').pop();
-        if (linkFile === currentFile || (isProjectPage && linkFile === 'works.html')) {
-            link.classList.add('active');
-        }
-    });
-
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 

@@ -123,10 +123,6 @@
         transition: color 0.5s ease;
     }
 
-    .nav-links li a::before {
-        display: none;
-    }
-
     /* 修正 About 頁面圖片在小螢幕被切到的問題 */
     .about-image {
         flex: auto;
