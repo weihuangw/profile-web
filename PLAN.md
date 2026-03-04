@@ -51,6 +51,8 @@
 | 頁面轉場動畫 | 離開淡出、進入淡入，不影響主題切換 | `css/base.css` + `js/script.js` |
 | YouTube 嵌入 | 響應式 iframe 影片嵌入 | `projects/project-10.html` |
 | 點擊播放 mp4 | 作品頁圖片點擊後原位播放 loop 影片 | `projects/project-8.html` |
+| 捲動淡入動畫 | 圖片進入視窗：blur 消除 + 滑入 + 淡入，onload 等待 + 1.5s 保底 | `js/script.js` + `css/base.css` |
+| 手機選單背景模糊 | 選單開啟時背景 blur(3px)，footer 隱藏 | `css/responsive.css` + `css/base.css` |
 
 ### 視覺設定
 
@@ -135,23 +137,14 @@
 
 ## 功能開發計畫
 
-### 階段 0：Works 頁面排版重構（進行中討論）
+### 階段 0：Works 頁面排版重構
 
 #### 0-1. 混合比例排版（Peeky 風格）
 
 - **優先度**：高
-- **狀態**：規劃中，尚未決定各作品方向
-- **說明**：Works 頁面改為 Flexbox，直向作品佔 1 欄（1/3），橫向作品佔 2 欄（2/3），響應式 3→2→1 欄
+- **狀態**：✓ 已完成
+- **說明**：Works 頁面 CSS Grid 排版，Masonry 風格，JS 動態計算各作品 row span
 - **影響檔案**：`works.html`、`css/works.css`、`js/script.js`
-- **實作要點**：
-  - 每個 `.work-item` 加 `data-type="landscape"` 或 `data-type="portrait"`
-  - JS 讀取視窗寬度決定欄數（>1024px → 3欄，768~1024px → 2欄，<768px → 1欄）
-  - 3欄模式：landscape=66.67%、portrait=33.33%，每排湊滿 100%
-  - 2欄模式：所有作品 50% 等寬
-  - 1欄模式：所有作品 100%
-  - JS 計算同排等高，圖片 object-fit: cover
-  - resize 事件加 debounce 重算
-- **待決定**：10 個作品各自是直向還是橫向（影響排列 pattern）
 
 ---
 
@@ -179,16 +172,27 @@
 - **狀態**：✓ 已完成
 - **說明**：頁面切換時淡入淡出，不影響主題切換動畫
 
+#### 1-3. 圖片右鍵保護
+
+- **優先度**：低
+- **狀態**：未開始
+- **說明**：隱藏圖片右鍵選單，防止直接下載圖片
+- **影響檔案**：`js/script.js`
+- **實作要點**：
+  - 監聽圖片的 `contextmenu` 事件，`preventDefault()` 阻止右鍵選單
+  - 僅套用在 `section img`（作品圖片），不影響其他元素
+
 #### 1-4. 圖片 Lazy Loading 強化
 
 - **優先度**：低
-- **狀態**：部分完成（已有 HTML `loading="lazy"`）
-- **說明**：加上 JS 版的 Lazy Loading，支援載入動畫（從模糊到清晰）
-- **參考**：`main.js` 的 Lazy Load v1.9.7
-- **影響檔案**：`js/script.js`
-- **實作要點**：
-  - Intersection Observer API
-  - 圖片進入視窗時才載入，載入完成後淡入顯示
+- **狀態**：✓ 已完成
+- **說明**：JS Lazy Loading + 載入動畫（從模糊到清晰）
+- **影響檔案**：`js/script.js`、`css/base.css`
+- **已實作**：
+  - Intersection Observer API 偵測圖片進入視窗
+  - 等待 `img.onload` 完成後才顯示，1.5s timeout 保底
+  - CSS `filter: blur(3px)` → `blur(0)` 過渡效果
+  - 套用頁面：project 詳情頁、about 頁
 
 ---
 
@@ -212,13 +216,9 @@
 #### 2-3. 捲動動畫（Scroll Animation）
 
 - **優先度**：中
-- **狀態**：未開始
-- **說明**：頁面內容在捲動時淡入出現
+- **狀態**：✓ 已完成（含於 1-4）
+- **說明**：圖片進入視窗時從下方滑入 + 淡入 + blur 消除
 - **影響檔案**：`js/script.js`、`css/base.css`
-- **實作要點**：
-  - Intersection Observer API 偵測元素進入視窗
-  - 元素從下方滑入 + 淡入（translateY + opacity）
-  - 只觸發一次
 
 #### 2-4. 作品分類篩選
 
@@ -237,17 +237,23 @@
 
 #### 4-1. 去除 URL 中的 .html 副檔名
 
-- **優先度**：低（等內容完成後再處理）
+- **優先度**：低（等遷移 Cloudflare 後再評估）
 - **狀態**：未開始
-- **說明**：GitHub Pages 不原生支援無副檔名 URL，需改用資料夾結構
-- **做法**：每個頁面改為 `頁面名稱/index.html`
-  ```
-  works.html               →  works/index.html          →  /works/
-  about.html               →  about/index.html          →  /about/
-  contact.html             →  contact/index.html        →  /contact/
-  projects/project-10.html →  projects/project-10/index.html  →  /projects/project-10/
-  ```
-- **注意**：所有內部連結（href）、CSS / JS / 圖片相對路徑全部要重寫，建議等 project-1~6 內容都填完再一次處理
+- **平台差異**：
+  - **GitHub Pages**：不原生支援，需將每個頁面改為資料夾結構（`works.html` → `works/index.html`），所有內部連結、CSS/JS/圖片相對路徑全部要重寫，成本高
+  - **Cloudflare Pages**：內建「Pretty URLs」設定，開啟後 `works.html` 自動同時支援 `/works.html` 和 `/works`，**不需修改任何檔案**
+- **結論**：遷移到 Cloudflare 後開啟 Pretty URLs 即可解決，無需重構檔案結構
+
+#### 4-2. SPA（單頁應用）架構評估
+
+- **優先度**：低（暫不建議）
+- **狀態**：評估後擱置
+- **說明**：若要完全無頁面刷新的導覽體驗，需改為 SPA 架構
+- **兩種做法**：
+  - 所有內容合併成單一 HTML，JS 控制顯示/隱藏
+  - 用 `fetch` + History API 動態載入各頁面內容
+- **現況評估**：目前淡出/淡入轉場動畫在快速網路下幾乎感覺不到刷新，一般訪客不會察覺差別。SPA 架構複雜度和維護成本高，效益有限
+- **例外情境**：若未來實作跨頁共用的 WebGL 背景（不希望背景動畫中斷），則值得重新評估 SPA
 
 ---
 
@@ -419,11 +425,12 @@ c:\__Code\profile-web\
 - [ ] `works.html` 6 個佔位圖待替換
 
 ### 功能
-- [ ] **階段 0-1**：Works 混合比例排版（需先決定各作品方向）
+- [x] **階段 0-1**：Works 混合比例排版
 - [ ] **階段 1-1**：圖片 Lightbox 燈箱
-- [ ] **階段 1-4**：圖片 Lazy Loading 強化
+- [ ] **階段 1-3**：圖片右鍵保護
+- [x] **階段 1-4**：圖片 Lazy Loading 強化
 - [ ] **階段 2-1**：首頁 WebGL 動態背景
-- [ ] **階段 2-3**：捲動動畫（Scroll Animation）
+- [x] **階段 2-3**：捲動動畫（Scroll Animation）
 - [ ] **階段 2-4**：作品分類篩選
 - [ ] **階段 3-1**：網頁音訊互動
 - [ ] **階段 3-2**：滑鼠互動式視覺

@@ -7,7 +7,7 @@ header {
     /* 深黑色背景（深色主題為預設） */
     color: #e0e0e0;
     /* 淺灰色文字 */
-    padding: 2rem 0;
+    padding: 1.5rem 0;
     /* 上下留白 */
     /* 主題切換時，背景色和文字色平滑過渡（用 background-color，跟 body 一致） */
     transition: background-color 0.5s ease, color 0.5s ease;
