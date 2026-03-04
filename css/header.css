@@ -112,6 +112,25 @@ header ul li a {
     /* 強制大寫 */
     /* 主題切換時，連結顏色平滑過渡 */
     transition: color 0.5s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 小圓點：始終佔位，active 時才顯色 */
+header ul li a::before {
+    content: '';
+    display: block;
+    width: 0.35em;
+    height: 0.35em;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    flex-shrink: 0;
+    transition: border-color 0.4s ease;
+}
+
+header ul li a.active::before {
+    border-color: currentColor;
 }
 
 header ul li a:hover {
