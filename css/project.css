@@ -100,6 +100,48 @@ p.img-label {
     /* 高度填滿 */
 }
 
+/* ====== Lightbox（FLIP 展開動畫） ====== */
+.lb-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    cursor: zoom-out;
+}
+
+.lb-img {
+    object-fit: contain;
+    transform-origin: center center;
+    user-select: none;
+    pointer-events: none;
+    display: block;
+}
+
+.lb-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: oklch(0.85 0 340);
+    padding: 20px 24px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.15s ease;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+
+.lb-btn:hover { opacity: 1; }
+.lb-prev { left: 0; }
+.lb-next { right: 0; }
+
 /* ====== 回到頂部箭頭 ====== */
 .scroll-top-wrapper {
     text-align: center;

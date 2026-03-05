@@ -328,6 +328,192 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ========================
+    // Lightbox（FLIP 展開 + 前後導覽，只在 Project 頁啟用）
+    // ========================
+    function initLightbox() {
+        if (!document.querySelector('.project-header')) return;
+
+        const lbImages = Array.from(document.querySelectorAll('main section img'));
+        if (lbImages.length === 0) return;
+
+        // 建立 overlay 結構
+        const overlay = document.createElement('div');
+        overlay.className = 'lb-overlay';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'lb-btn lb-prev';
+        prevBtn.setAttribute('aria-label', '上一張');
+        prevBtn.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18,4 8,14 18,24"/></svg>`;
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'lb-btn lb-next';
+        nextBtn.setAttribute('aria-label', '下一張');
+        nextBtn.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10,4 20,14 10,24"/></svg>`;
+
+        const lbImg = document.createElement('img');
+        lbImg.className = 'lb-img';
+
+        overlay.appendChild(prevBtn);
+        overlay.appendChild(lbImg);
+        overlay.appendChild(nextBtn);
+        document.body.appendChild(overlay);
+
+        let isOpen = false;
+        let srcImg = null;
+        let currentIdx = -1;
+        let navigating = false;
+
+        function calcFinalSize(nw, nh) {
+            const maxW = window.innerWidth * 0.92;
+            const maxH = window.innerHeight * 0.92;
+            const scale = Math.min(maxW / nw, maxH / nh, 1);
+            return { w: nw * scale, h: nh * scale };
+        }
+
+        function updateNavBtns() {
+            prevBtn.style.visibility = currentIdx > 0 ? 'visible' : 'hidden';
+            nextBtn.style.visibility = currentIdx < lbImages.length - 1 ? 'visible' : 'hidden';
+        }
+
+        function open(img) {
+            if (isOpen) return;
+            isOpen = true;
+            srcImg = img;
+            currentIdx = lbImages.indexOf(img);
+
+            const first = img.getBoundingClientRect();
+            const nw = img.naturalWidth || first.width;
+            const nh = img.naturalHeight || first.height;
+            const { w, h } = calcFinalSize(nw, nh);
+
+            lbImg.src = img.src;
+            lbImg.style.width = w + 'px';
+            lbImg.style.height = h + 'px';
+            lbImg.style.opacity = '1';
+
+            // Invert：把 lbImg 用 transform 移到 srcImg 的位置
+            const dx = first.left + first.width / 2 - window.innerWidth / 2;
+            const dy = first.top + first.height / 2 - window.innerHeight / 2;
+            const sx = first.width / w;
+            const sy = first.height / h;
+
+            overlay.style.pointerEvents = 'all';
+            lbImg.style.transition = 'none';
+            lbImg.style.transform = `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`;
+            overlay.style.transition = 'none';
+            overlay.style.opacity = '0';
+            void overlay.offsetHeight;
+
+            // Play：動畫到中央
+            lbImg.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            overlay.style.transition = 'opacity 0.25s ease';
+            requestAnimationFrame(() => {
+                lbImg.style.transform = 'translate(0, 0) scale(1)';
+                overlay.style.opacity = '1';
+            });
+
+            updateNavBtns();
+        }
+
+        function close() {
+            if (!isOpen) return;
+
+            const first = srcImg.getBoundingClientRect();
+            const w = parseFloat(lbImg.style.width);
+            const h = parseFloat(lbImg.style.height);
+            const dx = first.left + first.width / 2 - window.innerWidth / 2;
+            const dy = first.top + first.height / 2 - window.innerHeight / 2;
+            const sx = first.width / w;
+            const sy = first.height / h;
+
+            lbImg.style.transition = 'transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            overlay.style.transition = 'opacity 0.22s ease';
+            lbImg.style.transform = `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`;
+            overlay.style.opacity = '0';
+
+            overlay.addEventListener('transitionend', function handler(e) {
+                if (e.propertyName !== 'opacity') return;
+                overlay.removeEventListener('transitionend', handler);
+                overlay.style.pointerEvents = 'none';
+                lbImg.style.transition = 'none';
+                lbImg.style.transform = 'translate(0, 0) scale(1)';
+                lbImg.style.width = '';
+                lbImg.style.height = '';
+                lbImg.src = '';
+                isOpen = false;
+                srcImg = null;
+                currentIdx = -1;
+            });
+        }
+
+        function navigate(dir) {
+            if (navigating) return;
+            const newIdx = currentIdx + dir;
+            if (newIdx < 0 || newIdx >= lbImages.length) return;
+
+            navigating = true;
+            currentIdx = newIdx;
+            srcImg = lbImages[currentIdx];
+
+            lbImg.style.transition = 'opacity 0.15s ease';
+            lbImg.style.opacity = '0';
+
+            setTimeout(() => {
+                lbImg.src = srcImg.src;
+
+                function applySize() {
+                    const { w, h } = calcFinalSize(lbImg.naturalWidth, lbImg.naturalHeight);
+                    lbImg.style.width = w + 'px';
+                    lbImg.style.height = h + 'px';
+                    lbImg.style.transition = 'opacity 0.15s ease';
+                    lbImg.style.opacity = '1';
+                    navigating = false;
+                }
+
+                if (lbImg.complete && lbImg.naturalWidth) {
+                    applySize();
+                } else {
+                    lbImg.addEventListener('load', applySize, { once: true });
+                }
+            }, 150);
+
+            updateNavBtns();
+        }
+
+        lbImages.forEach(img => {
+            if (img.closest('.video-swap')) return; // 影片縮圖：保留在序列中但不綁 lightbox click
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', () => open(img));
+        });
+
+        overlay.addEventListener('click', close);
+        prevBtn.addEventListener('click', e => { e.stopPropagation(); navigate(-1); });
+        nextBtn.addEventListener('click', e => { e.stopPropagation(); navigate(1); });
+
+        document.addEventListener('keydown', e => {
+            if (!isOpen) return;
+            if (e.key === 'Escape') close();
+            if (e.key === 'ArrowLeft') navigate(-1);
+            if (e.key === 'ArrowRight') navigate(1);
+        });
+
+        // 手機滑動手勢
+        let touchStartX = 0;
+        overlay.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        overlay.addEventListener('touchend', e => {
+            const delta = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(delta) > 50) {
+                navigate(delta < 0 ? 1 : -1);
+            } else {
+                close();
+            }
+        });
+    }
+    initLightbox();
+
+    // ========================
     // 捲動淡入動畫（Project 頁 + About 頁）
     // ========================
     if (document.querySelector('.project-header') || document.querySelector('.about-section')) {

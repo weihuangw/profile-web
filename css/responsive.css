@@ -17,6 +17,11 @@
     }
 }
 
+/* 手機版隱藏 Lightbox 導覽箭頭（改用滑動手勢） */
+@media (max-width: 768px) {
+    .lb-btn { display: none; }
+}
+
 /* About 區塊手機版 */
 @media (max-width: 768px) {
     .about-content {
