@@ -215,6 +215,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- 載入進度條 ---
+    const progressBar = document.createElement('div');
+    progressBar.className = 'page-progress';
+    document.body.appendChild(progressBar);
+
+    function completeProgress() {
+        progressBar.style.width = '100%';
+        setTimeout(() => { progressBar.style.opacity = '0'; }, 300);
+    }
+
     // --- 收集螢幕上「看得到的圖片」 ---
     const allImages = document.querySelectorAll('img');  // 抓到頁面上所有 <img>
     const visibleImages = [];  // 存放「目前看得到」的圖片
@@ -230,36 +240,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (visibleImages.length === 0) {
         // 沒有需要等待的圖片（可能是沒圖片的頁面，或圖片都已經在快取中）
         // → 直接顯示頁面
+        completeProgress();
         showPage();
     } else {
         // 有圖片需要等待 → 每張圖片載入完成時檢查是否「全部」都好了
         let loadedCount = 0;  // 已載入完成的圖片數量
 
         visibleImages.forEach(img => {
-            // 圖片載入成功時
-            img.addEventListener('load', () => {
-                loadedCount++;  // 完成數量 +1
-                if (loadedCount >= visibleImages.length) {
-                    showPage();  // 全部載入完成 → 顯示頁面！
-                }
-            });
-
-            // 圖片載入失敗時（例如網址錯誤）→ 也算「完成」，不要讓頁面永遠卡住
-            img.addEventListener('error', () => {
+            const onDone = () => {
                 loadedCount++;
+                progressBar.style.width = (loadedCount / visibleImages.length * 100) + '%';
                 if (loadedCount >= visibleImages.length) {
+                    completeProgress();
                     showPage();
                 }
-            });
+            };
+            // 圖片載入成功時
+            img.addEventListener('load', onDone);
+            // 圖片載入失敗時（例如網址錯誤）→ 也算「完成」，不要讓頁面永遠卡住
+            img.addEventListener('error', onDone);
         });
 
-        // 安全機制：最多等 3 秒，即使圖片還沒載入完也強制顯示頁面
+        // 安全機制：最多等 2 秒，即使圖片還沒載入完也強制顯示頁面
         // 避免網路太慢時，使用者看到一片空白太久
         setTimeout(() => {
             if (!document.body.classList.contains('page-ready')) {
+                completeProgress();
                 showPage();  // 超時了，強制顯示！
             }
-        },2000);
+        }, 2000);
     }
 
     // ---------- 淡出部分：點連結時先淡出再跳頁 ----------

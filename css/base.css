@@ -61,6 +61,25 @@ body {
 }
 
 /* ====================
+   頁面載入進度條
+   ==================== */
+.page-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: oklch(0.75 0 340);
+    z-index: 99999;
+    pointer-events: none;
+    transition: width 0.3s ease, opacity 0.4s ease;
+}
+
+.light-theme .page-progress {
+    background: oklch(0.4 0 340);
+}
+
+/* ====================
    共用類別 (Utilities)
    ==================== */
 
