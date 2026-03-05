@@ -397,6 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const sx = first.width / w;
             const sy = first.height / h;
 
+            document.body.style.overflow = 'hidden';
             overlay.style.pointerEvents = 'all';
             lbImg.style.transition = 'none';
             lbImg.style.transform = `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`;
@@ -434,6 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.addEventListener('transitionend', function handler(e) {
                 if (e.propertyName !== 'opacity') return;
                 overlay.removeEventListener('transitionend', handler);
+                document.body.style.overflow = '';
                 overlay.style.pointerEvents = 'none';
                 lbImg.style.transition = 'none';
                 lbImg.style.transform = 'translate(0, 0) scale(1)';
