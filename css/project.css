@@ -124,12 +124,12 @@ p.img-label {
 
 .lb-btn {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
+    bottom: 0;
     background: none;
     border: none;
     color: oklch(0.85 0 340);
-    padding: 20px 24px;
+    padding: 0 24px;
     cursor: pointer;
     opacity: 0.5;
     transition: opacity 0.15s ease;
