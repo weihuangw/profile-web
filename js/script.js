@@ -372,6 +372,34 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentIdx = -1;
         let navigating = false;
 
+        // 縮放 / 拖移狀態
+        let zoom = 1, panX = 0, panY = 0;
+        let isPinching = false, pinchStartDist = 0, pinchStartZoom = 1;
+        let swipeStartX = 0, dragStartX = 0, dragStartY = 0, dragStartPanX = 0, dragStartPanY = 0;
+
+        function getTouchDist(t) {
+            return Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+        }
+
+        function applyImgTransform(animated) {
+            lbImg.style.transition = animated ? 'transform 0.25s ease' : 'none';
+            lbImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+        }
+
+        function clampPan() {
+            const w = parseFloat(lbImg.style.width) || 0;
+            const h = parseFloat(lbImg.style.height) || 0;
+            const maxX = Math.max(0, (w * zoom - window.innerWidth) / 2);
+            const maxY = Math.max(0, (h * zoom - window.innerHeight) / 2);
+            panX = Math.max(-maxX, Math.min(maxX, panX));
+            panY = Math.max(-maxY, Math.min(maxY, panY));
+        }
+
+        function resetZoom(animated) {
+            zoom = 1; panX = 0; panY = 0;
+            applyImgTransform(animated);
+        }
+
         function calcFinalSize(nw, nh) {
             const maxW = window.innerWidth * 0.92;
             const maxH = window.innerHeight * 0.92;
@@ -428,6 +456,12 @@ document.addEventListener('DOMContentLoaded', () => {
         function close() {
             if (!isOpen) return;
 
+            // 縮放中先重置，確保 FLIP 從正中央出發
+            if (zoom !== 1 || panX !== 0 || panY !== 0) {
+                resetZoom(false);
+                void lbImg.offsetHeight;
+            }
+
             const first = srcImg.getBoundingClientRect();
             const w = parseFloat(lbImg.style.width);
             const h = parseFloat(lbImg.style.height);
@@ -463,6 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newIdx < 0 || newIdx >= lbImages.length) return;
 
             navigating = true;
+            resetZoom(false);
             currentIdx = newIdx;
             srcImg = lbImages[currentIdx];
 
@@ -508,18 +543,48 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'ArrowRight') navigate(1);
         });
 
-        // 手機滑動手勢
-        let touchStartX = 0;
+        // 手機手勢：雙指縮放 + 拖移 + 單指滑動導覽
         overlay.addEventListener('touchstart', e => {
-            touchStartX = e.touches[0].clientX;
-        }, { passive: true });
-        overlay.addEventListener('touchend', e => {
-            const delta = e.changedTouches[0].clientX - touchStartX;
-            if (Math.abs(delta) > 50) {
-                navigate(delta < 0 ? 1 : -1);
+            if (!isOpen) return;
+            if (e.touches.length === 2) {
+                isPinching = true;
+                pinchStartDist = getTouchDist(e.touches);
+                pinchStartZoom = zoom;
             } else {
-                close();
+                swipeStartX = e.touches[0].clientX;
+                dragStartX = e.touches[0].clientX;
+                dragStartY = e.touches[0].clientY;
+                dragStartPanX = panX;
+                dragStartPanY = panY;
             }
+        }, { passive: true });
+
+        overlay.addEventListener('touchmove', e => {
+            if (!isOpen) return;
+            if (e.touches.length === 2) {
+                const dist = getTouchDist(e.touches);
+                zoom = Math.max(1, Math.min(4, pinchStartZoom * dist / pinchStartDist));
+                clampPan();
+                applyImgTransform(false);
+            } else if (e.touches.length === 1 && zoom > 1) {
+                panX = dragStartPanX + e.touches[0].clientX - dragStartX;
+                panY = dragStartPanY + e.touches[0].clientY - dragStartY;
+                clampPan();
+                applyImgTransform(false);
+            }
+        }, { passive: true });
+
+        overlay.addEventListener('touchend', e => {
+            if (!isOpen) return;
+            if (isPinching) {
+                isPinching = false;
+                if (zoom < 1.05) resetZoom(true); // 微幅 pinch 直接彈回
+                return;
+            }
+            if (zoom > 1) return; // 縮放中不觸發導覽或關閉
+            const delta = e.changedTouches[0].clientX - swipeStartX;
+            if (Math.abs(delta) > 50) navigate(delta < 0 ? 1 : -1);
+            else close();
         });
     }
     initLightbox();
