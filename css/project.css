@@ -150,10 +150,7 @@ p.img-label {
 
 .scroll-top {
     display: inline-block;
-    font-size: 1rem;
-    /* 箭頭大小 */
     color: oklch(0.5 0 340);
-    /* 箭頭顏色：低調灰色 */
     text-decoration: none;
     transition: color 0.5s ease;
 }
