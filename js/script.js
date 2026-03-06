@@ -367,13 +367,15 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.appendChild(nextBtn);
         document.body.appendChild(overlay);
 
-        let isOpen = false;
-        let srcImg = null;
-        let currentIdx = -1;
-        let navigating = false;
+        let isOpen = false, srcImg = null, currentIdx = -1, navigating = false;
 
-        // 縮放 / 拖移狀態
-        let zoom = 1, panX = 0, panY = 0, baseScale = 1;
+        // zoom / pan 狀態
+        let zoom = 1, panX = 0, panY = 0;
+        // cssW/H：圖片元素的 CSS 尺寸（較大，保留放大品質）
+        // baseScale：把 CSS 尺寸縮回顯示大小的比例（zoom=1 時的 transform scale）
+        let cssW = 0, cssH = 0, baseScale = 1;
+
+        // 手勢狀態
         let isPinching = false, pinchStartDist = 0, pinchStartZoom = 1;
         let pinchMidX = 0, pinchMidY = 0, pinchStartPanX = 0, pinchStartPanY = 0;
         let swipeStartX = 0, dragStartX = 0, dragStartY = 0, dragStartPanX = 0, dragStartPanY = 0;
@@ -382,15 +384,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
         }
 
-        function applyImgTransform(animated) {
-            lbImg.style.transition = animated ? 'transform 0.25s ease' : 'none';
+        // transform = translate(panX, panY) scale(baseScale * zoom)
+        // baseScale 讓 CSS 元素在 zoom=1 時顯示為正確的視窗適配尺寸
+        function applyTransform(animated) {
+            lbImg.style.transition = animated ? 'transform 0.2s ease' : 'none';
             lbImg.style.transform = `translate(${panX}px, ${panY}px) scale(${baseScale * zoom})`;
         }
 
         function clampPan() {
-            const cssW = parseFloat(lbImg.style.width) || 0;
-            const cssH = parseFloat(lbImg.style.height) || 0;
-            // 實際顯示尺寸 = CSS 尺寸 × baseScale × zoom
             const maxX = Math.max(0, (cssW * baseScale * zoom - window.innerWidth) / 2);
             const maxY = Math.max(0, (cssH * baseScale * zoom - window.innerHeight) / 2);
             panX = Math.max(-maxX, Math.min(maxX, panX));
@@ -399,14 +400,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function resetZoom(animated) {
             zoom = 1; panX = 0; panY = 0;
-            applyImgTransform(animated);
+            applyTransform(animated);
         }
 
-        function calcFinalSize(nw, nh) {
-            const maxW = window.innerWidth * 0.92;
-            const maxH = window.innerHeight * 0.92;
-            const scale = Math.min(maxW / nw, maxH / nh, 1);
-            return { w: nw * scale, h: nh * scale };
+        // 計算符合視窗 92% 的顯示尺寸
+        function calcDisplaySize(nw, nh) {
+            const s = Math.min(window.innerWidth * 0.92 / nw, window.innerHeight * 0.92 / nh, 1);
+            return { dispW: nw * s, dispH: nh * s };
+        }
+
+        // 設定 lbImg 的 CSS 尺寸與 margin 置中
+        // CSS 尺寸 = min(原始, 顯示尺寸 × 4)，讓 GPU texture 有足夠像素供放大不模糊
+        // 置中方式：position absolute + top/left 50% + 負 margin（比 flexbox 更可靠）
+        function applyImgSize(nw, nh) {
+            const { dispW } = calcDisplaySize(nw, nh);
+            cssW = Math.min(nw, dispW * 4);
+            cssH = Math.round(nh * cssW / nw);
+            baseScale = dispW / cssW;
+            lbImg.style.width = cssW + 'px';
+            lbImg.style.height = cssH + 'px';
+            lbImg.style.marginLeft = `-${cssW / 2}px`;
+            lbImg.style.marginTop = `-${cssH / 2}px`;
         }
 
         function updateNavBtns() {
@@ -419,26 +433,22 @@ document.addEventListener('DOMContentLoaded', () => {
             isOpen = true;
             srcImg = img;
             currentIdx = lbImages.indexOf(img);
+            zoom = 1; panX = 0; panY = 0;
 
-            const first = img.getBoundingClientRect();
-            const nw = img.naturalWidth || first.width;
-            const nh = img.naturalHeight || first.height;
-            const { w, h } = calcFinalSize(nw, nh);
-            // CSS 尺寸設為原始解析度（上限 4x 顯示尺寸），讓 GPU texture 有足夠像素供放大
-            const cssW = Math.min(nw, w * 4);
-            const cssH = Math.round(nh * (cssW / nw));
-            baseScale = w / cssW; // 縮回顯示大小的比例
-
+            const rect = img.getBoundingClientRect();
+            const nw = img.naturalWidth || rect.width;
+            const nh = img.naturalHeight || rect.height;
+            applyImgSize(nw, nh);
             lbImg.src = img.src;
-            lbImg.style.width = cssW + 'px';
-            lbImg.style.height = cssH + 'px';
             lbImg.style.opacity = '1';
 
-            // Invert：把 lbImg 用 transform 移到 srcImg 的位置
-            const dx = first.left + first.width / 2 - window.innerWidth / 2;
-            const dy = first.top + first.height / 2 - window.innerHeight / 2;
-            const sx = first.width / cssW;
-            const sy = first.height / cssH;
+            // FLIP Invert：把 lbImg 定位到 srcImg 的位置
+            // lbImg 中心在視窗中心（top/left 50% + margin），transform-origin 亦在元素中心
+            // dx/dy = srcImg 中心 相對於 視窗中心 的偏移
+            const dx = rect.left + rect.width / 2 - window.innerWidth / 2;
+            const dy = rect.top + rect.height / 2 - window.innerHeight / 2;
+            const sx = rect.width / cssW;
+            const sy = rect.height / cssH;
 
             document.body.style.overflow = 'hidden';
             overlay.style.pointerEvents = 'all';
@@ -448,7 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.opacity = '0';
             void overlay.offsetHeight;
 
-            // Play：動畫到中央（scale 到 baseScale = 顯示大小）
+            // FLIP Play：展開到視窗中央
             lbImg.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             overlay.style.transition = 'opacity 0.25s ease';
             requestAnimationFrame(() => {
@@ -461,20 +471,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function close() {
             if (!isOpen) return;
+            // 直接重置縮放（不做動畫，確保 FLIP 從正中央出發）
+            zoom = 1; panX = 0; panY = 0;
 
-            // 縮放中先重置，確保 FLIP 從正中央出發
-            if (zoom !== 1 || panX !== 0 || panY !== 0) {
-                resetZoom(false);
-                void lbImg.offsetHeight;
-            }
-
-            const first = srcImg.getBoundingClientRect();
-            const w = parseFloat(lbImg.style.width);
-            const h = parseFloat(lbImg.style.height);
-            const dx = first.left + first.width / 2 - window.innerWidth / 2;
-            const dy = first.top + first.height / 2 - window.innerHeight / 2;
-            const sx = first.width / w;
-            const sy = first.height / h;
+            const rect = srcImg.getBoundingClientRect();
+            const dx = rect.left + rect.width / 2 - window.innerWidth / 2;
+            const dy = rect.top + rect.height / 2 - window.innerHeight / 2;
+            const sx = rect.width / cssW;
+            const sy = rect.height / cssH;
 
             lbImg.style.transition = 'transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             overlay.style.transition = 'opacity 0.22s ease';
@@ -486,10 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlay.removeEventListener('transitionend', handler);
                 document.body.style.overflow = '';
                 overlay.style.pointerEvents = 'none';
-                lbImg.style.transition = 'none';
-                lbImg.style.transform = 'translate(0, 0) scale(1)';
-                lbImg.style.width = '';
-                lbImg.style.height = '';
+                lbImg.removeAttribute('style'); // 一次清除所有 inline style
                 lbImg.src = '';
                 isOpen = false;
                 srcImg = null;
@@ -503,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newIdx < 0 || newIdx >= lbImages.length) return;
 
             navigating = true;
-            resetZoom(false);
+            zoom = 1; panX = 0; panY = 0;
             currentIdx = newIdx;
             srcImg = lbImages[currentIdx];
 
@@ -514,14 +515,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 lbImg.src = srcImg.src;
 
                 function applySize() {
-                    const nw2 = lbImg.naturalWidth, nh2 = lbImg.naturalHeight;
-                    const { w } = calcFinalSize(nw2, nh2);
-                    const cssW2 = Math.min(nw2, w * 4);
-                    const cssH2 = Math.round(nh2 * (cssW2 / nw2));
-                    baseScale = w / cssW2;
-                    lbImg.style.width = cssW2 + 'px';
-                    lbImg.style.height = cssH2 + 'px';
-                    applyImgTransform(false); // 套用新的 baseScale（zoom 已重置為 1）
+                    applyImgSize(lbImg.naturalWidth, lbImg.naturalHeight);
+                    // 先 snap transform（圖片隱藏中，不可見）
+                    lbImg.style.transition = 'none';
+                    lbImg.style.transform = `translate(0, 0) scale(${baseScale})`;
+                    void lbImg.offsetHeight; // 強制 reflow，確保 transition:none 已套用
                     lbImg.style.transition = 'opacity 0.15s ease';
                     lbImg.style.opacity = '1';
                     navigating = false;
@@ -538,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         lbImages.forEach(img => {
-            if (img.closest('.video-swap')) return; // 影片縮圖：保留在序列中但不綁 lightbox click
+            if (img.closest('.video-swap')) return;
             img.style.cursor = 'zoom-in';
             img.addEventListener('click', () => open(img));
         });
@@ -554,19 +552,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'ArrowRight') navigate(1);
         });
 
-        // 手機手勢：雙指縮放 + 拖移 + 單指滑動導覽
+        // 手機手勢：雙指縮放 + 單指拖移 + 滑動切換 / 點擊關閉
         overlay.addEventListener('touchstart', e => {
             if (!isOpen) return;
             if (e.touches.length === 2) {
                 isPinching = true;
                 pinchStartDist = getTouchDist(e.touches);
                 pinchStartZoom = zoom;
-                // 記錄雙指中心點（viewport 座標）與此時的 pan 位置
                 pinchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
                 pinchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
                 pinchStartPanX = panX;
                 pinchStartPanY = panY;
-            } else {
+            } else if (e.touches.length === 1) {
                 swipeStartX = e.touches[0].clientX;
                 dragStartX = e.touches[0].clientX;
                 dragStartY = e.touches[0].clientY;
@@ -577,32 +574,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         overlay.addEventListener('touchmove', e => {
             if (!isOpen) return;
-            e.preventDefault(); // 阻止瀏覽器原生 pinch-zoom / 滾動介入
-            if (e.touches.length === 2) {
+            e.preventDefault();
+            if (e.touches.length === 2 && isPinching) {
                 const dist = getTouchDist(e.touches);
                 const newZoom = Math.max(1, Math.min(4, pinchStartZoom * dist / pinchStartDist));
-                // 以雙指中心點為縮放原點，讓指尖下的畫面位置不移動
+                // 以雙指中心點為縮放原點：指尖下的畫面位置保持不動
                 const W = window.innerWidth, H = window.innerHeight;
                 panX = pinchMidX - W / 2 - (pinchMidX - W / 2 - pinchStartPanX) * newZoom / pinchStartZoom;
                 panY = pinchMidY - H / 2 - (pinchMidY - H / 2 - pinchStartPanY) * newZoom / pinchStartZoom;
                 zoom = newZoom;
                 clampPan();
-                applyImgTransform(false);
-            } else if (e.touches.length === 1 && zoom > 1) {
+                applyTransform(false);
+            } else if (e.touches.length === 1 && !isPinching && zoom > 1) {
+                // 放大後單指拖移
                 panX = dragStartPanX + e.touches[0].clientX - dragStartX;
                 panY = dragStartPanY + e.touches[0].clientY - dragStartY;
                 clampPan();
-                applyImgTransform(false);
+                applyTransform(false);
             }
-        }, { passive: false }); // passive: false 才能呼叫 preventDefault()
+        }, { passive: false });
 
         overlay.addEventListener('touchend', e => {
             if (!isOpen) return;
             if (isPinching) {
                 isPinching = false;
-                if (zoom < 1.05) resetZoom(true); // 微幅 pinch 直接彈回
-                // 還剩一根手指時，重設拖移起點為當下位置
-                // 否則下一個 touchmove 會用舊起點計算 pan，造成跳位
+                if (zoom < 1.05) resetZoom(true); // 微幅 pinch 彈回
+                // 還剩一根手指：更新拖移起點，避免下次 touchmove 從舊位置計算造成跳位
                 if (e.touches.length === 1) {
                     dragStartX = e.touches[0].clientX;
                     dragStartY = e.touches[0].clientY;
@@ -612,7 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 return;
             }
-            if (zoom > 1) return; // 縮放中不觸發導覽或關閉
+            if (zoom > 1) return; // 放大中不觸發滑動 / 關閉
             const delta = e.changedTouches[0].clientX - swipeStartX;
             if (Math.abs(delta) > 50) navigate(delta < 0 ? 1 : -1);
             else close();

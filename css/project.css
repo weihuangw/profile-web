@@ -105,23 +105,23 @@ p.img-label {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: #000;
     opacity: 0;
     pointer-events: none;
     cursor: zoom-out;
-    touch-action: none; /* 阻止瀏覽器在 CSS 層搶走雙指手勢 */
+    touch-action: none;
+    overflow: hidden;
 }
 
 .lb-img {
+    /* 置中由 JS 設定 margin-left / margin-top 控制，transform-origin 對齊視窗中心 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
     object-fit: contain;
     transform-origin: center center;
     user-select: none;
     pointer-events: none;
-    display: block;
-    flex-shrink: 0; /* 防止 flexbox 壓縮大尺寸圖片，baseScale 才能正確計算 */
     will-change: transform;
 }
 
