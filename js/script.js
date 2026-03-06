@@ -651,7 +651,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
-        }, { threshold: 0.08 });
+        }, { threshold: 0.2 });
 
         document.querySelectorAll('.scroll-reveal').forEach(el => {
             revealObserver.observe(el);
