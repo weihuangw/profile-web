@@ -105,26 +105,23 @@ p.img-label {
     position: fixed;
     inset: 0;
     z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #000;
     opacity: 0;
     pointer-events: none;
     cursor: zoom-out;
     touch-action: none;
-    /* overflow 不設 hidden：overlay 是 position:fixed 全螢幕，
-       large CSS 元素 overflow 不影響頁面 layout；
-       若設 hidden 會在 transform 前裁切 layout box，導致圖片消失 */
 }
 
 .lb-img {
-    /* 置中由 JS 設定 margin-left / margin-top 控制，transform-origin 對齊視窗中心 */
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    display: block;
     object-fit: contain;
     transform-origin: center center;
     user-select: none;
     pointer-events: none;
-    will-change: transform;
+    /* 不設 will-change：讓瀏覽器依實際 zoom 大小動態 rasterize，zoom 時畫質更佳 */
 }
 
 .lb-btn {

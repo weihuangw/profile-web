@@ -369,11 +369,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let isOpen = false, srcImg = null, currentIdx = -1, navigating = false;
 
-        // zoom / pan 狀態
+        // zoom / pan 狀態（zoom=1 為正常顯示大小）
         let zoom = 1, panX = 0, panY = 0;
-        // cssW/H：圖片元素的 CSS 尺寸（較大，保留放大品質）
-        // baseScale：把 CSS 尺寸縮回顯示大小的比例（zoom=1 時的 transform scale）
-        let cssW = 0, cssH = 0, baseScale = 1;
 
         // 手勢狀態
         let isPinching = false, pinchStartDist = 0, pinchStartZoom = 1;
@@ -384,16 +381,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
         }
 
-        // transform = translate(panX, panY) scale(baseScale * zoom)
-        // baseScale 讓 CSS 元素在 zoom=1 時顯示為正確的視窗適配尺寸
         function applyTransform(animated) {
             lbImg.style.transition = animated ? 'transform 0.2s ease' : 'none';
-            lbImg.style.transform = `translate(${panX}px, ${panY}px) scale(${baseScale * zoom})`;
+            lbImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
         }
 
         function clampPan() {
-            const maxX = Math.max(0, (cssW * baseScale * zoom - window.innerWidth) / 2);
-            const maxY = Math.max(0, (cssH * baseScale * zoom - window.innerHeight) / 2);
+            const w = parseFloat(lbImg.style.width) || 0;
+            const h = parseFloat(lbImg.style.height) || 0;
+            const maxX = Math.max(0, (w * zoom - window.innerWidth) / 2);
+            const maxY = Math.max(0, (h * zoom - window.innerHeight) / 2);
             panX = Math.max(-maxX, Math.min(maxX, panX));
             panY = Math.max(-maxY, Math.min(maxY, panY));
         }
@@ -403,24 +400,10 @@ document.addEventListener('DOMContentLoaded', () => {
             applyTransform(animated);
         }
 
-        // 計算符合視窗 92% 的顯示尺寸
+        // 計算符合視窗 92% 的顯示尺寸（不超過原圖）
         function calcDisplaySize(nw, nh) {
             const s = Math.min(window.innerWidth * 0.92 / nw, window.innerHeight * 0.92 / nh, 1);
-            return { dispW: nw * s, dispH: nh * s };
-        }
-
-        // 設定 lbImg 的 CSS 尺寸與 margin 置中
-        // CSS 尺寸 = min(原始, 顯示尺寸 × 4)，讓 GPU texture 有足夠像素供放大不模糊
-        // 置中方式：position absolute + top/left 50% + 負 margin（比 flexbox 更可靠）
-        function applyImgSize(nw, nh) {
-            const { dispW } = calcDisplaySize(nw, nh);
-            cssW = Math.min(nw, dispW * 4);
-            cssH = Math.round(nh * cssW / nw);
-            baseScale = dispW / cssW;
-            lbImg.style.width = cssW + 'px';
-            lbImg.style.height = cssH + 'px';
-            lbImg.style.marginLeft = `-${cssW / 2}px`;
-            lbImg.style.marginTop = `-${cssH / 2}px`;
+            return { w: nw * s, h: nh * s };
         }
 
         function updateNavBtns() {
@@ -438,17 +421,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const rect = img.getBoundingClientRect();
             const nw = img.naturalWidth || rect.width;
             const nh = img.naturalHeight || rect.height;
-            applyImgSize(nw, nh);
+            const { w, h } = calcDisplaySize(nw, nh);
+
             lbImg.src = img.src;
+            lbImg.style.width = w + 'px';
+            lbImg.style.height = h + 'px';
             lbImg.style.opacity = '1';
 
-            // FLIP Invert：把 lbImg 定位到 srcImg 的位置
-            // lbImg 中心在視窗中心（top/left 50% + margin），transform-origin 亦在元素中心
-            // dx/dy = srcImg 中心 相對於 視窗中心 的偏移
+            // FLIP Invert：把 lbImg 定位到 srcImg 的位置與大小
             const dx = rect.left + rect.width / 2 - window.innerWidth / 2;
             const dy = rect.top + rect.height / 2 - window.innerHeight / 2;
-            const sx = rect.width / cssW;
-            const sy = rect.height / cssH;
+            const sx = rect.width / w;
+            const sy = rect.height / h;
 
             document.body.style.overflow = 'hidden';
             overlay.style.pointerEvents = 'all';
@@ -462,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lbImg.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             overlay.style.transition = 'opacity 0.25s ease';
             requestAnimationFrame(() => {
-                lbImg.style.transform = `translate(0, 0) scale(${baseScale})`;
+                lbImg.style.transform = 'translate(0, 0) scale(1)';
                 overlay.style.opacity = '1';
             });
 
@@ -471,14 +455,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function close() {
             if (!isOpen) return;
-            // 直接重置縮放（不做動畫，確保 FLIP 從正中央出發）
+
+            // zoom/pan 先 snap 回原位（transition:none），再執行關閉動畫
+            if (zoom !== 1 || panX !== 0 || panY !== 0) {
+                lbImg.style.transition = 'none';
+                lbImg.style.transform = 'translate(0, 0) scale(1)';
+                void lbImg.offsetHeight;
+            }
             zoom = 1; panX = 0; panY = 0;
 
             const rect = srcImg.getBoundingClientRect();
+            const w = parseFloat(lbImg.style.width);
+            const h = parseFloat(lbImg.style.height);
             const dx = rect.left + rect.width / 2 - window.innerWidth / 2;
             const dy = rect.top + rect.height / 2 - window.innerHeight / 2;
-            const sx = rect.width / cssW;
-            const sy = rect.height / cssH;
+            const sx = rect.width / w;
+            const sy = rect.height / h;
 
             lbImg.style.transition = 'transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             overlay.style.transition = 'opacity 0.22s ease';
@@ -490,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlay.removeEventListener('transitionend', handler);
                 document.body.style.overflow = '';
                 overlay.style.pointerEvents = 'none';
-                lbImg.removeAttribute('style'); // 一次清除所有 inline style
+                lbImg.removeAttribute('style');
                 lbImg.src = '';
                 isOpen = false;
                 srcImg = null;
@@ -515,11 +507,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 lbImg.src = srcImg.src;
 
                 function applySize() {
-                    applyImgSize(lbImg.naturalWidth, lbImg.naturalHeight);
-                    // 先 snap transform（圖片隱藏中，不可見）
+                    const { w, h } = calcDisplaySize(lbImg.naturalWidth, lbImg.naturalHeight);
+                    lbImg.style.width = w + 'px';
+                    lbImg.style.height = h + 'px';
                     lbImg.style.transition = 'none';
-                    lbImg.style.transform = `translate(0, 0) scale(${baseScale})`;
-                    void lbImg.offsetHeight; // 強制 reflow，確保 transition:none 已套用
+                    lbImg.style.transform = 'translate(0, 0) scale(1)';
+                    void lbImg.offsetHeight;
                     lbImg.style.transition = 'opacity 0.15s ease';
                     lbImg.style.opacity = '1';
                     navigating = false;
