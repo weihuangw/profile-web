@@ -121,7 +121,8 @@ p.img-label {
     user-select: none;
     pointer-events: none;
     display: block;
-    will-change: transform; /* GPU 加速，讓 transform 更流暢 */
+    flex-shrink: 0; /* 防止 flexbox 壓縮大尺寸圖片，baseScale 才能正確計算 */
+    will-change: transform;
 }
 
 .lb-btn {
