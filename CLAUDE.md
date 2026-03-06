@@ -25,7 +25,7 @@
 ├── js/script.js        # 漢堡選單、主題切換、頁面過渡
 ├── fonts/              # 自託管 Inter WOFF2
 ├── images/             # 作品圖片（依作品分子資料夾）
-└── projects/
+└── works/
     ├── project.html    # 空白模板
     └── project-1.html ~ project-10.html
 ```
@@ -40,7 +40,7 @@
 - 中文 fallback：`Microsoft JhengHei`
 
 ## 作品頁規則
-- 作品詳情頁在 `projects/project-N.html`
+- 作品詳情頁在 `works/project-N.html`
 - CSS 路徑：`../css/style.css`（注意相對路徑）
 - JS 路徑：`../js/script.js`
 - 圖片路徑：`../images/[作品資料夾名]/[檔名]`
@@ -48,7 +48,7 @@
 
 ## 作品列表格式（works.html）
 ```html
-<a href="projects/project-N.html" class="work-item">
+<a href="works/project-N.html" class="work-item">
     <img src="images/[資料夾]/[封面圖].jpg" alt="[作品名]">
     <div class="work-info">
         <span class="work-title">[作品名]</span>

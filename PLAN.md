@@ -28,15 +28,15 @@
 | 作品列表 | `works.html` | 已完成基礎版（10 格，4 個有圖，6 個佔位圖） |
 | 關於 | `about.html` | 已完成，有簡介、照片、完整經歷列表 |
 | 聯絡 | `contact.html` | 已完成，有 Email 和 Instagram |
-| project-10 | `projects/project-10.html` | ✓ ∫\<Sense\>*dt（含 YouTube 嵌入） |
-| project-9 | `projects/project-9.html` | ✓ Sedimentary |
-| project-8 | `projects/project-8.html` | ✓ MRSP（含點擊播放 mp4） |
-| project-7 | `projects/project-7.html` | ✓ INNERSTAR-01 : Reddening |
-| homoform | `projects/homoform.html` | ✓ Homoform |
-| mongtong-live | `projects/mongtong-live.html` | ✓ MongTong-Live |
-| daniel-yeung | `projects/daniel-yeung.html` | ✓ DanielYeung FreespaceDance-exhibitionist |
-| dispersion | `projects/dispersion.html` | ✓ Dispersion |
-| archive | `projects/archive.html` | 待填 |
+| project-10 | `works/project-10.html` | ✓ ∫\<Sense\>*dt（含 YouTube 嵌入） |
+| project-9 | `works/project-9.html` | ✓ Sedimentary |
+| project-8 | `works/project-8.html` | ✓ MRSP（含點擊播放 mp4） |
+| project-7 | `works/project-7.html` | ✓ INNERSTAR-01 : Reddening |
+| homoform | `works/homoform.html` | ✓ Homoform |
+| mongtong-live | `works/mongtong-live.html` | ✓ MongTong-Live |
+| daniel-yeung | `works/daniel-yeung.html` | ✓ DanielYeung FreespaceDance-exhibitionist |
+| dispersion | `works/dispersion.html` | ✓ Dispersion |
+| archive | `works/archive.html` | 待填 |
 
 ### 已完成的功能
 
@@ -48,8 +48,8 @@
 | 回到頂部按鈕 | 作品詳情頁底部的 ↑ 按鈕 | 各 project HTML 內嵌 |
 | HTML 圖片懶載入 | `loading="lazy"` 屬性 | 各 project HTML |
 | 頁面轉場動畫 | 離開淡出、進入淡入，不影響主題切換 | `css/base.css` + `js/script.js` |
-| YouTube 嵌入 | 響應式 iframe 影片嵌入 | `projects/project-10.html` |
-| 點擊播放 mp4 | 作品頁圖片點擊後原位播放 loop 影片 | `projects/project-8.html` |
+| YouTube 嵌入 | 響應式 iframe 影片嵌入 | `works/project-10.html` |
+| 點擊播放 mp4 | 作品頁圖片點擊後原位播放 loop 影片 | `works/project-8.html` |
 | 捲動淡入動畫 | 圖片進入視窗：blur 消除 + 滑入 + 淡入，onload 等待 + 1.5s 保底 | `js/script.js` + `css/base.css` |
 | 手機選單背景模糊 | 選單開啟時背景 blur(3px)，footer 隱藏 | `css/responsive.css` + `css/base.css` |
 
@@ -124,7 +124,7 @@
 
 ### 4. Peeky — 作品集平台照片排版機制
 
-- **來源**：`g:\My Drive\wei-Obsidian\projects\peeky-photo-layout.md`
+- **來源**：`g:\My Drive\wei-Obsidian\works\peeky-photo-layout.md`
 - **技術**：Flexbox + JS 動態計算位置
 - **可參考的功能**：
   - 直向（2:3）佔 1 欄、橫向（3:2）佔 2 欄
@@ -258,8 +258,8 @@
 
 #### 5-1. 遷移到 Cloudflare Pages + 開啟 Web Analytics
 
-- **優先度**：中（等網站內容完成後執行）
-- **狀態**：未開始
+- **優先度**：中
+- **狀態**：✓ 已完成（weihuang.io）
 - **說明**：將網站從 GitHub Pages 遷移到 Cloudflare Pages，免費獲得更快速度與內建訪客分析（無 Cookie、不用改程式碼）
 - **步驟**：
   1. 在 [cloudflare.com](https://cloudflare.com) 建立免費帳號
@@ -366,7 +366,7 @@ c:\__Code\profile-web\
 │   ├── MRSP\               ← MRSP
 │   └── Innerstar\          ← INNERSTAR-01
 │
-├── projects\
+├── works\
 │   ├── project.html        ← 空白模板
 │   ├── sense-dt.html       ← ✓ ∫<Sense>*dt
 │   ├── sedimentary.html    ← ✓ Sedimentary
@@ -387,9 +387,9 @@ c:\__Code\profile-web\
 
 | 檔案 | 說明 | 路徑 |
 |------|------|------|
-| `peeky-photo-layout.md` | Peeky 平台照片排版機制分析 | `g:\My Drive\wei-Obsidian\projects\` |
-| `404zero_audio_system.md` | 404.zero 聲音系統完整解析 | `g:\My Drive\wei-Obsidian\projects\` |
-| `shaders.md` | 三段 GLSL Shader 原始碼 | `g:\My Drive\wei-Obsidian\projects\` |
+| `peeky-photo-layout.md` | Peeky 平台照片排版機制分析 | `g:\My Drive\wei-Obsidian\works\` |
+| `404zero_audio_system.md` | 404.zero 聲音系統完整解析 | `g:\My Drive\wei-Obsidian\works\` |
+| `shaders.md` | 三段 GLSL Shader 原始碼 | `g:\My Drive\wei-Obsidian\works\` |
 
 ---
 
@@ -409,7 +409,8 @@ c:\__Code\profile-web\
 - _(長期)_ **階段 3-2**：滑鼠互動式視覺
 - _(長期)_ **階段 3-3**：自訂 404 錯誤頁面
 - [ ] **階段 4-1**：URL 結構重構（去除 .html）— 等內容完成後再處理
-- [ ] **階段 5-1**：遷移到 Cloudflare Pages + 開啟 Web Analytics — 等內容完成後再執行
+- [x] **階段 5-1**：遷移到 Cloudflare Pages（weihuang.io）
 - [ ] **階段 6-1**：提交 Google Search Console + sitemap.xml
 - [ ] **階段 6-2**：補齊所有頁面 meta description 和 og tags
 - [ ] **階段 6-3**：檢查並補全所有圖片 alt 屬性
+- [ ] **Email 轉址**：設定 weihuang.io 的 Email Routing，讓 @weihuang.io 信件轉到真實信箱（Cloudflare Email Routing）
