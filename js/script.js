@@ -591,6 +591,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isPinching) {
                 isPinching = false;
                 if (zoom < 1.05) resetZoom(true); // 微幅 pinch 直接彈回
+                // 還剩一根手指時，重設拖移起點為當下位置
+                // 否則下一個 touchmove 會用舊起點計算 pan，造成跳位
+                if (e.touches.length === 1) {
+                    dragStartX = e.touches[0].clientX;
+                    dragStartY = e.touches[0].clientY;
+                    dragStartPanX = panX;
+                    dragStartPanY = panY;
+                    swipeStartX = e.touches[0].clientX;
+                }
                 return;
             }
             if (zoom > 1) return; // 縮放中不觸發導覽或關閉
