@@ -8,17 +8,20 @@
     <title>Project 02 - HUANG WEI</title>
     <!-- 在 CSS 載入前就設定背景色，避免重新整理時閃爍 -->
     <script>
+        document.documentElement.style.backgroundColor = 'oklch(0.12 0 0)'; /* 深色預設，防 CSS 慢載閃白 */
         if (localStorage.getItem('theme') === 'light') {
             document.documentElement.style.backgroundColor = 'oklch(0.92 0 340)';
             document.documentElement.style.colorScheme = 'light';
         }
     </script>
+    <style>main{opacity:0}</style>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body class="no-transition">
     <!-- 頁面渲染後立即套用淺色主題的 class（如果使用者之前選了淺色） -->
     <script>
+        document.documentElement.style.backgroundColor = 'oklch(0.12 0 0)'; /* 深色預設，防 CSS 慢載閃白 */
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-theme');
         }

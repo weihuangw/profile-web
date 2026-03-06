@@ -24,6 +24,9 @@ window.addEventListener('pageshow', function (event) {
     }
 });
 
+// 禁用瀏覽器自動還原捲動位置，避免重新整理時畫面跳動
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
 // 等待 DOM 載入完成
 document.addEventListener('DOMContentLoaded', () => {
     // no-transition 移除後才能啟用主題切換動畫，body.page-ready 標記已就緒
