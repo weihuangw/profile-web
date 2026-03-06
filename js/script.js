@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let navigating = false;
 
         // 縮放 / 拖移狀態
-        let zoom = 1, panX = 0, panY = 0;
+        let zoom = 1, panX = 0, panY = 0, baseScale = 1;
         let isPinching = false, pinchStartDist = 0, pinchStartZoom = 1;
         let pinchMidX = 0, pinchMidY = 0, pinchStartPanX = 0, pinchStartPanY = 0;
         let swipeStartX = 0, dragStartX = 0, dragStartY = 0, dragStartPanX = 0, dragStartPanY = 0;
@@ -384,14 +384,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function applyImgTransform(animated) {
             lbImg.style.transition = animated ? 'transform 0.25s ease' : 'none';
-            lbImg.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+            lbImg.style.transform = `translate(${panX}px, ${panY}px) scale(${baseScale * zoom})`;
         }
 
         function clampPan() {
-            const w = parseFloat(lbImg.style.width) || 0;
-            const h = parseFloat(lbImg.style.height) || 0;
-            const maxX = Math.max(0, (w * zoom - window.innerWidth) / 2);
-            const maxY = Math.max(0, (h * zoom - window.innerHeight) / 2);
+            const cssW = parseFloat(lbImg.style.width) || 0;
+            const cssH = parseFloat(lbImg.style.height) || 0;
+            // 實際顯示尺寸 = CSS 尺寸 × baseScale × zoom
+            const maxX = Math.max(0, (cssW * baseScale * zoom - window.innerWidth) / 2);
+            const maxY = Math.max(0, (cssH * baseScale * zoom - window.innerHeight) / 2);
             panX = Math.max(-maxX, Math.min(maxX, panX));
             panY = Math.max(-maxY, Math.min(maxY, panY));
         }
@@ -423,17 +424,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const nw = img.naturalWidth || first.width;
             const nh = img.naturalHeight || first.height;
             const { w, h } = calcFinalSize(nw, nh);
+            // CSS 尺寸設為原始解析度（上限 4x 顯示尺寸），讓 GPU texture 有足夠像素供放大
+            const cssW = Math.min(nw, w * 4);
+            const cssH = Math.round(nh * (cssW / nw));
+            baseScale = w / cssW; // 縮回顯示大小的比例
 
             lbImg.src = img.src;
-            lbImg.style.width = w + 'px';
-            lbImg.style.height = h + 'px';
+            lbImg.style.width = cssW + 'px';
+            lbImg.style.height = cssH + 'px';
             lbImg.style.opacity = '1';
 
             // Invert：把 lbImg 用 transform 移到 srcImg 的位置
             const dx = first.left + first.width / 2 - window.innerWidth / 2;
             const dy = first.top + first.height / 2 - window.innerHeight / 2;
-            const sx = first.width / w;
-            const sy = first.height / h;
+            const sx = first.width / cssW;
+            const sy = first.height / cssH;
 
             document.body.style.overflow = 'hidden';
             overlay.style.pointerEvents = 'all';
@@ -443,11 +448,11 @@ document.addEventListener('DOMContentLoaded', () => {
             overlay.style.opacity = '0';
             void overlay.offsetHeight;
 
-            // Play：動畫到中央
+            // Play：動畫到中央（scale 到 baseScale = 顯示大小）
             lbImg.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             overlay.style.transition = 'opacity 0.25s ease';
             requestAnimationFrame(() => {
-                lbImg.style.transform = 'translate(0, 0) scale(1)';
+                lbImg.style.transform = `translate(0, 0) scale(${baseScale})`;
                 overlay.style.opacity = '1';
             });
 
@@ -509,9 +514,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 lbImg.src = srcImg.src;
 
                 function applySize() {
-                    const { w, h } = calcFinalSize(lbImg.naturalWidth, lbImg.naturalHeight);
-                    lbImg.style.width = w + 'px';
-                    lbImg.style.height = h + 'px';
+                    const nw2 = lbImg.naturalWidth, nh2 = lbImg.naturalHeight;
+                    const { w } = calcFinalSize(nw2, nh2);
+                    const cssW2 = Math.min(nw2, w * 4);
+                    const cssH2 = Math.round(nh2 * (cssW2 / nw2));
+                    baseScale = w / cssW2;
+                    lbImg.style.width = cssW2 + 'px';
+                    lbImg.style.height = cssH2 + 'px';
+                    applyImgTransform(false); // 套用新的 baseScale（zoom 已重置為 1）
                     lbImg.style.transition = 'opacity 0.15s ease';
                     lbImg.style.opacity = '1';
                     navigating = false;
