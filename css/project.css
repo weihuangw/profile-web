@@ -113,6 +113,7 @@ p.img-label {
     pointer-events: none;
     cursor: zoom-out;
     touch-action: none;
+    overscroll-behavior: none; /* 防止 Safari rubber-band 彈跳露出底層內容 */
 }
 
 .lb-img {
@@ -126,23 +127,36 @@ p.img-label {
 
 .lb-close {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 1.5rem;
+    right: 20px; /* 對齊手機版 header container 右邊 padding */
     z-index: 2;
-    background: rgba(0, 0, 0, 0.45);
+    background: none;
     border: none;
-    border-radius: 50%;
-    color: #fff;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 24px;
+    height: 24px;
     display: none; /* 預設隱藏，手機版才顯示 */
-    align-items: center;
-    justify-content: center;
-    opacity: 0.85;
-    transition: opacity 0.15s ease;
+    padding: 0;
 }
-.lb-close:hover { opacity: 1; }
+
+/* 用兩條細線疊成 X，造型與手機版漢堡選單一致 */
+.lb-close .bar {
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 1px;
+    background-color: oklch(0.96 0 340);
+    top: 50%;
+    left: 50%;
+}
+
+.lb-close .bar:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.lb-close .bar:nth-child(2) {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
 
 .lb-btn {
     position: absolute;

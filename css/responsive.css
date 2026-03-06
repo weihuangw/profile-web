@@ -20,7 +20,7 @@
 /* 手機版：隱藏導覽箭頭（改用滑動手勢）、顯示右上角關閉按鈕 */
 @media (max-width: 768px) {
     .lb-btn { display: none; }
-    .lb-close { display: flex; }
+    .lb-close { display: block; }
 }
 
 /* About 區塊手機版 */

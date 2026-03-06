@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeBtn = document.createElement('button');
         closeBtn.className = 'lb-close';
         closeBtn.setAttribute('aria-label', '關閉');
-        closeBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="3" x2="17" y2="17"/><line x1="17" y1="3" x2="3" y2="17"/></svg>`;
+        closeBtn.innerHTML = `<span class="bar"></span><span class="bar"></span>`;
 
         const lbImg = document.createElement('img');
         lbImg.className = 'lb-img';
@@ -441,6 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const sy = rect.height / h;
 
             document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden'; // Safari：鎖住 html 防止 rubber-band
             overlay.style.pointerEvents = 'all';
             lbImg.style.transition = 'none';
             lbImg.style.transform = `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`;
@@ -487,6 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.propertyName !== 'opacity') return;
                 overlay.removeEventListener('transitionend', handler);
                 document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
                 overlay.style.pointerEvents = 'none';
                 lbImg.removeAttribute('style');
                 lbImg.src = '';
