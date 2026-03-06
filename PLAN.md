@@ -1,6 +1,6 @@
 # HUANG WEI — 作品集網站開發計畫
 
-> 最後更新：2026-03-03
+> 最後更新：2026-03-06
 > 專案路徑：`c:\__Code\profile-web`
 
 ---
@@ -32,12 +32,11 @@
 | project-9 | `projects/project-9.html` | ✓ Sedimentary |
 | project-8 | `projects/project-8.html` | ✓ MRSP（含點擊播放 mp4） |
 | project-7 | `projects/project-7.html` | ✓ INNERSTAR-01 : Reddening |
-| project-6 | `projects/project-6.html` | 待填（封面圖已存在：Homoform） |
-| project-5 | `projects/project-5.html` | 待填（封面圖已存在：Daniel） |
-| project-4 | `projects/project-4.html` | 待填（封面圖已存在：MT） |
-| project-3 | `projects/project-3.html` | 待填（封面圖已存在：DIS） |
-| project-2 | `projects/project-2.html` | 待填（封面圖已存在：ex） |
-| project-1 | `projects/project-1.html` | 空白模板，works.html 中已註解隱藏 |
+| homoform | `projects/homoform.html` | ✓ Homoform |
+| mongtong-live | `projects/mongtong-live.html` | ✓ MongTong-Live |
+| daniel-yeung | `projects/daniel-yeung.html` | ✓ DanielYeung FreespaceDance-exhibitionist |
+| dispersion | `projects/dispersion.html` | ✓ Dispersion |
+| archive | `projects/archive.html` | 待填 |
 
 ### 已完成的功能
 
@@ -155,7 +154,7 @@
 #### 1-1. 圖片 Lightbox 燈箱
 
 - **優先度**：高
-- **狀態**：未開始
+- **狀態**：✓ 已完成
 - **說明**：在作品詳情頁，點擊圖片可以放大全螢幕瀏覽，支援左右切換和關閉
 - **參考**：`main.js` 的 Lightbox 模組
 - **影響檔案**：`js/script.js`、新增 `css/lightbox.css`、各 project HTML
@@ -171,16 +170,6 @@
 - **優先度**：高
 - **狀態**：✓ 已完成
 - **說明**：頁面切換時淡入淡出，不影響主題切換動畫
-
-#### 1-3. 圖片右鍵保護
-
-- **優先度**：低
-- **狀態**：未開始
-- **說明**：隱藏圖片右鍵選單，防止直接下載圖片
-- **影響檔案**：`js/script.js`
-- **實作要點**：
-  - 監聽圖片的 `contextmenu` 事件，`preventDefault()` 阻止右鍵選單
-  - 僅套用在 `section img`（作品圖片），不影響其他元素
 
 #### 1-4. 圖片 Lazy Loading 強化
 
@@ -202,16 +191,9 @@
 
 #### 2-1. 首頁 WebGL 動態背景
 
-- **優先度**：高
-- **狀態**：未開始
+- **優先度**：低（長期目標）
+- **狀態**：未開始，暫緩
 - **說明**：取代目前空白的 `index.html`，做一個有 WebGL Shader 動態背景的首頁
-- **參考**：`main1.js` 的 Shader 背景、`404` 的 Ray Marching
-- **影響檔案**：`index.html`（重寫）、新增 `js/webgl.js`
-- **實作要點**：
-  - 全螢幕 `<canvas>` 背景
-  - GLSL Fragment Shader 動態效果
-  - 上面疊加 HUANG WEI 名字和簡單導航
-  - 手機版降低解析度或關閉效果
 
 #### 2-3. 捲動動畫（Scroll Animation）
 
@@ -257,29 +239,18 @@
 
 ---
 
-### 階段 3：實驗性功能
+### 階段 3：實驗性功能（長期目標，暫緩）
 
 > 目標：讓網站本身成為一件 Audio-Visual 作品
 
 #### 3-1. 網頁音訊互動
-
-- **優先度**：低（長期目標）
-- **狀態**：未開始
-- **參考**：`404` 的 Web Audio API + LFO 交叉淡入淡出
-- **詳細文件**：`g:\My Drive\wei-Obsidian\projects\404zero_audio_system.md`
+- Web Audio API + LFO 交叉淡入淡出
 
 #### 3-2. 滑鼠互動式視覺
-
-- **優先度**：低（長期目標）
-- **狀態**：未開始
-- **參考**：`404` 的滑鼠控制攝影機 + 地形
+- 滑鼠控制攝影機 + 地形
 
 #### 3-3. 自訂 404 錯誤頁面
-
-- **優先度**：低
-- **狀態**：未開始
-- **影響檔案**：新增 `404.html`
-- **實作要點**：GitHub Pages 需要命名為 `404.html`
+- GitHub Pages 需命名為 `404.html`
 
 ---
 
@@ -397,11 +368,15 @@ c:\__Code\profile-web\
 │
 ├── projects\
 │   ├── project.html        ← 空白模板
-│   ├── project-7.html      ← ✓ INNERSTAR-01
-│   ├── project-8.html      ← ✓ MRSP
-│   ├── project-9.html      ← ✓ Sedimentary
-│   ├── project-10.html     ← ✓ ∫<Sense>*dt
-│   └── project-1 ~ 6.html  ← 空白模板，待填
+│   ├── sense-dt.html       ← ✓ ∫<Sense>*dt
+│   ├── sedimentary.html    ← ✓ Sedimentary
+│   ├── mrsp.html           ← ✓ MRSP
+│   ├── innerstar-01.html   ← ✓ INNERSTAR-01 : Reddening
+│   ├── homoform.html       ← ✓ Homoform
+│   ├── mongtong-live.html  ← ✓ MongTong-Live
+│   ├── daniel-yeung.html   ← ✓ DanielYeung FreespaceDance-exhibitionist
+│   ├── dispersion.html     ← ✓ Dispersion
+│   └── archive.html        ← 待填
 │
 └── fonts\                  ← 自訂字體（Inter WOFF2）
 ```
@@ -421,20 +396,18 @@ c:\__Code\profile-web\
 ## 待辦事項清單
 
 ### 內容
-- [ ] `project-1` ~ `project-6` 作品內容待填
-- [ ] `works.html` 6 個佔位圖待替換
+- [ ] `archive.html` 作品內容待填
 
 ### 功能
 - [x] **階段 0-1**：Works 混合比例排版
-- [ ] **階段 1-1**：圖片 Lightbox 燈箱
-- [ ] **階段 1-3**：圖片右鍵保護
+- [x] **階段 1-1**：圖片 Lightbox 燈箱
 - [x] **階段 1-4**：圖片 Lazy Loading 強化
-- [ ] **階段 2-1**：首頁 WebGL 動態背景
 - [x] **階段 2-3**：捲動動畫（Scroll Animation）
 - [ ] **階段 2-4**：作品分類篩選
-- [ ] **階段 3-1**：網頁音訊互動
-- [ ] **階段 3-2**：滑鼠互動式視覺
-- [ ] **階段 3-3**：自訂 404 錯誤頁面
+- _(長期)_ **階段 2-1**：首頁 WebGL 動態背景
+- _(長期)_ **階段 3-1**：網頁音訊互動
+- _(長期)_ **階段 3-2**：滑鼠互動式視覺
+- _(長期)_ **階段 3-3**：自訂 404 錯誤頁面
 - [ ] **階段 4-1**：URL 結構重構（去除 .html）— 等內容完成後再處理
 - [ ] **階段 5-1**：遷移到 Cloudflare Pages + 開啟 Web Analytics — 等內容完成後再執行
 - [ ] **階段 6-1**：提交 Google Search Console + sitemap.xml
