@@ -312,16 +312,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             e.preventDefault();  // 阻止瀏覽器立刻跳頁
 
-            // 只讓 main 淡出，header 維持不動
-            const main = document.querySelector('main');
-            if (main) {
-                main.classList.add('page-leaving');
+            // View Transitions API 支援時，直接 navigate（瀏覽器原生動畫處理）
+            // 不支援時 fallback 回舊的 JS fade-out
+            if (document.startViewTransition) {
+                window.location.href = href;
+            } else {
+                const main = document.querySelector('main');
+                if (main) main.classList.add('page-leaving');
+                setTimeout(() => { window.location.href = href; }, 150);
             }
-
-            // 等淡出動畫結束後（150 毫秒 = 0.15 秒），才真正跳到新頁面
-            setTimeout(() => {
-                window.location.href = href;  // 跳轉到目標頁面
-            }, 150);
         });
     });
 
