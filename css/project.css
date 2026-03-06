@@ -110,7 +110,9 @@ p.img-label {
     pointer-events: none;
     cursor: zoom-out;
     touch-action: none;
-    overflow: hidden;
+    /* overflow 不設 hidden：overlay 是 position:fixed 全螢幕，
+       large CSS 元素 overflow 不影響頁面 layout；
+       若設 hidden 會在 transform 前裁切 layout box，導致圖片消失 */
 }
 
 .lb-img {
