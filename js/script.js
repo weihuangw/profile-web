@@ -636,6 +636,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.classList.add('scroll-reveal');
             }
         });
+        document.querySelectorAll('section .video-swap').forEach(el => {
+            el.classList.add('scroll-reveal');
+        });
 
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
