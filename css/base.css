@@ -184,11 +184,6 @@ body.page-ready {
 /* main 內容區：負責淡入淡出，header 不受影響 */
 main {
     opacity: 0;
-    view-transition-name: main-content; /* VT：main 跨頁做動畫 */
-}
-
-header {
-    view-transition-name: site-header; /* VT：header 跨頁保持靜止 */
 }
 
 main.page-ready {
