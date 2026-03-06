@@ -359,9 +359,15 @@ document.addEventListener('DOMContentLoaded', () => {
         nextBtn.setAttribute('aria-label', '下一張');
         nextBtn.innerHTML = `<svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10,4 20,14 10,24"/></svg>`;
 
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'lb-close';
+        closeBtn.setAttribute('aria-label', '關閉');
+        closeBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="3" x2="17" y2="17"/><line x1="17" y1="3" x2="3" y2="17"/></svg>`;
+
         const lbImg = document.createElement('img');
         lbImg.className = 'lb-img';
 
+        overlay.appendChild(closeBtn);
         overlay.appendChild(prevBtn);
         overlay.appendChild(lbImg);
         overlay.appendChild(nextBtn);
@@ -534,7 +540,12 @@ document.addEventListener('DOMContentLoaded', () => {
             img.addEventListener('click', () => open(img));
         });
 
-        overlay.addEventListener('click', close);
+        // 電腦版：點 overlay 背景關閉（touch 裝置用 X 按鈕，不用 click 關閉）
+        overlay.addEventListener('click', e => {
+            if (e.pointerType === 'touch') return;
+            close();
+        });
+        closeBtn.addEventListener('click', e => { e.stopPropagation(); close(); });
         prevBtn.addEventListener('click', e => { e.stopPropagation(); navigate(-1); });
         nextBtn.addEventListener('click', e => { e.stopPropagation(); navigate(1); });
 
@@ -602,10 +613,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 return;
             }
-            if (zoom > 1) return; // 放大中不觸發滑動 / 關閉
+            if (zoom > 1) return; // 放大中不觸發滑動
             const delta = e.changedTouches[0].clientX - swipeStartX;
             if (Math.abs(delta) > 50) navigate(delta < 0 ? 1 : -1);
-            else close();
+            // 手機版：不用 tap 關閉，改用右上角 X 按鈕
         });
     }
     initLightbox();
