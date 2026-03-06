@@ -215,60 +215,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 載入進度條 ---
-    const progressBar = document.createElement('div');
-    progressBar.className = 'page-progress';
-    document.body.appendChild(progressBar);
+    // --- 載入進度條（只在 project 頁面顯示） ---
+    const isProjectPage = !!document.querySelector('.project-header');
 
-    function completeProgress() {
-        progressBar.style.width = '100%';
-        setTimeout(() => { progressBar.style.opacity = '0'; }, 300);
-    }
+    if (isProjectPage) {
+        const progressBar = document.createElement('div');
+        progressBar.className = 'page-progress';
+        document.body.appendChild(progressBar);
 
-    // --- 收集螢幕上「看得到的圖片」 ---
-    const allImages = document.querySelectorAll('img');  // 抓到頁面上所有 <img>
-    const visibleImages = [];  // 存放「目前看得到」的圖片
-
-    allImages.forEach(img => {
-        if (isInViewport(img) && !img.complete) {
-            // 圖片在螢幕範圍內，而且還沒載入完成 → 需要等它
-            // img.complete = true 代表圖片已經在快取中，不用等
-            visibleImages.push(img);
+        function completeProgress() {
+            progressBar.style.width = '100%';
+            setTimeout(() => { progressBar.style.opacity = '0'; }, 300);
         }
-    });
 
-    if (visibleImages.length === 0) {
-        // 沒有需要等待的圖片（可能是沒圖片的頁面，或圖片都已經在快取中）
-        // → 直接顯示頁面
-        completeProgress();
-        showPage();
-    } else {
-        // 有圖片需要等待 → 每張圖片載入完成時檢查是否「全部」都好了
-        let loadedCount = 0;  // 已載入完成的圖片數量
+        // --- 收集螢幕上「看得到的圖片」 ---
+        const allImages = document.querySelectorAll('img');
+        const visibleImages = [];
 
-        visibleImages.forEach(img => {
-            const onDone = () => {
-                loadedCount++;
-                progressBar.style.width = (loadedCount / visibleImages.length * 100) + '%';
-                if (loadedCount >= visibleImages.length) {
+        allImages.forEach(img => {
+            if (isInViewport(img) && !img.complete) {
+                visibleImages.push(img);
+            }
+        });
+
+        if (visibleImages.length === 0) {
+            completeProgress();
+            showPage();
+        } else {
+            let loadedCount = 0;
+
+            visibleImages.forEach(img => {
+                const onDone = () => {
+                    loadedCount++;
+                    progressBar.style.width = (loadedCount / visibleImages.length * 100) + '%';
+                    if (loadedCount >= visibleImages.length) {
+                        completeProgress();
+                        showPage();
+                    }
+                };
+                img.addEventListener('load', onDone);
+                img.addEventListener('error', onDone);
+            });
+
+            setTimeout(() => {
+                if (!document.body.classList.contains('page-ready')) {
                     completeProgress();
                     showPage();
                 }
-            };
-            // 圖片載入成功時
-            img.addEventListener('load', onDone);
-            // 圖片載入失敗時（例如網址錯誤）→ 也算「完成」，不要讓頁面永遠卡住
-            img.addEventListener('error', onDone);
-        });
-
-        // 安全機制：最多等 2 秒，即使圖片還沒載入完也強制顯示頁面
-        // 避免網路太慢時，使用者看到一片空白太久
-        setTimeout(() => {
-            if (!document.body.classList.contains('page-ready')) {
-                completeProgress();
-                showPage();  // 超時了，強制顯示！
-            }
-        }, 2000);
+            }, 2000);
+        }
+    } else {
+        // works / about / contact：不需要進度條，直接顯示
+        showPage();
     }
 
     // ---------- 淡出部分：點連結時先淡出再跳頁 ----------
