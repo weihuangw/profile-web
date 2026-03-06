@@ -540,9 +540,11 @@ document.addEventListener('DOMContentLoaded', () => {
             img.addEventListener('click', () => open(img));
         });
 
-        // 電腦版：點 overlay 背景關閉（touch 裝置用 X 按鈕，不用 click 關閉）
-        overlay.addEventListener('click', e => {
-            if (e.pointerType === 'touch') return;
+        // 電腦版：點 overlay 背景關閉
+        // touch 結束後瀏覽器會合成一個 click，用 flag 攔截避免誤觸關閉
+        let suppressClick = false;
+        overlay.addEventListener('click', () => {
+            if (suppressClick) { suppressClick = false; return; }
             close();
         });
         closeBtn.addEventListener('click', e => { e.stopPropagation(); close(); });
@@ -600,6 +602,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         overlay.addEventListener('touchend', e => {
             if (!isOpen) return;
+            suppressClick = true; // 攔截 touchend 後瀏覽器合成的 click，避免誤觸關閉
             if (isPinching) {
                 isPinching = false;
                 if (zoom < 1.05) resetZoom(true); // 微幅 pinch 彈回
