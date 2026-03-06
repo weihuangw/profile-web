@@ -112,6 +112,7 @@ p.img-label {
     opacity: 0;
     pointer-events: none;
     cursor: zoom-out;
+    touch-action: none; /* 阻止瀏覽器在 CSS 層搶走雙指手勢 */
 }
 
 .lb-img {
@@ -120,6 +121,7 @@ p.img-label {
     user-select: none;
     pointer-events: none;
     display: block;
+    will-change: transform; /* GPU 加速，讓 transform 更流暢 */
 }
 
 .lb-btn {

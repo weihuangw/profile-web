@@ -375,6 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 縮放 / 拖移狀態
         let zoom = 1, panX = 0, panY = 0;
         let isPinching = false, pinchStartDist = 0, pinchStartZoom = 1;
+        let pinchMidX = 0, pinchMidY = 0, pinchStartPanX = 0, pinchStartPanY = 0;
         let swipeStartX = 0, dragStartX = 0, dragStartY = 0, dragStartPanX = 0, dragStartPanY = 0;
 
         function getTouchDist(t) {
@@ -550,6 +551,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 isPinching = true;
                 pinchStartDist = getTouchDist(e.touches);
                 pinchStartZoom = zoom;
+                // 記錄雙指中心點（viewport 座標）與此時的 pan 位置
+                pinchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                pinchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                pinchStartPanX = panX;
+                pinchStartPanY = panY;
             } else {
                 swipeStartX = e.touches[0].clientX;
                 dragStartX = e.touches[0].clientX;
@@ -557,13 +563,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 dragStartPanX = panX;
                 dragStartPanY = panY;
             }
-        }, { passive: true });
+        });
 
         overlay.addEventListener('touchmove', e => {
             if (!isOpen) return;
+            e.preventDefault(); // 阻止瀏覽器原生 pinch-zoom / 滾動介入
             if (e.touches.length === 2) {
                 const dist = getTouchDist(e.touches);
-                zoom = Math.max(1, Math.min(4, pinchStartZoom * dist / pinchStartDist));
+                const newZoom = Math.max(1, Math.min(4, pinchStartZoom * dist / pinchStartDist));
+                // 以雙指中心點為縮放原點，讓指尖下的畫面位置不移動
+                const W = window.innerWidth, H = window.innerHeight;
+                panX = pinchMidX - W / 2 - (pinchMidX - W / 2 - pinchStartPanX) * newZoom / pinchStartZoom;
+                panY = pinchMidY - H / 2 - (pinchMidY - H / 2 - pinchStartPanY) * newZoom / pinchStartZoom;
+                zoom = newZoom;
                 clampPan();
                 applyImgTransform(false);
             } else if (e.touches.length === 1 && zoom > 1) {
@@ -572,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 clampPan();
                 applyImgTransform(false);
             }
-        }, { passive: true });
+        }, { passive: false }); // passive: false 才能呼叫 preventDefault()
 
         overlay.addEventListener('touchend', e => {
             if (!isOpen) return;
