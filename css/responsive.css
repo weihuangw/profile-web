@@ -294,34 +294,12 @@
         object-fit: cover !important;
     }
 
-    /* Contact 頁面：手機版垂直置中 + 縮小字體 */
-    .contact-content {
-        text-align: center;
-        /* 水平置中 */
-        display: flex;
-        flex-direction: column;
-        /* 內容垂直排列 */
-        justify-content: center;
-        /* 垂直方向置中 */
-        align-items: center;
-        /* 水平方向置中 */
-        min-height: 70vh;
-        /* 最小高度佔螢幕 70%（扣掉 header 和 footer 的空間） */
-        padding: 0;
-        /* 移除電腦版的大量 padding，改由 flexbox 處理置中 */
-    }
-
-    .contact-content h3 {
-        font-size: 0.8rem;
-        font-weight: 400;
-        /* Contact H3 手機版：0.8rem / 200（跟 About H3 同步） */
-    }
-
+    /* Contact 頁面：手機版字體與 header logo 同大小 */
+    .contact-content h3,
     .contact-content p,
     .contact-content .email-link {
-        font-size: 0.8rem;
+        font-size: clamp(1.0rem, 8vw, 1.8rem);
         font-weight: 400;
-        /* Contact 內文 & 連結手機版：0.8rem / 400 */
     }
 
     /* Footer：手機版調整 */

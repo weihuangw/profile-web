@@ -64,8 +64,10 @@ body.light-theme .link {
 /* ====================
    聯絡我 (Contact)
    ==================== */
+body.light-theme .contact-content h3,
+body.light-theme .contact-content p,
 body.light-theme .email-link {
-    color: #333;
+    color: oklch(0.45 0 340);
 }
 
 body.light-theme .email-link:hover {

@@ -2,40 +2,49 @@
    聯絡我區塊 (Contact Section)
    ==================== */
 
+/* main 填滿 header 與 footer 之間的剩餘空間，內容垂直置中 */
+main:has(.contact-content) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding-bottom: 12vh; /* 讓內容視覺上稍微偏上 */
+}
+
+main:has(.contact-content) section {
+    width: 100%;
+}
+
 .contact-content {
-    text-align: center;
-    /* 內容置中 */
-    padding: 200px 0;
-    /* 增加一點留白，讓它看起來很顯眼 */
+    text-align: left;
 }
 
 .contact-content h3 {
-    font-size: 1rem;
-    /* Contact H3 電腦版大小：1rem */
+    font-size: 1.4rem;
     font-weight: 400;
-    /* Contact H3 電腦版粗細：200（跟 About H3 一致） */
+    color: oklch(0.76 0 340);
+    transition: color 0.5s ease;
 }
 
 .contact-content p {
-    font-size: 1rem;
-    /* Contact 內文電腦版大小：1rem */
+    font-size: 1.4rem;
     font-weight: 400;
-    /* Contact 內文電腦版粗細：400 */
+    color: oklch(0.76 0 340);
+    transition: color 0.5s ease;
 }
 
 .email-link {
-    font-size: 1rem;
-    /* Contact 連結電腦版大小：1rem */
+    font-size: 1.4rem;
     font-weight: 400;
-    /* Contact 連結電腦版粗細：400 */
-    color: #ccc;
+    color: oklch(0.76 0 340);
     text-decoration: underline;
     margin-top: 20px;
     display: inline-block;
-    /* 主題切換時，連結顏色平滑過渡 */
     transition: color 0.5s ease;
 }
 
 .email-link:hover {
-    color: #fff;
+    color: oklch(0.96 0 340);
 }
