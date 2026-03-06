@@ -114,6 +114,8 @@ p.img-label {
     cursor: zoom-out;
     touch-action: none;
     overscroll-behavior: none; /* 防止 Safari rubber-band 彈跳露出底層內容 */
+    -webkit-transform: translateZ(0); /* Safari：強制 overlay 建立獨立 GPU 層，避免 zoom 時殘留像素 */
+    isolation: isolate;
 }
 
 .lb-img {
@@ -122,6 +124,8 @@ p.img-label {
     transform-origin: center center;
     user-select: none;
     pointer-events: none;
+    -webkit-backface-visibility: hidden; /* Safari：防止 transform 時邊緣殘影 */
+    backface-visibility: hidden;
     /* 不設 will-change：讓瀏覽器依實際 zoom 大小動態 rasterize，zoom 時畫質更佳 */
 }
 
