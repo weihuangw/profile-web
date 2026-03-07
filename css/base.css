@@ -184,6 +184,7 @@ body.page-ready {
 /* main 內容區：負責淡入淡出，header 不受影響 */
 main {
     opacity: 0;
+    padding-top: 0;
 }
 
 main.page-ready {

@@ -3,14 +3,15 @@
    ==================== */
 
 header {
-    background-color: oklch(0.12 0 0);
-    /* 深黑色背景（深色主題為預設） */
+    background-color: transparent;
     color: #e0e0e0;
-    /* 淺灰色文字 */
     padding: 1.5rem 0;
-    /* 上下留白 */
-    /* 主題切換時，背景色和文字色平滑過渡（用 background-color，跟 body 一致） */
-    transition: background-color 0.5s ease, color 0.5s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    transition: color 0.5s ease;
 }
 
 /* 使用 Flexbox 讓 Logo 和選單排在一左一右 */
@@ -66,7 +67,7 @@ header nav {
    ==================== */
 header ul {
     display: grid;
-    grid-template-columns: repeat(11, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     /* 把選單區域切成 11 等份 */
     list-style: none;
     /* 去除清單前面的黑點 */
@@ -74,21 +75,14 @@ header ul {
 
 /* WORKS 放在第 5 格 ← 改這個數字就能移動（範圍 1~11） */
 header ul li:nth-child(1) {
-    grid-column: 5;
+    grid-column: 10;
     text-align: right;
     /* 文字靠格子左邊 */
 }
 
 /* ABOUT 放在第 8 格 ← 改這個數字就能移動（範圍 1~11） */
 header ul li:nth-child(2) {
-    grid-column: 8;
-    text-align: right;
-    /* 文字靠格子左邊 */
-}
-
-/* CONTACT 放在第 11 格 ← 改這個數字就能移動（範圍 1~11） */
-header ul li:nth-child(3) {
-    grid-column: 11;
+    grid-column: 12;
     text-align: right;
     /* 文字靠格子左邊 */
 }

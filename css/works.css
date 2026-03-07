@@ -2,6 +2,10 @@
    作品集區塊 (Works Section)
    ==================== */
 
+#work {
+    padding-top: 0;
+}
+
 .work-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

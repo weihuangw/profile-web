@@ -16,8 +16,6 @@ body.light-theme {
    導覽列 (Header)
    ==================== */
 body.light-theme header {
-    background-color:oklch(0.92 0 340);
-    /* 白色背景 */
     color: oklch(0.45 0 340);
 }
 
@@ -117,7 +115,6 @@ body.light-theme .scroll-top {
    頁尾 (Footer)
    ==================== */
 body.light-theme footer {
-    background-color: oklch(0.92 0 0);
     color: oklch(0.55 0 340);
 }
 

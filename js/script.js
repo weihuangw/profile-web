@@ -29,6 +29,15 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 // 等待 DOM 載入完成
 document.addEventListener('DOMContentLoaded', () => {
+    // main padding-top 動態對齊 header 高度，避免 fixed header 遮住內容
+    const header = document.querySelector('header');
+    const main = document.querySelector('main');
+    function syncMainPadding() {
+        if (header && main) main.style.paddingTop = header.offsetHeight + 'px';
+    }
+    syncMainPadding();
+    window.addEventListener('resize', syncMainPadding);
+
     // no-transition 移除後才能啟用主題切換動畫，body.page-ready 標記已就緒
     void document.body.offsetHeight;
     document.body.classList.remove('no-transition');
@@ -65,14 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // 同步更新 html 背景色與 color-scheme，避免 body opacity:0 時透出錯誤顏色
         document.documentElement.style.backgroundColor = isLight ? 'oklch(0.92 0 340)' : 'oklch(0.12 0 0)';
         document.documentElement.style.colorScheme = isLight ? 'light' : 'dark';
+        // 同步更新 html 的 light-theme class（供 css 在 body 解析前就套用背景色）
+        document.documentElement.classList.toggle('light-theme', isLight);
     }
 
-    // --- 建立電腦版按鈕（固定在右下角） ---
-    const desktopToggle = document.createElement('button');
-    desktopToggle.className = 'theme-toggle';
-    desktopToggle.setAttribute('aria-label', '切換深色/淺色主題');
-    document.body.appendChild(desktopToggle);
-    desktopToggle.addEventListener('click', toggleTheme);
+    // 主題切換按鈕目前隱藏，toggleTheme 函式保留
 
     // ========================
     // 手機版作品圖片觸碰效果
@@ -325,17 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 建立手機版按鈕（放在選單最後面） ---
-    if (navLinks) {
-        const mobileLi = document.createElement('li');
-        mobileLi.className = 'theme-toggle-mobile';
-        const mobileBtn = document.createElement('button');
-        mobileBtn.className = 'theme-toggle';
-        mobileBtn.setAttribute('aria-label', '切換深色/淺色主題');
-        mobileLi.appendChild(mobileBtn);
-        navLinks.appendChild(mobileLi);
-        mobileBtn.addEventListener('click', toggleTheme);
-    }
+    // 手機版主題切換按鈕目前隱藏
 
     // ========================
     // Lightbox（FLIP 展開 + 前後導覽，只在 Project 頁啟用）

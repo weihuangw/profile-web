@@ -39,10 +39,17 @@
     }
 }
 
+
 /* 主要手機版 Media Query */
 @media (max-width: 768px) {
-    /* 手機版：nav 不要伸展，讓漢堡按鈕留在右邊 */
+    /* 手機版：還原 nav 佈局，讓漢堡選單正常運作 */
+    header .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
     header nav {
+        display: block;
         flex: none;
     }
 
@@ -156,10 +163,28 @@
         /* 作品區域移除 padding */
     }
 
-    /* About 頁面：手機版 Grid 改成單欄（佔滿整個寬度） */
+    /* About 頁面：手機版改回單欄 */
     .about-section .container {
         grid-template-columns: 1fr;
-        /* 覆蓋電腦版的 2fr 1fr，手機版只有一欄 = 滿版 */
+    }
+
+    .about-section .container > *:first-child,
+    .about-section .container > *:nth-child(2),
+    .about-section:has(.about-text) .container > *:first-child,
+    .about-section:has(.about-text) .container > *:nth-child(2),
+    .about-section:has(.about-image-gallery) .container > *:first-child,
+    .about-section:has(.about-credits) .container > *:first-child,
+    .about-section:has(.about-credits) .container > *:nth-child(2) {
+        grid-column: 1;
+    }
+
+    /* 經歷區塊：手機版 Residencies 欄排到上方 */
+    .about-section .container > .about-credits:first-child {
+        order: 2;
+    }
+
+    .about-section .container > .about-credits:nth-child(2) {
+        order: 1;
     }
 
     .work-title {
@@ -168,6 +193,11 @@
 
     .work-type {
         font-size: 10px;
+    }
+
+    .about-contact {
+        padding-left: 0;
+        margin-top: 1.5rem;
     }
 
     /* About 頁面：手機版字體大小 ← 改這裡的數字就能調整 */
@@ -311,10 +341,9 @@
     }
 
     footer .container {
-        flex-direction: column;
-        /* 手機版改為上下排列（電腦版是左右排列） */
+        flex-direction: row;
+        align-items: center;
         gap: 10px;
-        /* 縮小間距 */
     }
 
     footer .social-links {
