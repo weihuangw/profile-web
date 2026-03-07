@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
-    <title>ARCHIVE</title>
-    <!-- 在 CSS 載入前就設定背景色，避免重新整理時閃爍 -->
+    <title>ARCHIVE - HUANG WEI</title>
     <script>
-        document.documentElement.style.backgroundColor = 'oklch(0.12 0 0)'; /* 深色預設，防 CSS 慢載閃白 */
+        document.documentElement.style.backgroundColor = 'oklch(0.12 0 0)';
         if (localStorage.getItem('theme') === 'light') {
             document.documentElement.style.backgroundColor = 'oklch(0.92 0 340)';
             document.documentElement.style.colorScheme = 'light';
@@ -20,9 +19,8 @@
 </head>
 
 <body class="no-transition">
-    <!-- 頁面渲染後立即套用淺色主題的 class（如果使用者之前選了淺色） -->
     <script>
-        document.documentElement.style.backgroundColor = 'oklch(0.12 0 0)'; /* 深色預設，防 CSS 慢載閃白 */
+        document.documentElement.style.backgroundColor = 'oklch(0.12 0 0)';
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-theme');
         }
@@ -51,42 +49,163 @@
     </header>
 
     <main>
-    <!-- 作品詳情內容 -->
-    <section class="section-padding">
-        <div class="container">
-            <!-- 作品標題區 -->
-            <div class="project-header" style="text-align: left; margin-bottom: 5px;">
-                <h1>PROJECT TITLE 02</h1>
-            </div>
-            <div class="project-info" style="margin-bottom: 20px;">
-                <h3>Category</h3>
-                <h3>Year</h3>
-            </div>
-            <div class="project-info" style="margin-bottom: 20px;">
-                <p>Project description.</p>
-            </div>
 
-            <div class="project-images">
-                <!-- 兩張並排圖 -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 5px;">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Detail 1" style="width: 100%;">
-                    <img src="https://placehold.co/600x400/EEE/31343C" alt="Detail 2" style="width: 100%;">
+    <!-- ─── A Section Of ─── -->
+    <section class="section-padding about-section">
+        <div class="container">
+            <div class="archive-item">
+                <div class="project-header" style="margin-bottom: 5px;">
+                    <h1>A Section Of</h1>
+                </div>
+                <div class="project-info">
+                    <h3>Audio-Visual Live Performance with Ambisonics</h3>
+                    <h3>2021</h3>
                 </div>
             </div>
-
-            <!-- 滿版圖 -->
-            <img src="https://placehold.co/1200x800/EEE/31343C" alt="Project Detail Image" style="width: 100%; margin-top: 5px;">
-
-            <!-- 作品資訊區塊 -->
-            <div class="project-info" style="margin-top: 20px;">
-                <h3>Credits:</h3>
-                <p>Credits info.</p>
-                <br>
-                <h3>Dates</h3>
-                <p>Date info.</p>
+            <div class="archive-item">
+                <div class="project-info">
+                    <br>
+                    <h3>Credits</h3>
+                    <p>Visuals: HUANG WEI</p>
+                    <p>Sounds: <a href="https://www.instagram.com/chunlii.w/" class="link" target="_blank">WANG Chun-Li</a></p>
+                    <p>Ambisonics system: HUANG WEI</p>
+                </div>
             </div>
+            <!-- 圖片：3 張 3:2 橫排 -->
+            <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 20px;">
+                <img src="../images/archive/asetionof-1.jpg" alt="A Section Of 1" loading="lazy" style="width: 100%; aspect-ratio: 3/2; object-fit: cover;">
+                <img src="../images/archive/asetionof-2.jpg" alt="A Section Of 2" loading="lazy" style="width: 100%; aspect-ratio: 3/2; object-fit: cover;">
+                <img src="../images/archive/asetionof-3.jpg" alt="A Section Of 3" loading="lazy" style="width: 100%; aspect-ratio: 3/2; object-fit: cover;">
+            </div>
+        </div>
+    </section>
 
-            <!-- 回到頂部箭頭 -->
+    <!-- ─── Electronic Landscape ─── -->
+    <section class="section-padding about-section">
+        <div class="container">
+            <div class="archive-item">
+                <div class="project-header" style="margin-bottom: 5px;">
+                    <h1>Electronic Landscape</h1>
+                </div>
+                <div class="project-info">
+                    <h3>Audio-Visual Fulldome Screening</h3>
+                    <h3>2020</h3>
+                </div>
+            </div>
+            <div class="archive-item">
+                <div class="project-info">
+                    <br>
+                    <h3>Credits</h3>
+                    <p>Visuals: HUANG WEI, <a href="https://www.instagram.com/nanonanostudio/" class="link" target="_blank">NANONANO</a></p>
+                    <p>Sounds: <a href="https://hsunhsianghsu.com/" class="link" target="_blank">HSU Hsun-Hsiang</a></p>
+                </div>
+            </div>
+            <!-- EL 1-3 原比例橫排 -->
+            <div style="grid-column: 1 / -1; display: flex; gap: 5px; margin-top: 20px; align-items: flex-start;">
+                <img src="../images/archive/EL-1.jpg" alt="Electronic Landscape 1" loading="lazy" style="flex: 0.67; min-width: 0; width: 100%; height: auto; display: block;">
+                <img src="../images/archive/EL-2.jpg" alt="Electronic Landscape 2" loading="lazy" style="flex: 1; min-width: 0; width: 100%; height: auto; display: block;">
+                <img src="../images/archive/EL-3.jpg" alt="Electronic Landscape 3" loading="lazy" style="flex: 0.67; min-width: 0; width: 100%; height: auto; display: block;">
+            </div>
+            <!-- EL 4-6 原比例橫排 -->
+            <div style="grid-column: 1 / -1; display: flex; gap: 5px; margin-top: 5px; align-items: flex-start;">
+                <img src="../images/archive/EL-4.jpg" alt="Electronic Landscape 4" loading="lazy" style="flex: 1.40; min-width: 0; width: 100%; height: auto; display: block;">
+                <img src="../images/archive/EL-5.jpg" alt="Electronic Landscape 5" loading="lazy" style="flex: 1.40; min-width: 0; width: 100%; height: auto; display: block;">
+                <img src="../images/archive/EL-6.jpg" alt="Electronic Landscape 6" loading="lazy" style="flex: 1.33; min-width: 0; width: 100%; height: auto; display: block;">
+            </div>
+            <!-- EL 7-11 方形橫排 -->
+            <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-top: 5px;">
+                <img src="../images/archive/EL-7.jpg" alt="Electronic Landscape 7" loading="lazy" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;">
+                <img src="../images/archive/EL-8.jpg" alt="Electronic Landscape 8" loading="lazy" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;">
+                <img src="../images/archive/EL-9.jpg" alt="Electronic Landscape 9" loading="lazy" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;">
+                <img src="../images/archive/EL-10.jpg" alt="Electronic Landscape 10" loading="lazy" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;">
+                <img src="../images/archive/EL-11.jpg" alt="Electronic Landscape 11" loading="lazy" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── Approximation ─── -->
+    <section class="section-padding about-section">
+        <div class="container">
+            <div class="archive-item">
+                <div class="project-header" style="margin-bottom: 5px;">
+                    <h1>Approximation</h1>
+                </div>
+                <div class="project-info">
+                    <h3>Audio-Visual Installation</h3>
+                    <h3>2018</h3>
+                </div>
+            </div>
+            <div class="archive-item">
+                <div class="project-info">
+                    <br>
+                    <h3>Credits</h3>
+                    <p>Visuals: HUANG WEI</p>
+                    <p>Sounds: <a href="https://www.instagram.com/chunlii.w/" class="link" target="_blank">WANG Chun-Li</a></p>
+                </div>
+            </div>
+            <!-- 圖片：2 張 3:2 橫排 -->
+            <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; margin-top: 20px;">
+                <img src="../images/archive/AP-1.jpg" alt="Approximation 1" loading="lazy" style="width: 100%; aspect-ratio: 3/2; object-fit: cover;">
+                <img src="../images/archive/AP-2.jpg" alt="Approximation 2" loading="lazy" style="width: 100%; aspect-ratio: 3/2; object-fit: cover;">
+            </div>
+            <!-- YouTube -->
+            <div class="yt-wrapper" style="grid-column: 1 / -1; position: relative; padding-top: 56.25%;">
+                <iframe
+                    src="https://www.youtube.com/embed/RO_gV9EqF9I?si=9TNJz08P9gKaVo3d"
+                    title="Approximation"
+                    loading="lazy"
+                    style="border:0; position:absolute; top:0; height:100%; width:100%;"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen="true">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── RE ─── -->
+    <section class="section-padding about-section">
+        <div class="container">
+            <div class="archive-item">
+                <div class="project-header" style="margin-bottom: 5px;">
+                    <h1>RE</h1>
+                </div>
+                <div class="project-info">
+                    <h3>2017–2018</h3>
+                </div>
+            </div>
+            <div class="archive-item">
+                <div class="project-info">
+                    <br>
+                    <h3>Credits</h3>
+                    <p>Laser: HUANG WEI</p>
+                    <p>Visuals: HUANG WEI, UE, Yenching</p>
+                    <p>Sounds: <a href="https://www.instagram.com/chunlii.w/" class="link" target="_blank">WANG Chun-Li</a></p>
+                    <p>Special: RainbowEgg</p>
+                </div>
+            </div>
+            <!-- 圖片：2 張 16:9 橫排 -->
+            <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; margin-top: 20px;">
+                <img src="../images/archive/RE-1.jpg" alt="RE 1" loading="lazy" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;">
+                <img src="../images/archive/RE-2.jpg" alt="RE 2" loading="lazy" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;">
+            </div>
+            <!-- YouTube -->
+            <div class="yt-wrapper" style="grid-column: 1 / -1; position: relative; padding-top: 56.25%;">
+                <iframe
+                    src="https://www.youtube.com/embed/U0f4a6MpvuM?si=FtL2ScMJX2rrQcrx"
+                    title="RE"
+                    loading="lazy"
+                    style="border:0; position:absolute; top:0; height:100%; width:100%;"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen="true">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
             <div class="scroll-top-wrapper">
                 <a href="#" class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,13 10,7 16,13"/></svg></a>
             </div>
@@ -94,6 +213,7 @@
     </section>
 
     </main>
+
     <!-- 頁尾 -->
     <footer>
         <div class="container">

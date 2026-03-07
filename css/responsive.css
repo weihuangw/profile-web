@@ -302,6 +302,38 @@
         color: #e0e0e0;
     }
 
+    /* Archive 頁面：手機版欄位重設單欄 */
+    .about-section:has(.archive-item) .container > *:first-child,
+    .about-section:has(.archive-item) .container > *:nth-child(2) {
+        grid-column: 1;
+    }
+
+/* Archive 頁面手機版：圖片容器滿版 */
+    .about-section:has(.archive-item) .container > div:not([class]) {
+        margin-left: -20px;
+        margin-right: -20px;
+        width: calc(100% + 40px) !important;
+        max-width: calc(100% + 40px) !important;
+        gap: 2px !important;
+    }
+
+    /* Archive 頁面手機版：巢狀圖片 grid 也套 2px gap */
+    .about-section:has(.archive-item) .container > div:not([class]) > div:not([class]) {
+        gap: 2px !important;
+        margin-top: 2px !important;
+    }
+
+    /* Archive 頁面手機版：yt-wrapper 滿版 + 16:9 比例修正 */
+    .about-section:has(.archive-item) .container > .yt-wrapper {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        margin-left: -20px;
+        margin-right: -20px;
+        width: calc(100% + 40px) !important;
+        max-width: calc(100% + 40px) !important;
+        padding-top: 56.25vw !important;
+    }
+
     /* MRSP 作品章節：手機版改為單欄，每張圖各佔一行 */
     .labeled-grid {
         grid-template-columns: 1fr !important;
