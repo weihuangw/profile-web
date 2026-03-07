@@ -16,6 +16,7 @@
     margin-bottom: 0px;
     color:oklch(0.96 0 340);
     transition: color 0.5s ease;
+    text-transform: uppercase;
 }
 
 /* ====== 作品資訊文字區域（跟 About 頁面的經歷區塊一樣大小） ====== */
