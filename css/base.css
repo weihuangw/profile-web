@@ -216,19 +216,6 @@ body.menu-open footer {
     /* 選單開啟時 footer 消失，關閉後自動恢復 */
 }
 
-/* ====== 視覺隱藏（給 SEO 用，螢幕閱讀器可讀，畫面不顯示） ====== */
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
 /* ====== 捲動淡入動畫 ====== */
 .scroll-reveal {
     opacity: 0;
