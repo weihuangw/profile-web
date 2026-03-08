@@ -208,7 +208,12 @@
     /* About 頁面：手機版字體大小 ← 改這裡的數字就能調整 */
     .about-text {
         font-size: 0.9rem;
-        /* 個人介紹的內文字體大小 */
+        /* 英文介紹內文字體大小 */
+    }
+
+    .bio-zh {
+        font-size: 0.9rem;
+        /* 中文介紹內文字體大小 */
     }
 
     .about-credits h3 {
