@@ -624,6 +624,22 @@ document.addEventListener('DOMContentLoaded', () => {
     initLightbox();
 
     // ========================
+    // About 頁：中英文介紹切換
+    // ========================
+    const bioToggle = document.querySelector('.bio-lang-toggle');
+    if (bioToggle) {
+        const bioEn = document.querySelector('.bio-en');
+        const bioZh = document.querySelector('.bio-zh');
+        bioToggle.addEventListener('click', () => {
+            const showingEn = !bioEn.hidden;
+            bioEn.hidden = showingEn;
+            bioZh.hidden = !showingEn;
+            bioToggle.textContent = showingEn ? '(EN)' : '(中)';
+            bioToggle.dataset.lang = showingEn ? 'en' : 'zh';
+        });
+    }
+
+    // ========================
     // 捲動淡入動畫（Project 頁 + About 頁）
     // ========================
     if (document.querySelector('.project-header') || document.querySelector('.about-section')) {

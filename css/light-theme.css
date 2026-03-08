@@ -51,6 +51,14 @@ body.light-theme .about-credits h3 {
     color: oklch(0.55 0 340);
 }
 
+body.light-theme .bio-lang-toggle {
+    color: oklch(0.55 0 340);
+}
+
+body.light-theme .bio-lang-toggle:hover {
+    color: oklch(0.2 0 340);
+}
+
 body.light-theme .about-image img {
     border-radius: 0px;
 }

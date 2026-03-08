@@ -44,14 +44,44 @@
     font-weight: 400;
 }
 
-/* ====== 聯絡資訊（右欄上方） ====== */
+.bio-zh {
+    font-size: 1rem;
+}
+
+.bio-lang-toggle {
+    align-self: flex-start;
+    font-family: inherit;
+    color: oklch(0.76 0 340);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.bio-lang-toggle[data-lang="zh"] { font-size: 1.1rem; }
+.bio-lang-toggle[data-lang="en"] { font-size: 1rem; }
+
+.bio-lang-toggle:hover {
+    color: oklch(0.96 0 340);
+}
+
+/* ====== 聯絡資訊（右欄） ====== */
 .about-contact {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
     text-align: left;
-    align-self: end;
+    align-self: stretch;
+    justify-content: space-between;
+}
+
+.about-contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
 }
 
 .about-contact h3 {

@@ -200,6 +200,11 @@
         margin-top: 1.5rem;
     }
 
+    .bio-lang-toggle {
+        align-self: flex-start;
+        margin-bottom: 1rem;
+    }
+
     /* About 頁面：手機版字體大小 ← 改這裡的數字就能調整 */
     .about-text {
         font-size: 0.9rem;
