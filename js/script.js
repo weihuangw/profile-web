@@ -21,11 +21,45 @@ window.addEventListener('pageshow', function (event) {
             main.classList.remove('page-leaving');
             main.classList.add('page-ready');
         }
+        // bfcache 還原不會重跑 DOMContentLoaded，需手動重算瀑布流
+        layoutMasonry();
     }
 });
 
 // 禁用瀏覽器自動還原捲動位置，避免重新整理時畫面跳動
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+// ========================
+// 瀑布流 Masonry 排版
+// ========================
+// 提升到外層作用域，讓 pageshow（bfcache 還原）也能呼叫
+function layoutMasonry() {
+    const grid = document.querySelector('.work-grid');
+    if (!grid) return;
+
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        grid.querySelectorAll('.work-item').forEach(item => {
+            item.style.gridRowEnd = '';
+            const img = item.querySelector('img');
+            if (img) img.style.height = '';
+        });
+        return;
+    }
+
+    const gap = parseFloat(getComputedStyle(grid).rowGap) || 0;
+
+    grid.querySelectorAll('.work-item').forEach(item => {
+        const img = item.querySelector('img');
+        if (!img || !img.naturalWidth) return;
+
+        const colWidth = item.getBoundingClientRect().width;
+        const renderedHeight = colWidth * (img.naturalHeight / img.naturalWidth);
+        const span = Math.round((renderedHeight + gap) / (1 + gap));
+        item.style.gridRowEnd = `span ${span}`;
+        const gridAreaHeight = span + (span - 1) * gap;
+        img.style.height = `${gridAreaHeight}px`;
+    });
+}
 
 // 等待 DOM 載入完成
 document.addEventListener('DOMContentLoaded', () => {
@@ -134,44 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function isInViewport(img) {
         const rect = img.getBoundingClientRect();  // 取得圖片在螢幕上的位置
         return rect.top < window.innerHeight;      // 圖片頂部是否在螢幕可見範圍內
-    }
-
-    // ========================
-    // 瀑布流 Masonry 排版
-    // ========================
-    // 原理：grid-auto-rows: 1px 讓每列只有 1px 高
-    // JS 依圖片的真實寬高比算出每個 item 要 span 幾列，撐出正確高度
-    // 這樣 Grid 還是照橫向（左→右）排列，不像 CSS columns 會直向填欄
-    function layoutMasonry() {
-        const grid = document.querySelector('.work-grid');
-        if (!grid) return;
-
-        // 手機版不做 masonry，清掉 JS 設定的樣式讓 CSS 自然排列
-        // 用 matchMedia 確保與 CSS max-width: 768px 判斷完全一致
-        if (window.matchMedia('(max-width: 768px)').matches) {
-            grid.querySelectorAll('.work-item').forEach(item => {
-                item.style.gridRowEnd = '';
-                const img = item.querySelector('img');
-                if (img) img.style.height = '';
-            });
-            return;
-        }
-
-        const gap = parseFloat(getComputedStyle(grid).rowGap) || 0;
-
-        grid.querySelectorAll('.work-item').forEach(item => {
-            const img = item.querySelector('img');
-            if (!img || !img.naturalWidth) return;
-
-            const colWidth = item.getBoundingClientRect().width;
-            const renderedHeight = colWidth * (img.naturalHeight / img.naturalWidth);
-            const span = Math.round((renderedHeight + gap) / (1 + gap));
-            item.style.gridRowEnd = `span ${span}`;
-            // grid area 精確高度 = span 列(各 1px) + (span-1) 個 row-gap
-            // 把圖片設成這個高度，讓 item 完全貼合 grid area，縫隙就只剩純 row-gap
-            const gridAreaHeight = span + (span - 1) * gap;
-            img.style.height = `${gridAreaHeight}px`;
-        });
     }
 
     // 視窗縮放時重新計算（先淡出 grid，重算後淡入，遮住位置跳動）
