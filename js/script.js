@@ -195,6 +195,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function showPage() {
         layoutMasonry(); // 圖片載入完成後，計算瀑布流排版
 
+        // 冷快取（如從 links.html 導航過來）圖片可能還沒載入，naturalWidth=0 導致版面擠成一團
+        // 對每張尚未載入的圖片加上監聽，載入後重算一次瀑布流
+        const grid = document.querySelector('.work-grid');
+        if (grid) {
+            grid.querySelectorAll('img').forEach(img => {
+                if (!img.complete) {
+                    img.addEventListener('load', layoutMasonry, { once: true });
+                }
+            });
+        }
+
         // 逐格淡入：每個 work-item 依序用 workReveal 動畫出現
         // 180ms = body 淡入時間，之後 items 才開始逐格出現
         const workItems = document.querySelectorAll('.work-item');
