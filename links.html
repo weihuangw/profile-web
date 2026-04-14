@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
     <title>HUANG WEI - Links</title>
     <script>
@@ -12,21 +12,34 @@
     </script>
     <link rel="stylesheet" href="css/style.css">
     <style>
+        html {
+            height: 100dvh;
+            overflow: hidden;
+        }
+
         body {
+            height: 100dvh;
+            min-height: unset;
+            overflow: hidden;
             justify-content: center;
             align-items: center;
-            padding-bottom: 10vh;
+        }
+
+        main {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .links-wrap {
             width: 100%;
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 60px 24px 80px;
+            max-width: 420px;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 0;
         }
 
         .links-name {
@@ -35,30 +48,24 @@
             letter-spacing: 1px;
             color: oklch(0.76 0 340);
             text-transform: uppercase;
-            
-        }
-
-        .links-desc {
-            font-size: 0.72rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            color: #888;
-            margin-bottom: 24px;
+            line-height: 1;
+            margin: 0 0 44px;
             text-align: center;
         }
 
         .link-item {
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
             width: 100%;
-            padding: 15px 80px;
-            border: 2px solid rgba(255,255,255,0.4);
+            padding: 24px 24px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background-color: rgba(255,255,255,0.03);
             text-decoration: none;
-            color: #e0e0e0;
+            color: oklch(0.96 0 340);
             transition: border-color 0.25s ease, background-color 0.25s ease;
             text-align: center;
-            gap: 2px;
+            margin-bottom: 20px;
         }
 
         @media (hover: hover) {
@@ -69,31 +76,12 @@
         }
 
         .link-item-title {
-            font-size: clamp(12px, 1vw, 16px);
-            font-weight: 600;
+            font-size: clamp(14px, 1vw, 18px);
+            font-weight: 400;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: oklch(0.96 0 340);
+            color: inherit;
         }
-
-        .link-item-type {
-            font-size: 0.65rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            color: #666;
-        }
-
-        .links-divider {
-            width: 1px;
-            height: 24px;
-            background: rgba(255,255,255,0.12);
-            margin: 4px 0;
-        }
-
-        .link-item.link-primary {
-            border-color: rgba(255,255,255,0.4);
-        }
-
     </style>
 </head>
 
@@ -108,8 +96,7 @@
 
     <main class="page-ready">
         <div class="links-wrap">
-            <p class="links-name">HUANG WEI</p>
-
+            <p class="links-name">Huang Wei 黃偉</p>
             <a href="works" class="link-item">
                 <span class="link-item-title">Website</span>
             </a>
