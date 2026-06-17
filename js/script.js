@@ -325,16 +325,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
             e.preventDefault();  // 阻止瀏覽器立刻跳頁
 
+            // 如果手機版選單是開著的，先讓按鈕轉回「+」、選單淡出，再跳頁
+            // 否則新頁面載入時按鈕會從「×」瞬間跳回「+」，看起來像閃一下
+            const menuWasOpen = menuToggle && menuToggle.classList.contains('active');
+            if (menuWasOpen) {
+                navLinks.classList.remove('active');      // 選單覆蓋層淡出
+                menuToggle.classList.remove('active');    // 觸發按鈕旋轉回「+」的動畫
+                if (header) header.classList.remove('menu-open');
+                document.body.classList.remove('menu-open');
+            }
+
             // 只讓 main 淡出，header 維持不動
             const main = document.querySelector('main');
             if (main) {
                 main.classList.add('page-leaving');
             }
 
-            // 等淡出動畫結束後（150 毫秒 = 0.15 秒），才真正跳到新頁面
+            // 選單開著時，等按鈕轉回動畫播完（0.3s）才跳頁；否則維持原本 0.15s
             setTimeout(() => {
                 window.location.href = href;  // 跳轉到目標頁面
-            }, 150);
+            }, menuWasOpen ? 300 : 150);
         });
     });
 
