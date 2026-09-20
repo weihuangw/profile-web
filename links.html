@@ -26,13 +26,19 @@
         html {
             height: 100%;
             overflow: hidden;
+            overscroll-behavior: none;
+            /* 關掉橡皮筋回彈，手機往下拉不會露出底色 */
             scrollbar-gutter: auto;
         }
 
         body {
+            position: fixed;
+            inset: 0;
+            /* 脫離文件流貼死視窗，iOS Safari 才真的拖不動、網址列伸縮也不會抖 */
             height: 100%;
             min-height: unset;
             overflow: hidden;
+            overscroll-behavior: none;
             justify-content: center;
             align-items: center;
         }
